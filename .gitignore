@@ -17,6 +17,13 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/Base/Debug
+/compiled_resources
+/Content_Pipeline/Debug
+/ExternalLibs/Debug
+/Network/Debug
+/Risk/Debug
+
 # =========================
 # Operating System Files
 # =========================

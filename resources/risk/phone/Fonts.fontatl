@@ -1,0 +1,13 @@
+fonts = 
+	[ 
+		|consola.ttf|,
+		|DejaVuSansMono.ttf|,
+		|comic.ttf|,
+		|impact.ttf|,
+		|segoeui.ttf|,
+		|segoeuil.ttf|,
+		|seguisli.ttf|,
+		|calibri.ttf|
+	]
+size  = 256
+maxChar = 256

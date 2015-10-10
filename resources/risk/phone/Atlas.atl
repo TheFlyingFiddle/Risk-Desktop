@@ -1,0 +1,22 @@
+items = 
+[
+	{ name = |banana.png| padding = { left = 1 top = 0 right = 0 bottom = 0 } },
+	{ name = |base_tower.png| padding = { left = 0 top = 0 right = 0 bottom = 0 } },
+	{ name = |baws.png| 	  padding = { left = 0 top = 0 right = 0 bottom = 0 } },
+	{ name = |boulder.png| 	  padding = { left = 0 top = 0 right = 0 bottom = 0 }	},
+	{ name = |clock_base.png| 	  padding = { left = 0 top = 0 right = 0 bottom = 0 }	},
+	{ name = |circle.png| 	  padding = { left = 0 top = 0 right = 0 bottom = 0 } },
+	{ 
+		name = |orange.png| 
+		padding = { left = 1 top = 0 right = 1 bottom = 0 }
+	},
+	{ name = |teddy.png| },
+	{ 
+		name = |pixel.psd| 
+		padding = { left = 2 top = 2 right = 2 bottom = 2 }
+	}
+]
+
+spacing = 2
+width = 512
+height = 128
