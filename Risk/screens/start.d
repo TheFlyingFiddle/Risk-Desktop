@@ -57,7 +57,6 @@ class GameStartScreen : RiskScreen
 
 	void sendMissions()
 	{
-
 		auto missions = riskState.desc.missions;
 		missions.randomShuffle();
 
@@ -116,7 +115,5 @@ class GameStartScreen : RiskScreen
 			owner.replace(this, next);
 		}
 	}
-
-	
 }
 

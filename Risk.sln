@@ -15,6 +15,8 @@ Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "Content_Pipeline", "Content
 EndProject
 Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "Network", "Network\Network.visualdproj", "{E925CD8F-004F-465C-9A88-1A1E2DB936F9}"
 EndProject
+Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "RiskNew", "RiskNew\RiskNew.visualdproj", "{4EF6D2E2-E719-48EC-918F-A1254966A2F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -63,6 +65,12 @@ Global
 		{E925CD8F-004F-465C-9A88-1A1E2DB936F9}.Release|x64.ActiveCfg = Release|Win32
 		{E925CD8F-004F-465C-9A88-1A1E2DB936F9}.Release|x86.ActiveCfg = Release|Win32
 		{E925CD8F-004F-465C-9A88-1A1E2DB936F9}.Release|x86.Build.0 = Release|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Debug|x64.ActiveCfg = Debug|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Debug|x86.ActiveCfg = Debug|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Debug|x86.Build.0 = Debug|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Release|x64.ActiveCfg = Release|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Release|x86.ActiveCfg = Release|Win32
+		{4EF6D2E2-E719-48EC-918F-A1254966A2F7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

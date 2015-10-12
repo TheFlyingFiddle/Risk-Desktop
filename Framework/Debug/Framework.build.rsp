@@ -25,13 +25,6 @@ graphics\program.d
 graphics\shader.d 
 graphics\texture.d 
 graphics\textureatlas.d 
-network\file.d 
-network\luagen.d 
-network\message.d 
-network\router.d 
-network\server.d 
-network\service.d 
-network\util.d 
 rendering\asyncrenderbuffer.d 
 rendering\combined.d 
 rendering\package.d 

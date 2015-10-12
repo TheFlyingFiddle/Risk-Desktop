@@ -1,0 +1,9 @@
+ 
+"Debug\RiskNew.obj","Debug\RiskNew.exe","Debug\RiskNew.map",Base.lib+ 
+Framework.lib+ 
+ExternalLibs.lib+ 
+user32.lib+ 
+kernel32.lib+ 
+..\Base\Debug\+ 
+..\Framework\Debug\+ 
+..\ExternalLibs\Debug\/NOMAP/CO/NOI/DELEXE 

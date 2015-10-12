@@ -7,13 +7,117 @@ math,
 	graphics.frame,
 	graphics.font;
 
+enum TextAlignment
+{
+	center,
+	topLeft,
+	bottomLeft,
+	centerLeft,
+	topRight,
+	bottomRight,
+	centerRight,
+	topCenter,
+	bottomCenter
+}
+
+enum HTextAlignment 
+{
+	center,
+	left,
+	right
+}
+
+enum VTextAlignment
+{
+	center,
+	top,
+	right
+}
+
+void drawText(R)(ref R renderer,
+				 const(char)[] text,
+				 float2 pos, float2 size,
+				 ref Font font, Color color,
+				 HTextAlignment alignment, 
+				 float2 thresholds = float2(0.25, 0.75),
+				 float4 bounds	   = float4.zero)
+{
+
+	float2 msize = font.measure(text) * size;
+	float2 rpos  = float2(0, pos.y);
+	with(HTextAlignment)
+	{
+		final switch(alignment)
+		{
+			case left:
+				rpos.x = pos.x;
+				break;
+			case right:
+				rpos.x = pos.x - msize.x;
+			case center:
+				rpos.x = pos.x - msize.x / 2;
+		}
+	}
+
+	drawText!R(renderer, text, pos, size, font, color, thresholds, bounds);
+}
+
+
+void drawText(R)(ref R renderer, 
+				 const(char)[] text, 
+				 float4 pos,
+				 float2 size,
+				 ref Font font,
+				 Color color,
+				 TextAlignment alignment,
+				 float2 thresholds = float2(0.25, 0.75),
+				 float4 bounds	   = float4.zero)
+{
+	float2 msize = font.measure(text) * size;
+	float2 rpos;
+
+	with(TextAlignment)
+	{
+		switch(alignment)
+		{
+			case bottomLeft: case bottomRight: case bottomCenter:
+				rpos.y = pos.y;
+				break;
+			case center: case centerLeft: case centerRight:
+				rpos.y = (pos.y + pos.w) / 2 - msize.y / 2;
+				break;
+			default:
+				rpos.y = pos.w - msize.y; 
+				break;
+		}
+
+		switch(alignment)
+		{
+			case bottomLeft: case topLeft: case centerLeft:
+				rpos.x = pos.x;
+				break;
+			case center: case bottomCenter: case topCenter:
+				rpos.x = (pos.x + pos.w) / 2 - msize.x / 2;
+				break;
+			default:
+				rpos.x = pos.w - msize.x;
+				break;
+		}
+	}
+
+	drawText!R(renderer, text, rpos, size, font, color, thresholds, bounds);
+}
+
+
+
 void drawText(R)(ref R renderer, const(char)[] text, float2 pos, 
 				float2 size, ref Font font, Color color, 
 				float2 thresholds = float2(0.25,0.75), 
-				float4 bounds = float4(0,0,0,0))
+				float4 bounds = float4.zero)
 {
-	if(bounds == float4(0,0,0,0)) 
-		bounds = float4(-100000, -10000000, 1000000000000, 10000000000000); //LOL
+	enum L = 10000000000f;
+	if(bounds == float4.zero) 
+		bounds = float4(-L, -L, L, L); //LOL
 
 	import std.algorithm;
 	auto lines = text.count("\n");

@@ -13188,2780 +13188,6 @@
   ]
  },
  {
-  "name" : "network.file",
-  "kind" : "module",
-  "file" : "network\\file.d",
-  "members" : [
-   {
-    "name" : "allocation",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "util.bitmanip",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 20,
-    "protection" : "private"
-   },
-   {
-    "name" : "sdl",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 35,
-    "protection" : "private"
-   },
-   {
-    "name" : "content.file",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "util.strings",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 22,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.stdio",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.algorithm",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 19,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.file",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 34,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.path",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 44,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.socket",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 54,
-    "protection" : "private"
-   },
-   {
-    "name" : "log",
-    "kind" : "import",
-    "line" : 6,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "collections",
-    "kind" : "import",
-    "line" : 7,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "FileMessages",
-    "kind" : "enum",
-    "line" : 9,
-    "char" : 1,
-    "baseDeco" : "i",
-    "members" : [
-     {
-      "name" : "sentFile",
-      "kind" : "enum member",
-      "value" : "0",
-      "line" : 11,
-      "char" : 2
-     },
-     {
-      "name" : "removeFiles",
-      "kind" : "enum member",
-      "value" : "1",
-      "line" : 12,
-      "char" : 2
-     },
-     {
-      "name" : "allFilesSent",
-      "kind" : "enum member",
-      "value" : "2",
-      "line" : 13,
-      "char" : 2
-     }
-    ]
-   },
-   {
-    "name" : "GeneratedFile",
-    "kind" : "struct",
-    "protection" : "private",
-    "line" : 17,
-    "char" : 9,
-    "members" : [
-     {
-      "name" : "name",
-      "kind" : "variable",
-      "line" : 20,
-      "char" : 9,
-      "deco" : "Aya",
-      "offset" : 0
-     },
-     {
-      "name" : "data",
-      "kind" : "variable",
-      "line" : 21,
-      "char" : 9,
-      "deco" : "Av",
-      "offset" : 8
-     }
-    ]
-   },
-   {
-    "name" : "generatedFiles",
-    "kind" : "variable",
-    "line" : 25,
-    "char" : 30,
-    "storageClass" : [
-     "__gshared"
-    ],
-    "deco" : "S11collections4list39__T4ListTS7network4file13GeneratedFileZ4List",
-    "originalType" : "List!GeneratedFile"
-   },
-   {
-    "name" : "addGeneratedFile",
-    "kind" : "function",
-    "line" : 26,
-    "char" : 6,
-    "deco" : "FAyaAvZv",
-    "parameters" : [
-     {
-      "name" : "name",
-      "deco" : "Aya"
-     },
-     {
-      "name" : "data",
-      "deco" : "Av"
-     }
-    ],
-    "endline" : 32,
-    "endchar" : 1
-   },
-   {
-    "name" : "throwingSend",
-    "kind" : "function",
-    "protection" : "private",
-    "line" : 34,
-    "char" : 14,
-    "deco" : "FC3std6socket6SocketAvZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "buffer",
-      "deco" : "Av"
-     }
-    ],
-    "endline" : 39,
-    "endchar" : 1
-   },
-   {
-    "name" : "writeFileMetadata",
-    "kind" : "function",
-    "line" : 42,
-    "char" : 8,
-    "deco" : "FAhAxakZk",
-    "originalType" : "size_t(ubyte[] buffer, const(char)[] fileName, size_t fileSize)",
-    "parameters" : [
-     {
-      "name" : "buffer",
-      "deco" : "Ah"
-     },
-     {
-      "name" : "fileName",
-      "deco" : "Axa"
-     },
-     {
-      "name" : "fileSize",
-      "deco" : "k"
-     }
-    ],
-    "endline" : 51,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendGeneratedFiles",
-    "kind" : "function",
-    "line" : 53,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketAhZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "buffer",
-      "deco" : "Ah"
-     }
-    ],
-    "endline" : 61,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendAllFiles",
-    "kind" : "function",
-    "line" : 63,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketAyaZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "folder",
-      "deco" : "Aya"
-     }
-    ],
-    "endline" : 77,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendFile",
-    "kind" : "function",
-    "line" : 79,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketAxaAxaAhZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "entry",
-      "deco" : "Axa"
-     },
-     {
-      "name" : "folder",
-      "deco" : "Axa"
-     },
-     {
-      "name" : "buffer",
-      "deco" : "Ah"
-     }
-    ],
-    "endline" : 101,
-    "endchar" : 1
-   },
-   {
-    "name" : "listenForFileRequests",
-    "kind" : "function",
-    "line" : 103,
-    "char" : 6,
-    "deco" : "FktAyaZv",
-    "parameters" : [
-     {
-      "name" : "ip",
-      "deco" : "k"
-     },
-     {
-      "name" : "port",
-      "deco" : "t"
-     },
-     {
-      "name" : "resourceFolder",
-      "deco" : "Aya"
-     }
-    ],
-    "endline" : 120,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendFiles",
-    "kind" : "function",
-    "line" : 122,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketAyaZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "resourceFolder",
-      "deco" : "Aya"
-     }
-    ],
-    "endline" : 153,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendAllFilesSent",
-    "kind" : "function",
-    "line" : 155,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     }
-    ],
-    "endline" : 161,
-    "endchar" : 1
-   },
-   {
-    "name" : "sendDiffFiles",
-    "kind" : "function",
-    "line" : 163,
-    "char" : 6,
-    "deco" : "FC3std6socket6SocketAyaS7content4file7FileMapZv",
-    "parameters" : [
-     {
-      "name" : "socket",
-      "deco" : "C3std6socket6Socket"
-     },
-     {
-      "name" : "folder",
-      "deco" : "Aya"
-     },
-     {
-      "name" : "map",
-      "deco" : "S7content4file7FileMap"
-     }
-    ],
-    "endline" : 198,
-    "endchar" : 1
-   }
-  ]
- },
- {
-  "name" : "network.luagen",
-  "kind" : "module",
-  "file" : "network\\luagen.d",
-  "members" : [
-   {
-    "name" : "network.message",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "math",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "util.hash",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.conv",
-    "kind" : "import",
-    "line" : 6,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.conv",
-    "kind" : "import",
-    "line" : 7,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.string",
-    "kind" : "import",
-    "line" : 7,
-    "char" : 18,
-    "protection" : "private"
-   },
-   {
-    "kind" : "template",
-    "line" : 9,
-    "char" : 8,
-    "name" : "generateLuaCode",
-    "parameters" : [
-     {
-      "name" : "module_",
-      "kind" : "alias"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "generateLuaCode",
-      "kind" : "function",
-      "line" : 9,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 38,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 40,
-    "char" : 8,
-    "name" : "luaInMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaInMessage",
-      "kind" : "function",
-      "line" : 40,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 45,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 47,
-    "char" : 8,
-    "name" : "luaOutMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaOutMessage",
-      "kind" : "function",
-      "line" : 47,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 53,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 55,
-    "char" : 8,
-    "name" : "luaReadMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaReadMessage",
-      "kind" : "function",
-      "line" : 55,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 69,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 71,
-    "char" : 8,
-    "name" : "luaWriteDebug",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isBaseType!T",
-    "members" : [
-     {
-      "name" : "luaWriteDebug",
-      "kind" : "function",
-      "line" : 71,
-      "char" : 8,
-      "type" : "string(string name, string table, string msgName)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       },
-       {
-        "name" : "msgName",
-        "type" : "string"
-       }
-      ],
-      "endline" : 77,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 79,
-    "char" : 8,
-    "name" : "luaWriteDebug",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "!isBaseType!T",
-    "members" : [
-     {
-      "name" : "luaWriteDebug",
-      "kind" : "function",
-      "line" : 79,
-      "char" : 8,
-      "type" : "string(string name, string table, string msgName)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       },
-       {
-        "name" : "msgName",
-        "type" : "string"
-       }
-      ],
-      "endline" : 94,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 96,
-    "char" : 8,
-    "name" : "luaWriteMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaWriteMessage",
-      "kind" : "function",
-      "line" : 96,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 138,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "name" : "math",
-    "kind" : "import",
-    "line" : 140,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "basic_types",
-    "kind" : "alias",
-    "line" : 141,
-    "char" : 1,
-    "deco" : "B366ghstiklmfdAhAyaS4math6vector17__T6VectorVki2TfZ6VectorS4math6vector17__T6VectorVki3TfZ6VectorS4math6vector17__T6VectorVki4TfZ6VectorS4math6vector17__T6VectorVki2TkZ6VectorS4math6vector17__T6VectorVki3TkZ6VectorS4math6vector17__T6VectorVki4TkZ6VectorS4math6vector17__T6VectorVki2TtZ6VectorS4math6vector17__T6VectorVki3TtZ6VectorS4math6vector17__T6VectorVki4TtZ6Vector"
-   },
-   {
-    "name" : "names",
-    "kind" : "variable",
-    "line" : 148,
-    "char" : 6,
-    "storageClass" : [
-     "enum"
-    ],
-    "deco" : "AAya",
-    "init" : "[\"Byte\", \"Byte\", \"Short\", \"Short\", \"Int\", \"Int\", \"Long\", \"Long\", \"Float\", \"Double\", \"UTF8\", \"ByteArray\", \"Float2\", \"Float3\", \"Float4\", \"Int2\", \"Int3\", \"Int4\", \"Short2\", \"Short3\", \"Short4\"]"
-   },
-   {
-    "name" : "std.traits",
-    "kind" : "import",
-    "line" : 156,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.typetuple",
-    "kind" : "import",
-    "line" : 156,
-    "char" : 20,
-    "protection" : "private"
-   },
-   {
-    "kind" : "template",
-    "line" : 158,
-    "char" : 6,
-    "name" : "isBaseType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "isBaseType",
-      "kind" : "variable",
-      "line" : 158,
-      "char" : 6,
-      "storageClass" : [
-       "enum"
-      ],
-      "init" : "staticIndexOf!(T, basic_types) != -1"
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 161,
-    "char" : 8,
-    "name" : "luaReadType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "is(T == string)",
-    "members" : [
-     {
-      "name" : "luaReadType",
-      "kind" : "function",
-      "line" : 161,
-      "char" : 8,
-      "type" : "string(string name, string table)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 164,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 166,
-    "char" : 8,
-    "name" : "luaReadType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isBaseType!T && !is(T == string)",
-    "members" : [
-     {
-      "name" : "luaReadType",
-      "kind" : "function",
-      "line" : 166,
-      "char" : 8,
-      "type" : "string(string name, string table)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 171,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 173,
-    "char" : 8,
-    "name" : "luaReadType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "!isBaseType!T && is(T == struct)",
-    "members" : [
-     {
-      "name" : "luaReadType",
-      "kind" : "function",
-      "line" : 173,
-      "char" : 8,
-      "type" : "string(string name, string table)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 185,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 187,
-    "char" : 8,
-    "name" : "luaWriteType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isBaseType!T",
-    "members" : [
-     {
-      "name" : "luaWriteType",
-      "kind" : "function",
-      "line" : 187,
-      "char" : 8,
-      "type" : "string(string variable, string table)",
-      "parameters" : [
-       {
-        "name" : "variable",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 192,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 194,
-    "char" : 8,
-    "name" : "luaWriteType",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "!isBaseType!T && is(T == struct)",
-    "members" : [
-     {
-      "name" : "luaWriteType",
-      "kind" : "function",
-      "line" : 194,
-      "char" : 8,
-      "type" : "string(string name, string table)",
-      "parameters" : [
-       {
-        "name" : "name",
-        "type" : "string"
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 205,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 207,
-    "char" : 8,
-    "name" : "luaIndirectCalculateLength",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaIndirectCalculateLength",
-      "kind" : "function",
-      "line" : 207,
-      "char" : 8,
-      "type" : "string()",
-      "endline" : 238,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 240,
-    "char" : 8,
-    "name" : "luaIndirectCalculateLength",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "luaIndirectCalculateLength",
-      "kind" : "function",
-      "line" : 240,
-      "char" : 8,
-      "type" : "string(ref size_t size, string table)",
-      "parameters" : [
-       {
-        "name" : "size",
-        "type" : "size_t",
-        "storageClass" : [
-         "ref"
-        ]
-       },
-       {
-        "name" : "table",
-        "type" : "string"
-       }
-      ],
-      "endline" : 258,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 260,
-    "char" : 8,
-    "name" : "messageLength",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "messageLength",
-      "kind" : "function",
-      "line" : 260,
-      "char" : 8,
-      "type" : "size_t()",
-      "endline" : 269,
-      "endchar" : 1
-     }
-    ]
-   }
-  ]
- },
- {
-  "name" : "network.message",
-  "kind" : "module",
-  "file" : "network\\message.d",
-  "members" : [
-   {
-    "name" : "std.traits",
-    "kind" : "import",
-    "line" : 2,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "util.bitmanip",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "network.server",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "util.hash",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "log",
-    "kind" : "import",
-    "line" : 6,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "InMessage",
-    "kind" : "struct",
-    "line" : 8,
-    "char" : 1,
-    "members" : []
-   },
-   {
-    "name" : "OutMessage",
-    "kind" : "struct",
-    "line" : 9,
-    "char" : 1,
-    "members" : []
-   },
-   {
-    "name" : "InoutMessage",
-    "kind" : "struct",
-    "line" : 10,
-    "char" : 1,
-    "members" : []
-   },
-   {
-    "kind" : "template",
-    "line" : 12,
-    "char" : 1,
-    "name" : "Alias",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "Alias",
-      "kind" : "alias",
-      "line" : 12,
-      "char" : 1,
-      "type" : "T"
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 13,
-    "char" : 1,
-    "name" : "isOutMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "isOutMessage",
-      "kind" : "variable",
-      "line" : 19,
-      "char" : 7,
-      "storageClass" : [
-       "enum"
-      ],
-      "init" : "is(type == OutMessage) || is(type == InoutMessage)"
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 22,
-    "char" : 1,
-    "name" : "isInMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "isInMessage",
-      "kind" : "variable",
-      "line" : 28,
-      "char" : 7,
-      "storageClass" : [
-       "enum"
-      ],
-      "init" : "is(type == InMessage) || is(type == InoutMessage)"
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 31,
-    "char" : 1,
-    "name" : "isIndirectMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "isIndirectMessage",
-      "kind" : "variable",
-      "line" : 33,
-      "char" : 7,
-      "storageClass" : [
-       "enum"
-      ],
-      "init" : "hasIndirections!T"
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 38,
-    "char" : 8,
-    "name" : "writeMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "writeMessage",
-      "kind" : "function",
-      "line" : 38,
-      "char" : 8,
-      "type" : "size_t(ubyte[] buf, T message)",
-      "parameters" : [
-       {
-        "name" : "buf",
-        "type" : "ubyte[]"
-       },
-       {
-        "name" : "message",
-        "type" : "T"
-       }
-      ],
-      "endline" : 49,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 51,
-    "char" : 3,
-    "name" : "readMessageContent",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isInMessage!T",
-    "members" : [
-     {
-      "name" : "readMessageContent",
-      "kind" : "function",
-      "line" : 51,
-      "char" : 3,
-      "type" : "T(ref ubyte[] buf)",
-      "parameters" : [
-       {
-        "name" : "buf",
-        "type" : "ubyte[]",
-        "storageClass" : [
-         "ref"
-        ]
-       }
-      ],
-      "endline" : 61,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 63,
-    "char" : 6,
-    "name" : "sendMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isOutMessage!T && hasIndirections!T",
-    "members" : [
-     {
-      "name" : "sendMessage",
-      "kind" : "function",
-      "line" : 63,
-      "char" : 6,
-      "type" : "void(Server* server, ulong id, T message)",
-      "parameters" : [
-       {
-        "name" : "server",
-        "type" : "Server*"
-       },
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "message",
-        "type" : "T"
-       }
-      ],
-      "endline" : 70,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "kind" : "template",
-    "line" : 72,
-    "char" : 6,
-    "name" : "sendMessage",
-    "parameters" : [
-     {
-      "name" : "T",
-      "kind" : "type"
-     }
-    ],
-    "constraint" : "isOutMessage!T && !hasIndirections!T",
-    "members" : [
-     {
-      "name" : "sendMessage",
-      "kind" : "function",
-      "line" : 72,
-      "char" : 6,
-      "type" : "void(Server* server, ulong id, T message)",
-      "parameters" : [
-       {
-        "name" : "server",
-        "type" : "Server*"
-       },
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "message",
-        "type" : "T"
-       }
-      ],
-      "endline" : 79,
-      "endchar" : 1
-     }
-    ]
-   },
-   {
-    "name" : "__unittestL81_21",
-    "kind" : "function",
-    "line" : 81,
-    "char" : 1,
-    "endline" : 107,
-    "endchar" : 2
-   }
-  ]
- },
- {
-  "name" : "network.router",
-  "kind" : "module",
-  "file" : "network\\router.d",
-  "members" : [
-   {
-    "name" : "collections.table",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "collections.list",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "network.server",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "network.message",
-    "kind" : "import",
-    "line" : 6,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "ConnectionHandler",
-    "kind" : "alias",
-    "line" : 8,
-    "char" : 1,
-    "deco" : "DFmZv"
-   },
-   {
-    "name" : "ReconnectionHandler",
-    "kind" : "alias",
-    "line" : 9,
-    "char" : 1,
-    "deco" : "DFmZv"
-   },
-   {
-    "name" : "DisconnectonHandler",
-    "kind" : "alias",
-    "line" : 10,
-    "char" : 1,
-    "deco" : "DFmZv"
-   },
-   {
-    "name" : "RawMessageHandler",
-    "kind" : "alias",
-    "line" : 11,
-    "char" : 1,
-    "deco" : "DFmAhZv"
-   },
-   {
-    "name" : "MessageHandler",
-    "kind" : "struct",
-    "line" : 13,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "del",
-      "kind" : "variable",
-      "line" : 15,
-      "char" : 18,
-      "deco" : "DFZv",
-      "offset" : 0
-     },
-     {
-      "name" : "func",
-      "kind" : "variable",
-      "line" : 16,
-      "char" : 49,
-      "deco" : "PFDFZvmAhZv",
-      "offset" : 8
-     },
-     {
-      "name" : "this",
-      "kind" : "constructor",
-      "line" : 17,
-      "char" : 2,
-      "deco" : "FNcDFZvPFDFZvmAhZvZS7network6router14MessageHandler",
-      "originalType" : "ref (void delegate() del, void function(void delegate(), ulong, ubyte[]) func)",
-      "parameters" : [
-       {
-        "name" : "del",
-        "deco" : "DFZv"
-       },
-       {
-        "name" : "func",
-        "deco" : "PFDFZvmAhZv"
-       }
-      ],
-      "endline" : 22,
-      "endchar" : 2
-     },
-     {
-      "name" : "opCall",
-      "kind" : "function",
-      "line" : 24,
-      "char" : 7,
-      "deco" : "FmAhZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "data",
-        "deco" : "Ah"
-       }
-      ],
-      "endline" : 27,
-      "endchar" : 2
-     }
-    ]
-   },
-   {
-    "name" : "HandlerTable",
-    "kind" : "alias",
-    "line" : 30,
-    "char" : 1,
-    "deco" : "S11collections5table82__T5TableTtTS7network6router14MessageHandlerVE11collections5table12SortStrategyi1Z5Table"
-   },
-   {
-    "name" : "Router",
-    "kind" : "struct",
-    "line" : 32,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "connectionHandlers",
-      "kind" : "variable",
-      "line" : 34,
-      "char" : 25,
-      "deco" : "S11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "List!ConnectionHandler",
-      "offset" : 0
-     },
-     {
-      "name" : "reconnectionHandlers",
-      "kind" : "variable",
-      "line" : 35,
-      "char" : 27,
-      "deco" : "S11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "List!ReconnectionHandler",
-      "offset" : 12
-     },
-     {
-      "name" : "disconnectionHandlers",
-      "kind" : "variable",
-      "line" : 36,
-      "char" : 27,
-      "deco" : "S11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "List!DisconnectonHandler",
-      "offset" : 24
-     },
-     {
-      "name" : "messageHandlers",
-      "kind" : "variable",
-      "line" : 37,
-      "char" : 25,
-      "deco" : "S11collections4list17__T4ListTDFmAhZvZ4List",
-      "originalType" : "List!RawMessageHandler",
-      "offset" : 36
-     },
-     {
-      "name" : "specificHandlers",
-      "kind" : "variable",
-      "line" : 39,
-      "char" : 15,
-      "deco" : "S11collections5table82__T5TableTtTS7network6router14MessageHandlerVE11collections5table12SortStrategyi1Z5Table",
-      "originalType" : "HandlerTable",
-      "offset" : 48
-     },
-     {
-      "kind" : "template",
-      "line" : 41,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 41,
-        "char" : 2,
-        "type" : "(ref A allocator, Server* server)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "server",
-          "type" : "Server*"
-         }
-        ],
-        "endline" : 56,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "name" : "connections",
-      "kind" : "function",
-      "line" : 58,
-      "char" : 29,
-      "deco" : "FNcZS11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "ref List!ConnectionHandler()",
-      "endline" : 61,
-      "endchar" : 2
-     },
-     {
-      "name" : "reconnections",
-      "kind" : "function",
-      "line" : 63,
-      "char" : 31,
-      "deco" : "FNcZS11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "ref List!ReconnectionHandler()",
-      "endline" : 66,
-      "endchar" : 2
-     },
-     {
-      "name" : "disconnections",
-      "kind" : "function",
-      "line" : 68,
-      "char" : 31,
-      "deco" : "FNcZS11collections4list15__T4ListTDFmZvZ4List",
-      "originalType" : "ref List!DisconnectonHandler()",
-      "endline" : 71,
-      "endchar" : 2
-     },
-     {
-      "name" : "connected",
-      "kind" : "function",
-      "line" : 73,
-      "char" : 7,
-      "deco" : "FmZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       }
-      ],
-      "endline" : 77,
-      "endchar" : 2
-     },
-     {
-      "name" : "disconected",
-      "kind" : "function",
-      "line" : 79,
-      "char" : 7,
-      "deco" : "FmZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       }
-      ],
-      "endline" : 83,
-      "endchar" : 2
-     },
-     {
-      "name" : "reconnect",
-      "kind" : "function",
-      "line" : 85,
-      "char" : 7,
-      "deco" : "FmZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       }
-      ],
-      "endline" : 89,
-      "endchar" : 2
-     },
-     {
-      "name" : "message",
-      "kind" : "function",
-      "line" : 91,
-      "char" : 7,
-      "deco" : "FmAhZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "mess",
-        "deco" : "Ah"
-       }
-      ],
-      "endline" : 103,
-      "endchar" : 2
-     },
-     {
-      "kind" : "template",
-      "line" : 105,
-      "char" : 7,
-      "name" : "setMessageHandler",
-      "parameters" : [
-       {
-        "name" : "T",
-        "kind" : "type"
-       }
-      ],
-      "constraint" : "isInMessage!T",
-      "members" : [
-       {
-        "name" : "setMessageHandler",
-        "kind" : "function",
-        "line" : 105,
-        "char" : 7,
-        "type" : "void(void delegate(ulong, T) fun)",
-        "parameters" : [
-         {
-          "name" : "fun",
-          "type" : "void delegate(ulong, T)"
-         }
-        ],
-        "endline" : 120,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "kind" : "template",
-      "line" : 122,
-      "char" : 7,
-      "name" : "removeMessageHandler",
-      "parameters" : [
-       {
-        "name" : "T",
-        "kind" : "type"
-       }
-      ],
-      "constraint" : "isIncommingMessage!T",
-      "members" : [
-       {
-        "name" : "removeMessageHandler",
-        "kind" : "function",
-        "line" : 122,
-        "char" : 7,
-        "type" : "void()",
-        "endline" : 125,
-        "endchar" : 2
-       }
-      ]
-     }
-    ]
-   }
-  ]
- },
- {
-  "name" : "network.server",
-  "kind" : "module",
-  "file" : "network\\server.d",
-  "members" : [
-   {
-    "name" : "std.socket",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "allocation",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 20,
-    "protection" : "private"
-   },
-   {
-    "name" : "log",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 32,
-    "protection" : "private"
-   },
-   {
-    "name" : "collections",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 37,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.conv",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 50,
-    "protection" : "private"
-   },
-   {
-    "name" : "logChnl",
-    "kind" : "variable",
-    "line" : 5,
-    "char" : 6,
-    "deco" : "S3log10LogChannel",
-    "init" : "LogChannel(\"LOBBY\")"
-   },
-   {
-    "name" : "Connection",
-    "kind" : "struct",
-    "line" : 7,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "socket",
-      "kind" : "variable",
-      "line" : 9,
-      "char" : 9,
-      "deco" : "C3std6socket6Socket",
-      "originalType" : "Socket",
-      "offset" : 0
-     },
-     {
-      "name" : "timeSinceLastMessage",
-      "kind" : "variable",
-      "line" : 10,
-      "char" : 8,
-      "deco" : "f",
-      "offset" : 4
-     },
-     {
-      "name" : "id",
-      "kind" : "variable",
-      "line" : 11,
-      "char" : 8,
-      "deco" : "m",
-      "offset" : 8
-     },
-     {
-      "name" : "inBuffer",
-      "kind" : "variable",
-      "line" : 13,
-      "char" : 10,
-      "deco" : "Ah",
-      "offset" : 16
-     },
-     {
-      "name" : "outBuffer",
-      "kind" : "variable",
-      "line" : 14,
-      "char" : 10,
-      "deco" : "Ah",
-      "offset" : 24
-     }
-    ]
-   },
-   {
-    "name" : "Listener",
-    "kind" : "class",
-    "line" : 18,
-    "char" : 1,
-    "base" : "std.socket.TcpSocket",
-    "members" : [
-     {
-      "name" : "freeList",
-      "kind" : "variable",
-      "line" : 20,
-      "char" : 20,
-      "deco" : "S10allocation8freelist33__T8FreeListTC3std6socket6SocketZ8FreeList",
-      "originalType" : "FreeList!Socket",
-      "offset" : 20
-     },
-     {
-      "kind" : "template",
-      "line" : 22,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 22,
-        "char" : 2,
-        "type" : "(ref A allocator, size_t maxConnections)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "maxConnections",
-          "type" : "size_t"
-         }
-        ],
-        "endline" : 26,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "name" : "workaround",
-      "kind" : "function",
-      "line" : 28,
-      "char" : 18,
-      "deco" : "FNaNbNeZC3std6socket6Socket",
-      "endline" : 31,
-      "endchar" : 2
-     },
-     {
-      "name" : "accepting",
-      "kind" : "function",
-      "line" : 33,
-      "char" : 18,
-      "storageClass" : [
-       "override"
-      ],
-      "deco" : "FNaNbNfZC3std6socket6Socket",
-      "originalType" : "Socket()",
-      "endline" : 36,
-      "endchar" : 2,
-      "overrides" : [
-       "std.socket.Socket.accepting"
-      ]
-     },
-     {
-      "name" : "deallocate",
-      "kind" : "function",
-      "line" : 38,
-      "char" : 7,
-      "deco" : "FC3std6socket6SocketZv",
-      "parameters" : [
-       {
-        "name" : "toFree",
-        "deco" : "C3std6socket6Socket"
-       }
-      ],
-      "endline" : 41,
-      "endchar" : 2
-     }
-    ]
-   },
-   {
-    "name" : "ServerConfig",
-    "kind" : "struct",
-    "line" : 44,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "connectionTimeout",
-      "kind" : "variable",
-      "line" : 46,
-      "char" : 8,
-      "deco" : "f",
-      "offset" : 0
-     },
-     {
-      "name" : "maxConnections",
-      "kind" : "variable",
-      "line" : 47,
-      "char" : 7,
-      "deco" : "k",
-      "offset" : 4
-     },
-     {
-      "name" : "maxMessageSize",
-      "kind" : "variable",
-      "line" : 48,
-      "char" : 7,
-      "deco" : "k",
-      "offset" : 8
-     }
-    ]
-   },
-   {
-    "name" : "SHUTDOWN_ID",
-    "kind" : "variable",
-    "line" : 53,
-    "char" : 6,
-    "storageClass" : [
-     "enum"
-    ],
-    "deco" : "i",
-    "init" : "8"
-   },
-   {
-    "name" : "Server",
-    "kind" : "struct",
-    "line" : 55,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "config",
-      "kind" : "variable",
-      "line" : 57,
-      "char" : 15,
-      "deco" : "S7network6server12ServerConfig",
-      "offset" : 0
-     },
-     {
-      "name" : "bytesProcessed",
-      "kind" : "variable",
-      "line" : 58,
-      "char" : 8,
-      "deco" : "m",
-      "offset" : 16
-     },
-     {
-      "name" : "lostConnections",
-      "kind" : "variable",
-      "line" : 60,
-      "char" : 13,
-      "deco" : "S11collections4list11__T4ListTmZ4List",
-      "offset" : 24
-     },
-     {
-      "name" : "activeConnections",
-      "kind" : "variable",
-      "line" : 61,
-      "char" : 18,
-      "deco" : "S11collections4list38__T4ListTS7network6server10ConnectionZ4List",
-      "originalType" : "List!Connection",
-      "offset" : 36
-     },
-     {
-      "name" : "pendingConnections",
-      "kind" : "variable",
-      "line" : 62,
-      "char" : 18,
-      "deco" : "S11collections4list38__T4ListTS7network6server10ConnectionZ4List",
-      "originalType" : "List!Connection",
-      "offset" : 48
-     },
-     {
-      "name" : "udpSocket",
-      "kind" : "variable",
-      "line" : 64,
-      "char" : 9,
-      "deco" : "C3std6socket6Socket",
-      "originalType" : "Socket",
-      "offset" : 60
-     },
-     {
-      "name" : "listener",
-      "kind" : "variable",
-      "line" : 65,
-      "char" : 11,
-      "deco" : "C7network6server8Listener",
-      "originalType" : "Listener",
-      "offset" : 64
-     },
-     {
-      "name" : "listenerAddress",
-      "kind" : "variable",
-      "line" : 67,
-      "char" : 18,
-      "deco" : "C3std6socket15InternetAddress",
-      "originalType" : "InternetAddress",
-      "offset" : 68
-     },
-     {
-      "name" : "updAddress",
-      "kind" : "variable",
-      "line" : 68,
-      "char" : 18,
-      "deco" : "C3std6socket15InternetAddress",
-      "originalType" : "InternetAddress",
-      "offset" : 72
-     },
-     {
-      "name" : "hostName",
-      "kind" : "variable",
-      "line" : 70,
-      "char" : 9,
-      "deco" : "Aa",
-      "offset" : 76
-     },
-     {
-      "name" : "listenerString",
-      "kind" : "variable",
-      "line" : 71,
-      "char" : 9,
-      "deco" : "Aya",
-      "offset" : 84
-     },
-     {
-      "name" : "onConnect",
-      "kind" : "variable",
-      "line" : 73,
-      "char" : 23,
-      "deco" : "DFmZv",
-      "offset" : 92
-     },
-     {
-      "name" : "onReconnect",
-      "kind" : "variable",
-      "line" : 74,
-      "char" : 23,
-      "deco" : "DFmZv",
-      "offset" : 100
-     },
-     {
-      "name" : "onDisconnect",
-      "kind" : "variable",
-      "line" : 75,
-      "char" : 23,
-      "deco" : "DFmZv",
-      "offset" : 108
-     },
-     {
-      "name" : "onMessage",
-      "kind" : "variable",
-      "line" : 76,
-      "char" : 32,
-      "deco" : "DFmAhZv",
-      "offset" : 116
-     },
-     {
-      "kind" : "template",
-      "line" : 78,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 78,
-        "char" : 2,
-        "type" : "(ref A allocator, ServerConfig config)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "config",
-          "type" : "ServerConfig"
-         }
-        ],
-        "endline" : 111,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "name" : "~this",
-      "kind" : "destructor",
-      "line" : 113,
-      "char" : 2,
-      "deco" : "FZv",
-      "endline" : 134,
-      "endchar" : 2
-     },
-     {
-      "name" : "update",
-      "kind" : "function",
-      "line" : 136,
-      "char" : 7,
-      "deco" : "FfZv",
-      "parameters" : [
-       {
-        "name" : "elapsed",
-        "deco" : "f"
-       }
-      ],
-      "endline" : 143,
-      "endchar" : 2
-     },
-     {
-      "name" : "sendLeftovers",
-      "kind" : "function",
-      "protection" : "private",
-      "line" : 145,
-      "char" : 15,
-      "deco" : "FZv",
-      "endline" : 159,
-      "endchar" : 2
-     },
-     {
-      "name" : "processPendingConnections",
-      "kind" : "function",
-      "line" : 161,
-      "char" : 7,
-      "deco" : "FfZv",
-      "parameters" : [
-       {
-        "name" : "elapsed",
-        "deco" : "f"
-       }
-      ],
-      "endline" : 235,
-      "endchar" : 2
-     },
-     {
-      "name" : "processUDPMessages",
-      "kind" : "function",
-      "line" : 237,
-      "char" : 7,
-      "deco" : "FfZv",
-      "parameters" : [
-       {
-        "name" : "elapsed",
-        "deco" : "f"
-       }
-      ],
-      "endline" : 256,
-      "endchar" : 2
-     },
-     {
-      "name" : "processMessages",
-      "kind" : "function",
-      "line" : 258,
-      "char" : 7,
-      "deco" : "FfZv",
-      "parameters" : [
-       {
-        "name" : "elapsed",
-        "deco" : "f"
-       }
-      ],
-      "endline" : 310,
-      "endchar" : 2
-     },
-     {
-      "name" : "send",
-      "kind" : "function",
-      "line" : 312,
-      "char" : 6,
-      "deco" : "FKS7network6server10ConnectionAhZi",
-      "parameters" : [
-       {
-        "name" : "con",
-        "deco" : "S7network6server10Connection",
-        "storageClass" : [
-         "ref"
-        ]
-       },
-       {
-        "name" : "data",
-        "deco" : "Ah"
-       }
-      ],
-      "endline" : 337,
-      "endchar" : 2
-     },
-     {
-      "name" : "send",
-      "kind" : "function",
-      "line" : 340,
-      "char" : 7,
-      "deco" : "FmAhZv",
-      "parameters" : [
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "message",
-        "deco" : "Ah"
-       }
-      ],
-      "endline" : 349,
-      "endchar" : 2
-     },
-     {
-      "name" : "forwardMessages",
-      "kind" : "function",
-      "protection" : "private",
-      "line" : 351,
-      "char" : 15,
-      "deco" : "FkKS7network6server10ConnectionAhZv",
-      "parameters" : [
-       {
-        "name" : "listIndex",
-        "deco" : "k"
-       },
-       {
-        "name" : "con",
-        "deco" : "S7network6server10Connection",
-        "storageClass" : [
-         "ref"
-        ]
-       },
-       {
-        "name" : "buffer",
-        "deco" : "Ah"
-       }
-      ],
-      "endline" : 390,
-      "endchar" : 2
-     },
-     {
-      "name" : "acceptIncoming",
-      "kind" : "function",
-      "line" : 392,
-      "char" : 7,
-      "deco" : "FZv",
-      "endline" : 421,
-      "endchar" : 2
-     },
-     {
-      "name" : "activateConnection",
-      "kind" : "function",
-      "line" : 423,
-      "char" : 7,
-      "deco" : "FC3std6socket6SocketmbZv",
-      "parameters" : [
-       {
-        "name" : "socket",
-        "deco" : "C3std6socket6Socket"
-       },
-       {
-        "name" : "id",
-        "deco" : "m"
-       },
-       {
-        "name" : "isReconnect",
-        "deco" : "b"
-       }
-      ],
-      "endline" : 437,
-      "endchar" : 2
-     },
-     {
-      "name" : "closeConnection",
-      "kind" : "function",
-      "line" : 439,
-      "char" : 7,
-      "deco" : "FKS11collections4list38__T4ListTS7network6server10ConnectionZ4ListibbZv",
-      "originalType" : "void(ref List!Connection connections, int i, bool wasConnected, bool addToLost)",
-      "parameters" : [
-       {
-        "name" : "connections",
-        "deco" : "S11collections4list38__T4ListTS7network6server10ConnectionZ4List",
-        "storageClass" : [
-         "ref"
-        ]
-       },
-       {
-        "name" : "i",
-        "deco" : "i"
-       },
-       {
-        "name" : "wasConnected",
-        "deco" : "b"
-       },
-       {
-        "name" : "addToLost",
-        "deco" : "b"
-       }
-      ],
-      "endline" : 462,
-      "endchar" : 2
-     },
-     {
-      "name" : "uniqueNumber",
-      "kind" : "function",
-      "protection" : "private",
-      "line" : 464,
-      "char" : 16,
-      "deco" : "FZm",
-      "endline" : 471,
-      "endchar" : 2
-     },
-     {
-      "name" : "unique",
-      "kind" : "function",
-      "protection" : "private",
-      "line" : 473,
-      "char" : 15,
-      "deco" : "FmZb",
-      "parameters" : [
-       {
-        "name" : "num",
-        "deco" : "m"
-       }
-      ],
-      "endline" : 479,
-      "endchar" : 2
-     },
-     {
-      "name" : "__xdtor",
-      "kind" : "alias"
-     },
-     {
-      "name" : "__xpostblit",
-      "kind" : "alias"
-     },
-     {
-      "name" : "opAssign",
-      "kind" : "function",
-      "line" : 55,
-      "char" : 1,
-      "deco" : "FNcNjS7network6server6ServerZS7network6server6Server",
-      "originalType" : "ref Server(Server p)return ",
-      "parameters" : [
-       {
-        "name" : "p",
-        "deco" : "S7network6server6Server"
-       }
-      ]
-     }
-    ]
-   }
-  ]
- },
- {
-  "name" : "network.service",
-  "kind" : "module",
-  "file" : "network\\service.d",
-  "members" : [
-   {
-    "name" : "network.util",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "std.socket",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "collections",
-    "kind" : "import",
-    "line" : 5,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "allocation",
-    "kind" : "import",
-    "line" : 6,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "anyService",
-    "kind" : "variable",
-    "line" : 8,
-    "char" : 6,
-    "storageClass" : [
-     "enum"
-    ],
-    "deco" : "Aya",
-    "init" : "\"ANY_NETWORK_SERVICE\""
-   },
-   {
-    "name" : "serviceMessageMax",
-    "kind" : "variable",
-    "line" : 9,
-    "char" : 13,
-    "storageClass" : [
-     "enum"
-    ],
-    "deco" : "k",
-    "originalType" : "size_t",
-    "init" : "256u"
-   },
-   {
-    "name" : "servicePort",
-    "kind" : "variable",
-    "line" : 10,
-    "char" : 13,
-    "storageClass" : [
-     "enum"
-    ],
-    "deco" : "t",
-    "init" : "cast(ushort)34299u"
-   },
-   {
-    "name" : "NetworkServiceProvider",
-    "kind" : "struct",
-    "line" : 12,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "id",
-      "kind" : "variable",
-      "line" : 14,
-      "char" : 9,
-      "deco" : "Aya",
-      "offset" : 0
-     },
-     {
-      "name" : "data",
-      "kind" : "variable",
-      "line" : 15,
-      "char" : 10,
-      "deco" : "Ah",
-      "offset" : 8
-     }
-    ]
-   },
-   {
-    "name" : "NetworkServices",
-    "kind" : "struct",
-    "line" : 18,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "services",
-      "kind" : "variable",
-      "line" : 20,
-      "char" : 30,
-      "deco" : "S11collections4list51__T4ListTS7network7service22NetworkServiceProviderZ4List",
-      "originalType" : "List!NetworkServiceProvider",
-      "offset" : 0
-     },
-     {
-      "name" : "socket",
-      "kind" : "variable",
-      "line" : 21,
-      "char" : 12,
-      "deco" : "C3std6socket9UdpSocket",
-      "originalType" : "UdpSocket",
-      "offset" : 12
-     },
-     {
-      "kind" : "template",
-      "line" : 23,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 23,
-        "char" : 2,
-        "type" : "(ref A allocator, ushort port, uint maxServices)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "port",
-          "deco" : "t"
-         },
-         {
-          "name" : "maxServices",
-          "deco" : "k"
-         }
-        ],
-        "endline" : 30,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "kind" : "template",
-      "line" : 32,
-      "char" : 7,
-      "name" : "add",
-      "parameters" : [
-       {
-        "name" : "T",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "add",
-        "kind" : "function",
-        "line" : 32,
-        "char" : 7,
-        "type" : "void(string serviceID, auto ref T t)",
-        "parameters" : [
-         {
-          "name" : "serviceID",
-          "type" : "string"
-         },
-         {
-          "name" : "t",
-          "type" : "T",
-          "storageClass" : [
-           "auto",
-           "ref"
-          ]
-         }
-        ],
-        "endline" : 42,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "name" : "poll",
-      "kind" : "function",
-      "line" : 44,
-      "char" : 7,
-      "deco" : "FZv",
-      "endline" : 73,
-      "endchar" : 2
-     },
-     {
-      "name" : "sendService",
-      "kind" : "function",
-      "protection" : "private",
-      "line" : 75,
-      "char" : 15,
-      "deco" : "FkC3std6socket7AddressZv",
-      "parameters" : [
-       {
-        "name" : "index",
-        "deco" : "k"
-       },
-       {
-        "name" : "to",
-        "deco" : "C3std6socket7Address"
-       }
-      ],
-      "endline" : 86,
-      "endchar" : 2
-     }
-    ]
-   },
-   {
-    "name" : "NetworkServiceFinder",
-    "kind" : "struct",
-    "line" : 89,
-    "char" : 1,
-    "members" : [
-     {
-      "name" : "toFind",
-      "kind" : "variable",
-      "line" : 91,
-      "char" : 9,
-      "deco" : "Aya",
-      "offset" : 0
-     },
-     {
-      "name" : "socket",
-      "kind" : "variable",
-      "line" : 92,
-      "char" : 12,
-      "deco" : "C3std6socket9UdpSocket",
-      "originalType" : "UdpSocket",
-      "offset" : 8
-     },
-     {
-      "name" : "broadcastAddress",
-      "kind" : "variable",
-      "line" : 93,
-      "char" : 18,
-      "deco" : "C3std6socket15InternetAddress",
-      "originalType" : "InternetAddress",
-      "offset" : 12
-     },
-     {
-      "name" : "foundFunc",
-      "kind" : "variable",
-      "line" : 95,
-      "char" : 40,
-      "deco" : "PFAxaAhZv",
-      "offset" : 16
-     },
-     {
-      "name" : "foundDel",
-      "kind" : "variable",
-      "line" : 96,
-      "char" : 40,
-      "deco" : "DFAxaAhZv",
-      "offset" : 20
-     },
-     {
-      "kind" : "template",
-      "line" : 98,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 98,
-        "char" : 2,
-        "type" : "(ref A allocator, ushort port, string toFind)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "port",
-          "deco" : "t"
-         },
-         {
-          "name" : "toFind",
-          "type" : "string"
-         }
-        ],
-        "endline" : 106,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "kind" : "template",
-      "line" : 108,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 108,
-        "char" : 2,
-        "type" : "(ref A allocator, ushort port, string toFind, void function(const(char)[], ubyte[]) func)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "port",
-          "deco" : "t"
-         },
-         {
-          "name" : "toFind",
-          "type" : "string"
-         },
-         {
-          "name" : "func",
-          "type" : "void function(const(char)[], ubyte[])"
-         }
-        ],
-        "endline" : 112,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "kind" : "template",
-      "line" : 114,
-      "char" : 2,
-      "name" : "this",
-      "parameters" : [
-       {
-        "name" : "A",
-        "kind" : "type"
-       }
-      ],
-      "members" : [
-       {
-        "name" : "this",
-        "kind" : "constructor",
-        "line" : 114,
-        "char" : 2,
-        "type" : "(ref A allocator, ushort port, string toFind, void delegate(const(char)[], ubyte[]) del)",
-        "parameters" : [
-         {
-          "name" : "allocator",
-          "type" : "A",
-          "storageClass" : [
-           "ref"
-          ]
-         },
-         {
-          "name" : "port",
-          "deco" : "t"
-         },
-         {
-          "name" : "toFind",
-          "type" : "string"
-         },
-         {
-          "name" : "del",
-          "type" : "void delegate(const(char)[], ubyte[])"
-         }
-        ],
-        "endline" : 118,
-        "endchar" : 2
-       }
-      ]
-     },
-     {
-      "name" : "~this",
-      "kind" : "destructor",
-      "line" : 120,
-      "char" : 2,
-      "deco" : "FZv",
-      "endline" : 123,
-      "endchar" : 2
-     },
-     {
-      "name" : "sendServiceQuery",
-      "kind" : "function",
-      "line" : 125,
-      "char" : 7,
-      "deco" : "FZv",
-      "endline" : 133,
-      "endchar" : 2
-     },
-     {
-      "name" : "pollServiceFound",
-      "kind" : "function",
-      "line" : 135,
-      "char" : 7,
-      "deco" : "FZb",
-      "endline" : 160,
-      "endchar" : 2
-     },
-     {
-      "name" : "__xdtor",
-      "kind" : "alias"
-     },
-     {
-      "name" : "opAssign",
-      "kind" : "function",
-      "line" : 89,
-      "char" : 1,
-      "deco" : "FNcNjS7network7service20NetworkServiceFinderZS7network7service20NetworkServiceFinder",
-      "originalType" : "ref NetworkServiceFinder(NetworkServiceFinder p)return ",
-      "parameters" : [
-       {
-        "name" : "p",
-        "deco" : "S7network7service20NetworkServiceFinder"
-       }
-      ]
-     }
-    ]
-   }
-  ]
- },
- {
-  "name" : "network.util",
-  "kind" : "module",
-  "file" : "network\\util.d",
-  "members" : [
-   {
-    "name" : "std.socket",
-    "kind" : "import",
-    "line" : 3,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "allocation",
-    "kind" : "import",
-    "line" : 4,
-    "char" : 8,
-    "protection" : "private"
-   },
-   {
-    "name" : "localIPString",
-    "kind" : "function",
-    "line" : 6,
-    "char" : 8,
-    "deco" : "FZAya",
-    "endline" : 17,
-    "endchar" : 1
-   },
-   {
-    "kind" : "template",
-    "line" : 19,
-    "char" : 17,
-    "name" : "lanBroadcastAddress",
-    "parameters" : [
-     {
-      "name" : "A",
-      "kind" : "type"
-     }
-    ],
-    "members" : [
-     {
-      "name" : "lanBroadcastAddress",
-      "kind" : "function",
-      "line" : 19,
-      "char" : 17,
-      "type" : "InternetAddress(ref A allocator, ushort port)",
-      "parameters" : [
-       {
-        "name" : "allocator",
-        "type" : "A",
-        "storageClass" : [
-         "ref"
-        ]
-       },
-       {
-        "name" : "port",
-        "deco" : "t"
-       }
-      ],
-      "endline" : 26,
-      "endchar" : 1
-     }
-    ]
-   }
-  ]
- },
- {
   "name" : "rendering.asyncrenderbuffer",
   "kind" : "module",
   "file" : "rendering\\asyncrenderbuffer.d",
@@ -17106,8 +14332,140 @@
     "char" : 2
    },
    {
-    "kind" : "template",
+    "name" : "TextAlignment",
+    "kind" : "enum",
     "line" : 10,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "center",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 12,
+      "char" : 2
+     },
+     {
+      "name" : "topLeft",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 13,
+      "char" : 2
+     },
+     {
+      "name" : "bottomLeft",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 14,
+      "char" : 2
+     },
+     {
+      "name" : "centerLeft",
+      "kind" : "enum member",
+      "value" : "3",
+      "line" : 15,
+      "char" : 2
+     },
+     {
+      "name" : "topRight",
+      "kind" : "enum member",
+      "value" : "4",
+      "line" : 16,
+      "char" : 2
+     },
+     {
+      "name" : "bottomRight",
+      "kind" : "enum member",
+      "value" : "5",
+      "line" : 17,
+      "char" : 2
+     },
+     {
+      "name" : "centerRight",
+      "kind" : "enum member",
+      "value" : "6",
+      "line" : 18,
+      "char" : 2
+     },
+     {
+      "name" : "topCenter",
+      "kind" : "enum member",
+      "value" : "7",
+      "line" : 19,
+      "char" : 2
+     },
+     {
+      "name" : "bottomCenter",
+      "kind" : "enum member",
+      "value" : "8",
+      "line" : 20,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "name" : "HTextAlignment",
+    "kind" : "enum",
+    "line" : 23,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "center",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 25,
+      "char" : 2
+     },
+     {
+      "name" : "left",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 26,
+      "char" : 2
+     },
+     {
+      "name" : "right",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 27,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "name" : "VTextAlignment",
+    "kind" : "enum",
+    "line" : 30,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "center",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 32,
+      "char" : 2
+     },
+     {
+      "name" : "top",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 33,
+      "char" : 2
+     },
+     {
+      "name" : "right",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 34,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 37,
     "char" : 6,
     "name" : "drawText",
     "parameters" : [
@@ -17120,9 +14478,147 @@
      {
       "name" : "drawText",
       "kind" : "function",
-      "line" : 10,
+      "line" : 37,
       "char" : 6,
-      "type" : "void(ref R renderer, const(char)[] text, float2 pos, float2 size, ref Font font, Color color, float2 thresholds = float2(0.25, 0.75), float4 bounds = float4(0, 0, 0, 0))",
+      "type" : "void(ref R renderer, const(char)[] text, float2 pos, float2 size, ref Font font, Color color, HTextAlignment alignment, float2 thresholds = float2(0.25, 0.75), float4 bounds = float4.zero)",
+      "parameters" : [
+       {
+        "name" : "renderer",
+        "type" : "R",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "text",
+        "type" : "const(char)[]"
+       },
+       {
+        "name" : "pos",
+        "type" : "float2"
+       },
+       {
+        "name" : "size",
+        "type" : "float2"
+       },
+       {
+        "name" : "font",
+        "type" : "Font",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "color",
+        "type" : "Color"
+       },
+       {
+        "name" : "alignment",
+        "type" : "HTextAlignment"
+       },
+       {
+        "name" : "thresholds",
+        "type" : "float2",
+        "default" : "float2(0.25, 0.75)"
+       },
+       {
+        "name" : "bounds",
+        "type" : "float4",
+        "default" : "float4.zero"
+       }
+      ],
+      "endline" : 63,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 66,
+    "char" : 6,
+    "name" : "drawText",
+    "parameters" : [
+     {
+      "name" : "R",
+      "kind" : "type"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "drawText",
+      "kind" : "function",
+      "line" : 66,
+      "char" : 6,
+      "type" : "void(ref R renderer, const(char)[] text, float4 pos, float2 size, ref Font font, Color color, TextAlignment alignment, float2 thresholds = float2(0.25, 0.75), float4 bounds = float4.zero)",
+      "parameters" : [
+       {
+        "name" : "renderer",
+        "type" : "R",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "text",
+        "type" : "const(char)[]"
+       },
+       {
+        "name" : "pos",
+        "type" : "float4"
+       },
+       {
+        "name" : "size",
+        "type" : "float2"
+       },
+       {
+        "name" : "font",
+        "type" : "Font",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "color",
+        "type" : "Color"
+       },
+       {
+        "name" : "alignment",
+        "type" : "TextAlignment"
+       },
+       {
+        "name" : "thresholds",
+        "type" : "float2",
+        "default" : "float2(0.25, 0.75)"
+       },
+       {
+        "name" : "bounds",
+        "type" : "float4",
+        "default" : "float4.zero"
+       }
+      ],
+      "endline" : 109,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 113,
+    "char" : 6,
+    "name" : "drawText",
+    "parameters" : [
+     {
+      "name" : "R",
+      "kind" : "type"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "drawText",
+      "kind" : "function",
+      "line" : 113,
+      "char" : 6,
+      "type" : "void(ref R renderer, const(char)[] text, float2 pos, float2 size, ref Font font, Color color, float2 thresholds = float2(0.25, 0.75), float4 bounds = float4.zero)",
       "parameters" : [
        {
         "name" : "renderer",
@@ -17162,17 +14658,17 @@
        {
         "name" : "bounds",
         "type" : "float4",
-        "default" : "float4(0, 0, 0, 0)"
+        "default" : "float4.zero"
        }
       ],
-      "endline" : 62,
+      "endline" : 166,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 65,
+    "line" : 169,
     "char" : 6,
     "name" : "drawDistQuad",
     "parameters" : [
@@ -17185,7 +14681,7 @@
      {
       "name" : "drawDistQuad",
       "kind" : "function",
-      "line" : 65,
+      "line" : 169,
       "char" : 6,
       "type" : "void(ref R renderer, ref float4 quad, ref Frame frame, ref float3 thresh, Color color)",
       "parameters" : [
@@ -17222,14 +14718,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 79,
+      "endline" : 183,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 81,
+    "line" : 185,
     "char" : 6,
     "name" : "drawDistQuad",
     "parameters" : [
@@ -17242,7 +14738,7 @@
      {
       "name" : "drawDistQuad",
       "kind" : "function",
-      "line" : 81,
+      "line" : 185,
       "char" : 6,
       "type" : "void(ref R renderer, ref float4 quad, ref float4 bounds, ref Frame frame, ref float3 thresh, Color color)",
       "parameters" : [
@@ -17286,7 +14782,7 @@
         "type" : "Color"
        }
       ],
-      "endline" : 106,
+      "endline" : 210,
       "endchar" : 1
      }
     ]
@@ -17294,7 +14790,7 @@
    {
     "name" : "fixQuad",
     "kind" : "function",
-    "line" : 109,
+    "line" : 213,
     "char" : 6,
     "deco" : "FKS4math6vector17__T6VectorVki4TfZ6VectorKS4math6vector17__T6VectorVki4TfZ6VectorKS4math6vector17__T6VectorVki4TfZ6VectorZv",
     "originalType" : "void(ref float4 quad, ref float4 coords, ref float4 bounds)",
@@ -17321,12 +14817,12 @@
       ]
      }
     ],
-    "endline" : 131,
+    "endline" : 235,
     "endchar" : 1
    },
    {
     "kind" : "template",
-    "line" : 134,
+    "line" : 238,
     "char" : 6,
     "name" : "drawQuad",
     "parameters" : [
@@ -17339,7 +14835,7 @@
      {
       "name" : "drawQuad",
       "kind" : "function",
-      "line" : 134,
+      "line" : 238,
       "char" : 6,
       "type" : "void(ref R renderer, float4 quad, Frame frame, Color color, float4 bounds)",
       "parameters" : [
@@ -17367,14 +14863,14 @@
         "type" : "float4"
        }
       ],
-      "endline" : 146,
+      "endline" : 250,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 148,
+    "line" : 252,
     "char" : 6,
     "name" : "drawQuad",
     "parameters" : [
@@ -17391,7 +14887,7 @@
      {
       "name" : "drawQuad",
       "kind" : "function",
-      "line" : 148,
+      "line" : 252,
       "char" : 6,
       "type" : "void(ref R renderer, float4 quad, auto ref F frame, Color color)",
       "parameters" : [
@@ -17419,14 +14915,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 161,
+      "endline" : 265,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 163,
+    "line" : 267,
     "char" : 6,
     "name" : "drawQuad",
     "parameters" : [
@@ -17439,7 +14935,7 @@
      {
       "name" : "drawQuad",
       "kind" : "function",
-      "line" : 163,
+      "line" : 267,
       "char" : 6,
       "type" : "void(ref R renderer, float4 quad, float rotation, Frame frame, Color color)",
       "parameters" : [
@@ -17467,14 +14963,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 185,
+      "endline" : 289,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 187,
+    "line" : 291,
     "char" : 6,
     "name" : "drawTriangle",
     "parameters" : [
@@ -17487,7 +14983,7 @@
      {
       "name" : "drawTriangle",
       "kind" : "function",
-      "line" : 187,
+      "line" : 291,
       "char" : 6,
       "type" : "void(ref R renderer, float2 a, float2 b, float2 c, Texture2D texture, Color color)",
       "parameters" : [
@@ -17519,14 +15015,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 198,
+      "endline" : 302,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 200,
+    "line" : 304,
     "char" : 6,
     "name" : "drawQuadOutline",
     "parameters" : [
@@ -17539,7 +15035,7 @@
      {
       "name" : "drawQuadOutline",
       "kind" : "function",
-      "line" : 200,
+      "line" : 304,
       "char" : 6,
       "type" : "void(ref R renderer, float4 rect, float width, Frame frame, Color color, float rotation = 0)",
       "parameters" : [
@@ -17572,14 +15068,14 @@
         "default" : "0"
        }
       ],
-      "endline" : 234,
+      "endline" : 338,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 236,
+    "line" : 340,
     "char" : 6,
     "name" : "drawSpottedLine",
     "parameters" : [
@@ -17592,7 +15088,7 @@
      {
       "name" : "drawSpottedLine",
       "kind" : "function",
-      "line" : 236,
+      "line" : 340,
       "char" : 6,
       "type" : "void(ref R renderer, float2 start, float2 end, float width, float spotLength, ref Frame frame, Color color)",
       "parameters" : [
@@ -17631,14 +15127,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 248,
+      "endline" : 352,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 250,
+    "line" : 354,
     "char" : 6,
     "name" : "drawLine",
     "parameters" : [
@@ -17651,7 +15147,7 @@
      {
       "name" : "drawLine",
       "kind" : "function",
-      "line" : 250,
+      "line" : 354,
       "char" : 6,
       "type" : "void(ref R renderer, float2 start, float2 end, float width, Frame frame, Color color)",
       "parameters" : [
@@ -17683,14 +15179,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 264,
+      "endline" : 368,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 266,
+    "line" : 370,
     "char" : 15,
     "name" : "makeNGonIndices",
     "parameters" : [
@@ -17704,10 +15200,10 @@
      {
       "name" : "makeNGonIndices",
       "kind" : "function",
-      "line" : 266,
+      "line" : 370,
       "char" : 15,
       "type" : "ushort[N * 3]()",
-      "endline" : 281,
+      "endline" : 385,
       "endchar" : 1
      }
     ]
@@ -17715,13 +15211,13 @@
    {
     "name" : "rendering.combined",
     "kind" : "import",
-    "line" : 283,
+    "line" : 387,
     "char" : 8,
     "protection" : "private"
    },
    {
     "kind" : "template",
-    "line" : 284,
+    "line" : 388,
     "char" : 6,
     "name" : "drawNGon",
     "parameters" : [
@@ -17739,7 +15235,7 @@
      {
       "name" : "drawNGon",
       "kind" : "function",
-      "line" : 284,
+      "line" : 388,
       "char" : 6,
       "type" : "void(ref R renderer, float2 origin, float radius, Frame frame, Color color)",
       "parameters" : [
@@ -17767,14 +15263,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 320,
+      "endline" : 424,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 322,
+    "line" : 426,
     "char" : 16,
     "name" : "makeNGonOutlineIndices",
     "parameters" : [
@@ -17788,17 +15284,17 @@
      {
       "name" : "makeNGonOutlineIndices",
       "kind" : "function",
-      "line" : 322,
+      "line" : 426,
       "char" : 16,
       "type" : "ushort[N * 12]()",
-      "endline" : 336,
+      "endline" : 440,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 338,
+    "line" : 442,
     "char" : 6,
     "name" : "drawNGonOutline",
     "parameters" : [
@@ -17816,7 +15312,7 @@
      {
       "name" : "drawNGonOutline",
       "kind" : "function",
-      "line" : 338,
+      "line" : 442,
       "char" : 6,
       "type" : "void(ref R renderer, float2 origin, float innerRadius, float outerRadius, Frame frame, Color color)",
       "parameters" : [
@@ -17848,14 +15344,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 374,
+      "endline" : 478,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 376,
+    "line" : 480,
     "char" : 15,
     "name" : "makeCircleSectionIndices",
     "parameters" : [
@@ -17869,17 +15365,17 @@
      {
       "name" : "makeCircleSectionIndices",
       "kind" : "function",
-      "line" : 376,
+      "line" : 480,
       "char" : 15,
       "type" : "ushort[N * 3]()",
-      "endline" : 386,
+      "endline" : 490,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 388,
+    "line" : 492,
     "char" : 6,
     "name" : "drawCircleSection",
     "parameters" : [
@@ -17897,7 +15393,7 @@
      {
       "name" : "drawCircleSection",
       "kind" : "function",
-      "line" : 388,
+      "line" : 492,
       "char" : 6,
       "type" : "void(ref R renderer, float2 origin, float radius, float startAngle, float endAngle, Texture2D texture, Color color)",
       "parameters" : [
@@ -17933,14 +15429,14 @@
         "type" : "Color"
        }
       ],
-      "endline" : 413,
+      "endline" : 517,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 415,
+    "line" : 519,
     "char" : 3,
     "name" : "quadraticBezier",
     "parameters" : [
@@ -17953,7 +15449,7 @@
      {
       "name" : "quadraticBezier",
       "kind" : "function",
-      "line" : 415,
+      "line" : 519,
       "char" : 3,
       "type" : "T(float t, T a, T b, T c)",
       "parameters" : [
@@ -17974,14 +15470,14 @@
         "type" : "T"
        }
       ],
-      "endline" : 419,
+      "endline" : 523,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 421,
+    "line" : 525,
     "char" : 3,
     "name" : "cubiqBezier",
     "parameters" : [
@@ -17994,7 +15490,7 @@
      {
       "name" : "cubiqBezier",
       "kind" : "function",
-      "line" : 421,
+      "line" : 525,
       "char" : 3,
       "type" : "T(float t, T a, T b, T c, T d)",
       "parameters" : [
@@ -18019,14 +15515,14 @@
         "type" : "T"
        }
       ],
-      "endline" : 427,
+      "endline" : 531,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 429,
+    "line" : 533,
     "char" : 15,
     "name" : "makeBezierIndices",
     "parameters" : [
@@ -18040,17 +15536,17 @@
      {
       "name" : "makeBezierIndices",
       "kind" : "function",
-      "line" : 429,
+      "line" : 533,
       "char" : 15,
       "type" : "ushort[N * 6]()",
-      "endline" : 440,
+      "endline" : 544,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 442,
+    "line" : 546,
     "char" : 6,
     "name" : "drawBezier",
     "parameters" : [
@@ -18068,7 +15564,7 @@
      {
       "name" : "drawBezier",
       "kind" : "function",
-      "line" : 442,
+      "line" : 546,
       "char" : 6,
       "type" : "void(ref R renderer, float2 start, float2 c0, float2 c1, float2 end, float width, Texture2D texture, Color color, float rotation = 0)",
       "parameters" : [
@@ -18113,14 +15609,14 @@
         "default" : "0"
        }
       ],
-      "endline" : 468,
+      "endline" : 572,
       "endchar" : 1
      }
     ]
    },
    {
     "kind" : "template",
-    "line" : 470,
+    "line" : 574,
     "char" : 6,
     "name" : "drawPath",
     "parameters" : [
@@ -18133,7 +15629,7 @@
      {
       "name" : "drawPath",
       "kind" : "function",
-      "line" : 470,
+      "line" : 574,
       "char" : 6,
       "type" : "void(ref R renderer, float2[] path, float width, Texture2D texture, Color color)",
       "parameters" : [
@@ -18161,7 +15657,7 @@
         "type" : "Color"
        }
       ],
-      "endline" : 479,
+      "endline" : 583,
       "endchar" : 1
      }
     ]
@@ -19809,7 +17305,7 @@
     ]
    },
    {
-    "name" : "_sharedStaticCtor32",
+    "name" : "_sharedStaticCtor20",
     "kind" : "function",
     "line" : 265,
     "char" : 1,

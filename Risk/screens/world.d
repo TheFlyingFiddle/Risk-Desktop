@@ -19,7 +19,7 @@ class WorldScreen : RiskScreen
 		enum x = 0.65;
 		static float2[5] corners = [float2(-x, -x), float2(-x, x), float2(x, -x), float2(0, 0)];
 
-		import util.strings;
+		import util.strings; 
 
 		renderer.begin();
 

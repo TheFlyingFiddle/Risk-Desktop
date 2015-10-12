@@ -28,13 +28,6 @@ echo graphics\program.d >>Debug\Framework.build.rsp
 echo graphics\shader.d >>Debug\Framework.build.rsp
 echo graphics\texture.d >>Debug\Framework.build.rsp
 echo graphics\textureatlas.d >>Debug\Framework.build.rsp
-echo network\file.d >>Debug\Framework.build.rsp
-echo network\luagen.d >>Debug\Framework.build.rsp
-echo network\message.d >>Debug\Framework.build.rsp
-echo network\router.d >>Debug\Framework.build.rsp
-echo network\server.d >>Debug\Framework.build.rsp
-echo network\service.d >>Debug\Framework.build.rsp
-echo network\util.d >>Debug\Framework.build.rsp
 echo rendering\asyncrenderbuffer.d >>Debug\Framework.build.rsp
 echo rendering\combined.d >>Debug\Framework.build.rsp
 echo rendering\package.d >>Debug\Framework.build.rsp

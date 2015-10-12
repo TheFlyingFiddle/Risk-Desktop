@@ -1,0 +1,56 @@
+<html><head><META HTTP-EQUIV="Content-Type" content="text/html">
+</head><body><pre>
+<table width=100% bgcolor=#CFCFE5><tr><td>
+	<font face=arial size=+3>Build Log</font>
+</table>
+<table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Building Debug\RiskNew.exe
+</font></table>
+<table width=100% bgcolor=#EFEFE5><tr><td><font face=arial size=+1>
+Command Line
+</font></table>
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+set DMD_LIB=;..\Base\Debug ..\Framework\Debug ..\ExternalLibs\Debug
+
+echo experimental\serialization\simple.d &gt;Debug\RiskNew.build.rsp
+echo experimental\binaryblob.d &gt;&gt;Debug\RiskNew.build.rsp
+echo experimental\channel.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\states\common.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\states\rendering.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\states\start.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\database.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\database_operations.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\input.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\output.d &gt;&gt;Debug\RiskNew.build.rsp
+echo risk\screen.d &gt;&gt;Debug\RiskNew.build.rsp
+echo main.d &gt;&gt;Debug\RiskNew.build.rsp
+
+dmd -g -debug -X -Xf&quot;Debug\RiskNew.json&quot; -I..\Base -I..\Framework -I..\ExternalLibs -deps=&quot;Debug\RiskNew.dep&quot; -c -of&quot;Debug\RiskNew.obj&quot; @Debug\RiskNew.build.rsp
+if errorlevel 1 goto reportError
+
+set LIB=&quot;C:\D\dmd2\windows\bin\..\lib&quot;
+echo. &gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo &quot;Debug\RiskNew.obj&quot;,&quot;Debug\RiskNew.exe&quot;,&quot;Debug\RiskNew.map&quot;,Base.lib+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo Framework.lib+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo ExternalLibs.lib+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo user32.lib+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo kernel32.lib+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo ..\Base\Debug\+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo ..\Framework\Debug\+ &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+echo ..\ExternalLibs\Debug\/NOMAP/CO/NOI/DELEXE &gt;&gt; C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+
+&quot;C:\Program Files (x86)\VisualD\pipedmd.exe&quot; -deps Debug\RiskNew.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\Risk\Risk-Desktop\RiskNew\Debug\RiskNew.build.lnkarg
+if errorlevel 1 goto reportError
+if not exist &quot;Debug\RiskNew.exe&quot; (echo &quot;Debug\RiskNew.exe&quot; not created! &amp;&amp; goto reportError)
+
+goto noError
+
+:reportError
+echo Building Debug\RiskNew.exe failed!
+
+:noError
+<table width=100% bgcolor=#EFEFE5><tr><td><font face=arial size=+1>
+Output
+</font></table>
+
+</body></html>

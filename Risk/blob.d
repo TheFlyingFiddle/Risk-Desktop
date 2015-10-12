@@ -154,5 +154,4 @@ struct Serializer
 		import std.conv, std.format;
 		static assert(format(array_error, T.stringof, "sized"));
 	}
-
 }

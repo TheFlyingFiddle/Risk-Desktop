@@ -1,0 +1,3390 @@
+[
+ {
+  "name" : "experimental.serialization.simple",
+  "kind" : "module",
+  "file" : "experimental\\serialization\\simple.d",
+  "members" : [
+   {
+    "name" : "util.traits",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.traits",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.array",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "kind" : "template",
+    "line" : 15,
+    "char" : 6,
+    "name" : "serialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!is(T == struct) && !isArray!T && !hasIndirections!T",
+    "members" : [
+     {
+      "name" : "serialize",
+      "kind" : "function",
+      "line" : 15,
+      "char" : 6,
+      "type" : "void(auto ref T t, ref Store s)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 18,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 20,
+    "char" : 3,
+    "name" : "deserialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!is(T == struct) && !isArray!T && !hasIndirections!T",
+    "members" : [
+     {
+      "name" : "deserialize",
+      "kind" : "function",
+      "line" : 20,
+      "char" : 3,
+      "type" : "T(ref Store s)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 23,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 25,
+    "char" : 8,
+    "name" : "size",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!is(T == struct) && !isArray!T && !hasIndirections!T",
+    "members" : [
+     {
+      "name" : "size",
+      "kind" : "function",
+      "line" : 25,
+      "char" : 8,
+      "type" : "size_t(auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 28,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 30,
+    "char" : 6,
+    "name" : "serialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && !hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "serialize",
+      "kind" : "function",
+      "line" : 30,
+      "char" : 6,
+      "type" : "void(T t, ref Store s)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T"
+       },
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 35,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 37,
+    "char" : 3,
+    "name" : "deserialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && !hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "deserialize",
+      "kind" : "function",
+      "line" : 37,
+      "char" : 3,
+      "type" : "T(ref Store s)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 49,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 51,
+    "char" : 8,
+    "name" : "size",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && !hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "size",
+      "kind" : "function",
+      "line" : 51,
+      "char" : 8,
+      "type" : "size_t(auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 55,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 57,
+    "char" : 6,
+    "name" : "serialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "serialize",
+      "kind" : "function",
+      "line" : 57,
+      "char" : 6,
+      "type" : "void(auto ref T t, ref Store s)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 63,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 65,
+    "char" : 3,
+    "name" : "deserialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "deserialize",
+      "kind" : "function",
+      "line" : 65,
+      "char" : 3,
+      "type" : "T(ref Store s)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 71,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 73,
+    "char" : 8,
+    "name" : "size",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "size",
+      "kind" : "function",
+      "line" : 73,
+      "char" : 8,
+      "type" : "size_t(auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 79,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "name" : "array_error",
+    "kind" : "variable",
+    "line" : 81,
+    "char" : 6,
+    "storageClass" : [
+     "enum"
+    ],
+    "deco" : "Aya",
+    "init" : "\"%s cannot be %s as it contains indirections please flatten the structure.\""
+   },
+   {
+    "kind" : "template",
+    "line" : 82,
+    "char" : 6,
+    "name" : "serialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "serialize",
+      "kind" : "function",
+      "line" : 82,
+      "char" : 6,
+      "type" : "void(auto ref T t, ref Store s)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 86,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 88,
+    "char" : 6,
+    "name" : "deserialize",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Store",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "deserialize",
+      "kind" : "function",
+      "line" : 88,
+      "char" : 6,
+      "type" : "void(ref Store s)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Store",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 92,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 94,
+    "char" : 8,
+    "name" : "size",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isArray!T && hasIndirections!(ElementType!T)",
+    "members" : [
+     {
+      "name" : "size",
+      "kind" : "function",
+      "line" : 94,
+      "char" : 8,
+      "type" : "size_t(auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 98,
+      "endchar" : 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "experimental.binaryblob",
+  "kind" : "module",
+  "file" : "experimental\\binaryblob.d",
+  "members" : [
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "BinaryBlob",
+    "kind" : "struct",
+    "line" : 16,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "store",
+      "kind" : "variable",
+      "line" : 18,
+      "char" : 9,
+      "deco" : "Av",
+      "offset" : 0
+     },
+     {
+      "name" : "back",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 9,
+      "deco" : "k",
+      "originalType" : "size_t",
+      "offset" : 8
+     },
+     {
+      "name" : "front",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 15,
+      "deco" : "k",
+      "originalType" : "size_t",
+      "offset" : 12
+     },
+     {
+      "name" : "allocator",
+      "kind" : "variable",
+      "line" : 20,
+      "char" : 13,
+      "deco" : "C10allocation6common10IAllocator",
+      "originalType" : "IAllocator",
+      "offset" : 16
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 22,
+      "char" : 2,
+      "deco" : "FNcC10allocation6common10IAllocatorkZS12experimental10binaryblob10BinaryBlob",
+      "originalType" : "ref (IAllocator allocator, size_t cap = 1024)",
+      "parameters" : [
+       {
+        "name" : "allocator",
+        "deco" : "C10allocation6common10IAllocator"
+       },
+       {
+        "name" : "cap",
+        "deco" : "k",
+        "default" : "1024u"
+       }
+      ],
+      "endline" : 27,
+      "endchar" : 2
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 29,
+      "char" : 2,
+      "deco" : "FNcAvZS12experimental10binaryblob10BinaryBlob",
+      "originalType" : "ref (void[] data)",
+      "parameters" : [
+       {
+        "name" : "data",
+        "deco" : "Av"
+       }
+      ],
+      "endline" : 35,
+      "endchar" : 2
+     },
+     {
+      "name" : "grow",
+      "kind" : "function",
+      "line" : 37,
+      "char" : 7,
+      "deco" : "FZv",
+      "endline" : 45,
+      "endchar" : 2
+     },
+     {
+      "name" : "put",
+      "kind" : "function",
+      "line" : 47,
+      "char" : 7,
+      "deco" : "FAvZv",
+      "parameters" : [
+       {
+        "name" : "data",
+        "deco" : "Av"
+       }
+      ],
+      "endline" : 54,
+      "endchar" : 2
+     },
+     {
+      "name" : "take",
+      "kind" : "function",
+      "line" : 56,
+      "char" : 9,
+      "deco" : "FkZAv",
+      "originalType" : "void[](size_t size)",
+      "parameters" : [
+       {
+        "name" : "size",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 61,
+      "endchar" : 2
+     },
+     {
+      "name" : "empty",
+      "kind" : "function",
+      "line" : 63,
+      "char" : 7,
+      "deco" : "FZb",
+      "endline" : 66,
+      "endchar" : 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "experimental.channel",
+  "kind" : "module",
+  "file" : "experimental\\channel.d",
+  "members" : [
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "experimental.binaryblob",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "experimental.serialization.simple",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "util.hash",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "kind" : "template",
+    "line" : 8,
+    "char" : 1,
+    "name" : "Channel",
+    "parameters" : [
+     {
+      "name" : "Header",
+      "kind" : "type"
+     },
+     {
+      "name" : "Size",
+      "kind" : "type",
+      "defaultDeco" : "k"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "Channel",
+      "kind" : "struct",
+      "line" : 8,
+      "char" : 1,
+      "members" : [
+       {
+        "name" : "SizedHeader",
+        "kind" : "struct",
+        "line" : 10,
+        "char" : 2,
+        "members" : [
+         {
+          "name" : "header",
+          "kind" : "variable",
+          "line" : 12,
+          "char" : 11,
+          "type" : "Header"
+         },
+         {
+          "name" : "type",
+          "kind" : "variable",
+          "line" : 13,
+          "char" : 12,
+          "type" : "TypeHash"
+         },
+         {
+          "name" : "size",
+          "kind" : "variable",
+          "line" : 14,
+          "char" : 9,
+          "type" : "Size"
+         }
+        ]
+       },
+       {
+        "name" : "blob",
+        "kind" : "variable",
+        "line" : 17,
+        "char" : 13,
+        "type" : "BinaryBlob"
+       },
+       {
+        "name" : "this",
+        "kind" : "constructor",
+        "line" : 18,
+        "char" : 2,
+        "type" : "(IAllocator allocator, size_t cap = 1024)",
+        "parameters" : [
+         {
+          "name" : "allocator",
+          "type" : "IAllocator"
+         },
+         {
+          "name" : "cap",
+          "type" : "size_t",
+          "default" : "1024"
+         }
+        ],
+        "endline" : 21,
+        "endchar" : 2
+       },
+       {
+        "name" : "empty",
+        "kind" : "function",
+        "line" : 23,
+        "char" : 7,
+        "type" : "bool()",
+        "endline" : 23,
+        "endchar" : 36
+       },
+       {
+        "kind" : "template",
+        "line" : 25,
+        "char" : 7,
+        "name" : "send",
+        "parameters" : [
+         {
+          "name" : "T",
+          "kind" : "type"
+         }
+        ],
+        "members" : [
+         {
+          "name" : "send",
+          "kind" : "function",
+          "line" : 25,
+          "char" : 7,
+          "type" : "void(Header h, auto ref T t)",
+          "parameters" : [
+           {
+            "name" : "h",
+            "type" : "Header"
+           },
+           {
+            "name" : "t",
+            "type" : "T",
+            "storageClass" : [
+             "auto",
+             "ref"
+            ]
+           }
+          ],
+          "endline" : 30,
+          "endchar" : 2
+         }
+        ]
+       },
+       {
+        "kind" : "template",
+        "line" : 32,
+        "char" : 7,
+        "name" : "peek",
+        "parameters" : [
+         {
+          "name" : "T",
+          "kind" : "type"
+         }
+        ],
+        "members" : [
+         {
+          "name" : "peek",
+          "kind" : "function",
+          "line" : 32,
+          "char" : 7,
+          "type" : "void(ref Header h, ref T t)",
+          "parameters" : [
+           {
+            "name" : "h",
+            "type" : "Header",
+            "storageClass" : [
+             "ref"
+            ]
+           },
+           {
+            "name" : "t",
+            "type" : "T",
+            "storageClass" : [
+             "ref"
+            ]
+           }
+          ],
+          "endline" : 39,
+          "endchar" : 2
+         }
+        ]
+       },
+       {
+        "name" : "peek",
+        "kind" : "function",
+        "line" : 41,
+        "char" : 7,
+        "type" : "void(ref Header h, ref TypeHash type, ref void[] data)",
+        "parameters" : [
+         {
+          "name" : "h",
+          "type" : "Header",
+          "storageClass" : [
+           "ref"
+          ]
+         },
+         {
+          "name" : "type",
+          "type" : "TypeHash",
+          "storageClass" : [
+           "ref"
+          ]
+         },
+         {
+          "name" : "data",
+          "type" : "void[]",
+          "storageClass" : [
+           "ref"
+          ]
+         }
+        ],
+        "endline" : 48,
+        "endchar" : 2
+       },
+       {
+        "kind" : "template",
+        "line" : 51,
+        "char" : 7,
+        "name" : "receive",
+        "parameters" : [
+         {
+          "name" : "Funcs",
+          "kind" : "tuple"
+         }
+        ],
+        "members" : [
+         {
+          "name" : "receive",
+          "kind" : "function",
+          "line" : 51,
+          "char" : 7,
+          "type" : "void(Funcs f)",
+          "parameters" : [
+           {
+            "name" : "f",
+            "type" : "Funcs"
+           }
+          ],
+          "endline" : 76,
+          "endchar" : 2
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.states.common",
+  "kind" : "module",
+  "file" : "risk\\states\\common.d",
+  "members" : [
+   {
+    "name" : "experimental.channel",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 15
+   },
+   {
+    "name" : "rendering.shapes",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 15
+   },
+   {
+    "name" : "rendering.combined",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 6
+   },
+   {
+    "name" : "app.core",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 15,
+    "protection" : "private",
+    "selective" : [
+     "Time"
+    ]
+   },
+   {
+    "name" : "risk.database",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 15
+   },
+   {
+    "name" : "risk.states.rendering",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 15
+   },
+   {
+    "name" : "GameStates",
+    "kind" : "enum",
+    "line" : 10,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "start",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 12,
+      "char" : 2
+     },
+     {
+      "name" : "build",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 13,
+      "char" : 2
+     },
+     {
+      "name" : "move",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 14,
+      "char" : 2
+     },
+     {
+      "name" : "attack",
+      "kind" : "enum member",
+      "value" : "3",
+      "line" : 15,
+      "char" : 2
+     },
+     {
+      "name" : "gameOver",
+      "kind" : "enum member",
+      "value" : "4",
+      "line" : 16,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "name" : "GameChannel",
+    "kind" : "alias",
+    "line" : 19,
+    "char" : 1,
+    "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel"
+   },
+   {
+    "name" : "IGameState",
+    "kind" : "interface",
+    "line" : 20,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "hasCompleated",
+      "kind" : "function",
+      "line" : 22,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FZb"
+     },
+     {
+      "name" : "enter",
+      "kind" : "function",
+      "line" : 23,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ]
+     },
+     {
+      "name" : "exit",
+      "kind" : "function",
+      "line" : 24,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ]
+     },
+     {
+      "name" : "handleInput",
+      "kind" : "function",
+      "line" : 25,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel input)",
+      "parameters" : [
+       {
+        "name" : "input",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ]
+     },
+     {
+      "name" : "update",
+      "kind" : "function",
+      "line" : 26,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FS3app4core4TimeKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(Time time, ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       },
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ]
+     },
+     {
+      "name" : "render",
+      "kind" : "function",
+      "line" : 27,
+      "char" : 7,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FS3app4core4TimeKS4risk6states9rendering13RenderContextZv",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       },
+       {
+        "name" : "context",
+        "deco" : "S4risk6states9rendering13RenderContext",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "GameState",
+    "kind" : "class",
+    "line" : 30,
+    "char" : 1,
+    "interfaces" : [
+     "risk.states.common.IGameState"
+    ],
+    "members" : [
+     {
+      "name" : "board",
+      "kind" : "variable",
+      "line" : 32,
+      "char" : 9,
+      "deco" : "PS4risk8database5Board",
+      "offset" : 8
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 33,
+      "char" : 2,
+      "deco" : "FPS4risk8database5BoardZC4risk6states6common9GameState",
+      "originalType" : "(Board* board)",
+      "parameters" : [
+       {
+        "name" : "board",
+        "deco" : "PS4risk8database5Board"
+       }
+      ],
+      "endline" : 33,
+      "endchar" : 43
+     },
+     {
+      "name" : "hasCompleated",
+      "kind" : "function",
+      "line" : 35,
+      "char" : 16,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FZb",
+      "overrides" : [
+       "risk.states.common.IGameState.hasCompleated"
+      ]
+     },
+     {
+      "name" : "enter",
+      "kind" : "function",
+      "line" : 36,
+      "char" : 16,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "overrides" : [
+       "risk.states.common.IGameState.enter"
+      ]
+     },
+     {
+      "name" : "render",
+      "kind" : "function",
+      "line" : 37,
+      "char" : 16,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FS3app4core4TimeKS4risk6states9rendering13RenderContextZv",
+      "parameters" : [
+       {
+        "name" : "t",
+        "deco" : "S3app4core4Time"
+       },
+       {
+        "name" : "context",
+        "deco" : "S4risk6states9rendering13RenderContext",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "overrides" : [
+       "risk.states.common.IGameState.render"
+      ]
+     },
+     {
+      "name" : "handleInput",
+      "kind" : "function",
+      "line" : 38,
+      "char" : 16,
+      "storageClass" : [
+       "abstract"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel input)",
+      "parameters" : [
+       {
+        "name" : "input",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "overrides" : [
+       "risk.states.common.IGameState.handleInput"
+      ]
+     },
+     {
+      "name" : "exit",
+      "kind" : "function",
+      "line" : 41,
+      "char" : 7,
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 41,
+      "endchar" : 39,
+      "overrides" : [
+       "risk.states.common.IGameState.exit"
+      ]
+     },
+     {
+      "name" : "update",
+      "kind" : "function",
+      "line" : 42,
+      "char" : 7,
+      "deco" : "FS3app4core4TimeKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(Time time, ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       },
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 42,
+      "endchar" : 51,
+      "overrides" : [
+       "risk.states.common.IGameState.update"
+      ]
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "protection" : "private",
+    "line" : 46,
+    "char" : 15,
+    "name" : "Dispatch",
+    "parameters" : [
+     {
+      "name" : "To",
+      "kind" : "type"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "T",
+      "kind" : "alias",
+      "line" : 48,
+      "char" : 2,
+      "type" : "typeof(this)"
+     },
+     {
+      "name" : "parent",
+      "kind" : "variable",
+      "line" : 49,
+      "char" : 6,
+      "type" : "To*"
+     },
+     {
+      "kind" : "template",
+      "line" : 57,
+      "char" : 11,
+      "name" : "opDispatch",
+      "parameters" : [
+       {
+        "name" : "s",
+        "kind" : "value",
+        "type" : "string"
+       }
+      ],
+      "members" : [
+       {
+        "name" : "opDispatch",
+        "kind" : "function",
+        "line" : 57,
+        "char" : 11,
+        "storageClass" : [
+         "auto"
+        ],
+        "type" : "ref ()",
+        "endline" : 70,
+        "endchar" : 2
+       }
+      ]
+     },
+     {
+      "kind" : "template",
+      "line" : 72,
+      "char" : 11,
+      "name" : "opDispatch",
+      "parameters" : [
+       {
+        "name" : "s",
+        "kind" : "value",
+        "type" : "string"
+       },
+       {
+        "name" : "Args",
+        "kind" : "tuple"
+       }
+      ],
+      "constraint" : "Args.length > 0",
+      "members" : [
+       {
+        "name" : "opDispatch",
+        "kind" : "function",
+        "line" : 72,
+        "char" : 11,
+        "storageClass" : [
+         "auto"
+        ],
+        "type" : "ref (auto ref Args args)",
+        "parameters" : [
+         {
+          "name" : "args",
+          "type" : "Args",
+          "storageClass" : [
+           "auto",
+           "ref"
+          ]
+         }
+        ],
+        "endline" : 82,
+        "endchar" : 2
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "_arraySliceExpAddSliceAssign_t",
+    "kind" : "function",
+    "deco" : "UNaNbNiNeAttxAtZAt",
+    "originalType" : "pure nothrow @nogc @trusted extern (C) ushort[](ushort[] p2, ushort c1, const ushort[] p0)",
+    "parameters" : [
+     {
+      "name" : "p2",
+      "deco" : "At"
+     },
+     {
+      "name" : "c1",
+      "deco" : "t"
+     },
+     {
+      "name" : "p0",
+      "deco" : "xAt"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.states.rendering",
+  "kind" : "module",
+  "file" : "risk\\states\\rendering.d",
+  "members" : [
+   {
+    "name" : "util.strings",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "util.hash",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "window.window",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "rendering.shapes",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "rendering.combined",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 5,
+    "protection" : "private"
+   },
+   {
+    "name" : "graphics.textureatlas",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "content",
+    "kind" : "import",
+    "line" : 9,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "math.vector",
+    "kind" : "import",
+    "line" : 10,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "graphics.color",
+    "kind" : "import",
+    "line" : 11,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.database",
+    "kind" : "import",
+    "line" : 12,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "app.core",
+    "kind" : "import",
+    "line" : 13,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.algorithm",
+    "kind" : "import",
+    "line" : 14,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "RenderSettings",
+    "kind" : "struct",
+    "line" : 16,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "fonts",
+      "kind" : "variable",
+      "line" : 18,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 0
+     },
+     {
+      "name" : "titleFont",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 8
+     },
+     {
+      "name" : "pixel",
+      "kind" : "variable",
+      "line" : 20,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 16
+     },
+     {
+      "name" : "unitAtlas",
+      "kind" : "variable",
+      "line" : 21,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 24
+     },
+     {
+      "name" : "countryAtlas",
+      "kind" : "variable",
+      "line" : 22,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 32
+     }
+    ]
+   },
+   {
+    "name" : "RenderContext",
+    "kind" : "struct",
+    "line" : 25,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "titleFontID",
+      "kind" : "variable",
+      "line" : 27,
+      "char" : 9,
+      "deco" : "S4util4hash6HashID",
+      "offset" : 0
+     },
+     {
+      "name" : "pixelID",
+      "kind" : "variable",
+      "line" : 28,
+      "char" : 9,
+      "deco" : "S4util4hash6HashID",
+      "offset" : 4
+     },
+     {
+      "name" : "countryAtlas",
+      "kind" : "variable",
+      "line" : 31,
+      "char" : 14,
+      "deco" : "S7content7content58__T13ContentHandleTS8graphics12textureatlas12TextureAtlasZ13ContentHandle",
+      "originalType" : "AtlasHandle",
+      "offset" : 8
+     },
+     {
+      "name" : "unitAtlas",
+      "kind" : "variable",
+      "line" : 32,
+      "char" : 14,
+      "deco" : "S7content7content58__T13ContentHandleTS8graphics12textureatlas12TextureAtlasZ13ContentHandle",
+      "originalType" : "AtlasHandle",
+      "offset" : 12
+     },
+     {
+      "name" : "fonts",
+      "kind" : "variable",
+      "line" : 33,
+      "char" : 14,
+      "deco" : "S7content7content45__T13ContentHandleTS8graphics4font9FontAtlasZ13ContentHandle",
+      "originalType" : "FontHandle",
+      "offset" : 16
+     },
+     {
+      "name" : "renderer",
+      "kind" : "variable",
+      "line" : 34,
+      "char" : 14,
+      "deco" : "PS9rendering8combined10Renderer2D",
+      "offset" : 20
+     },
+     {
+      "name" : "wnd",
+      "kind" : "variable",
+      "line" : 35,
+      "char" : 11,
+      "deco" : "PS6window6window6Window",
+      "offset" : 24
+     },
+     {
+      "name" : "titleFont",
+      "kind" : "function",
+      "line" : 37,
+      "char" : 7,
+      "deco" : "FZS8graphics4font4Font",
+      "endline" : 40,
+      "endchar" : 2
+     },
+     {
+      "name" : "pixel",
+      "kind" : "function",
+      "line" : 42,
+      "char" : 8,
+      "deco" : "FZS8graphics5frame5Frame",
+      "endline" : 45,
+      "endchar" : 2
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 47,
+      "char" : 2,
+      "deco" : "FNcS4risk6states9rendering14RenderSettingsPS3app4core11ApplicationZS4risk6states9rendering13RenderContext",
+      "originalType" : "ref (RenderSettings settings, Application* app)",
+      "parameters" : [
+       {
+        "name" : "settings",
+        "deco" : "S4risk6states9rendering14RenderSettings"
+       },
+       {
+        "name" : "app",
+        "deco" : "PS3app4core11Application"
+       }
+      ],
+      "endline" : 59,
+      "endchar" : 2
+     },
+     {
+      "name" : "drawTitle",
+      "kind" : "function",
+      "line" : 61,
+      "char" : 7,
+      "deco" : "FAyaZv",
+      "parameters" : [
+       {
+        "name" : "title",
+        "deco" : "Aya"
+       }
+      ],
+      "endline" : 67,
+      "endchar" : 2
+     },
+     {
+      "name" : "drawCountries",
+      "kind" : "function",
+      "line" : 69,
+      "char" : 7,
+      "deco" : "FPS4risk8database5BoardZv",
+      "parameters" : [
+       {
+        "name" : "board",
+        "deco" : "PS4risk8database5Board"
+       }
+      ],
+      "endline" : 100,
+      "endchar" : 2
+     },
+     {
+      "name" : "drawUnits",
+      "kind" : "function",
+      "line" : 102,
+      "char" : 7,
+      "deco" : "FPS4risk8database5BoardZv",
+      "parameters" : [
+       {
+        "name" : "board",
+        "deco" : "PS4risk8database5Board"
+       }
+      ],
+      "endline" : 135,
+      "endchar" : 2
+     },
+     {
+      "name" : "opAssign",
+      "kind" : "function",
+      "line" : 25,
+      "char" : 1,
+      "deco" : "FNaNbNcNjNfS4risk6states9rendering13RenderContextZS4risk6states9rendering13RenderContext",
+      "parameters" : [
+       {
+        "name" : "p",
+        "deco" : "S4risk6states9rendering13RenderContext"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.states.start",
+  "kind" : "module",
+  "file" : "risk\\states\\start.d",
+  "members" : [
+   {
+    "name" : "risk.states.common",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.algorithm",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.states.rendering",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.random",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.database_operations",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.output",
+    "kind" : "import",
+    "line" : 9,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.input",
+    "kind" : "import",
+    "line" : 9,
+    "char" : 21,
+    "protection" : "private"
+   },
+   {
+    "name" : "Start",
+    "kind" : "class",
+    "line" : 11,
+    "char" : 1,
+    "base" : "risk.states.common.GameState",
+    "members" : [
+     {
+      "name" : "Mission",
+      "kind" : "struct",
+      "line" : 13,
+      "char" : 2,
+      "members" : [
+       {
+        "name" : "player",
+        "kind" : "variable",
+        "line" : 15,
+        "char" : 12,
+        "deco" : "S4risk8database8PlayerID",
+        "offset" : 0
+       },
+       {
+        "name" : "mission",
+        "kind" : "variable",
+        "line" : 16,
+        "char" : 13,
+        "deco" : "S4risk8database9MissionID",
+        "offset" : 4
+       }
+      ]
+     },
+     {
+      "name" : "missions",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 17,
+      "deco" : "S11collections4list43__T4ListTS4risk6states5start5Start7MissionZ4List",
+      "originalType" : "List!Mission",
+      "offset" : 16
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 20,
+      "char" : 2,
+      "deco" : "FC10allocation6common10IAllocatorPS4risk8database5BoardZC4risk6states5start5Start",
+      "originalType" : "(IAllocator a, Board* data)",
+      "parameters" : [
+       {
+        "name" : "a",
+        "deco" : "C10allocation6common10IAllocator"
+       },
+       {
+        "name" : "data",
+        "deco" : "PS4risk8database5Board"
+       }
+      ],
+      "endline" : 24,
+      "endchar" : 2
+     },
+     {
+      "name" : "enter",
+      "kind" : "function",
+      "line" : 26,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel output)",
+      "parameters" : [
+       {
+        "name" : "output",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 64,
+      "endchar" : 2,
+      "overrides" : [
+       "risk.states.common.GameState.enter"
+      ]
+     },
+     {
+      "name" : "handleInput",
+      "kind" : "function",
+      "line" : 66,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FKS12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7ChannelZv",
+      "originalType" : "void(ref GameChannel input)",
+      "parameters" : [
+       {
+        "name" : "input",
+        "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 80,
+      "endchar" : 2,
+      "overrides" : [
+       "risk.states.common.GameState.handleInput"
+      ]
+     },
+     {
+      "name" : "hasCompleated",
+      "kind" : "function",
+      "line" : 82,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FZb",
+      "endline" : 85,
+      "endchar" : 2,
+      "overrides" : [
+       "risk.states.common.GameState.hasCompleated"
+      ]
+     },
+     {
+      "name" : "render",
+      "kind" : "function",
+      "line" : 87,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FS3app4core4TimeKS4risk6states9rendering13RenderContextZv",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       },
+       {
+        "name" : "context",
+        "deco" : "S4risk6states9rendering13RenderContext",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 92,
+      "endchar" : 2,
+      "overrides" : [
+       "risk.states.common.GameState.render"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.database",
+  "kind" : "module",
+  "file" : "risk\\database.d",
+  "members" : [
+   {
+    "name" : "math.vector",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 15
+   },
+   {
+    "name" : "graphics.color",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 15
+   },
+   {
+    "name" : "collections.list",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 15
+   },
+   {
+    "name" : "util.hash",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "sdl",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "stringToHash",
+    "kind" : "function",
+    "line" : 8,
+    "char" : 8,
+    "deco" : "FAyaZS4util4hash6HashID",
+    "parameters" : [
+     {
+      "name" : "s",
+      "deco" : "Aya"
+     }
+    ],
+    "endline" : 11,
+    "endchar" : 1
+   },
+   {
+    "name" : "uintsToCountries",
+    "kind" : "function",
+    "line" : 13,
+    "char" : 13,
+    "deco" : "FAkZAS4risk8database9CountryID",
+    "parameters" : [
+     {
+      "name" : "ints",
+      "deco" : "Ak"
+     }
+    ],
+    "endline" : 19,
+    "endchar" : 1
+   },
+   {
+    "name" : "CountryID",
+    "kind" : "struct",
+    "line" : 21,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 23,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     },
+     {
+      "name" : "fromSDL",
+      "kind" : "function",
+      "line" : 25,
+      "char" : 19,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "FkZS4risk8database9CountryID",
+      "parameters" : [
+       {
+        "name" : "id",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 28,
+      "endchar" : 2
+     },
+     {
+      "name" : "toSDL",
+      "kind" : "function",
+      "line" : 30,
+      "char" : 7,
+      "deco" : "FZk",
+      "endline" : 33,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "name" : "PlayerID",
+    "kind" : "struct",
+    "line" : 36,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 38,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     },
+     {
+      "name" : "fromSDL",
+      "kind" : "function",
+      "line" : 39,
+      "char" : 18,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "FkZS4risk8database8PlayerID",
+      "parameters" : [
+       {
+        "name" : "id",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 42,
+      "endchar" : 2
+     },
+     {
+      "name" : "toSDL",
+      "kind" : "function",
+      "line" : 44,
+      "char" : 7,
+      "deco" : "FZk",
+      "endline" : 47,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "name" : "UnitID",
+    "kind" : "struct",
+    "line" : 50,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 52,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     },
+     {
+      "name" : "fromSDL",
+      "kind" : "function",
+      "line" : 53,
+      "char" : 16,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "FkZS4risk8database6UnitID",
+      "parameters" : [
+       {
+        "name" : "id",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 56,
+      "endchar" : 2
+     },
+     {
+      "name" : "toSDL",
+      "kind" : "function",
+      "line" : 58,
+      "char" : 7,
+      "deco" : "FZk",
+      "endline" : 61,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "name" : "MissionID",
+    "kind" : "struct",
+    "line" : 64,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 66,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     },
+     {
+      "name" : "fromSDL",
+      "kind" : "function",
+      "line" : 67,
+      "char" : 19,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "FkZS4risk8database9MissionID",
+      "parameters" : [
+       {
+        "name" : "id",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 70,
+      "endchar" : 2
+     },
+     {
+      "name" : "toSDL",
+      "kind" : "function",
+      "line" : 72,
+      "char" : 7,
+      "deco" : "FZk",
+      "endline" : 75,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "name" : "CountryDesc",
+    "kind" : "struct",
+    "line" : 78,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "name",
+      "kind" : "variable",
+      "line" : 80,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 0
+     },
+     {
+      "name" : "texture",
+      "kind" : "variable",
+      "line" : 81,
+      "char" : 33,
+      "deco" : "S4util4hash6HashID",
+      "offset" : 8
+     },
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 82,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 12
+     },
+     {
+      "name" : "position",
+      "kind" : "variable",
+      "line" : 84,
+      "char" : 9,
+      "deco" : "S4math6vector17__T6VectorVki2TfZ6Vector",
+      "originalType" : "float2",
+      "offset" : 16
+     },
+     {
+      "name" : "bounds",
+      "kind" : "variable",
+      "line" : 85,
+      "char" : 9,
+      "deco" : "S4math6vector17__T6VectorVki2TfZ6Vector",
+      "originalType" : "float2",
+      "offset" : 24
+     },
+     {
+      "name" : "opAssign",
+      "kind" : "function",
+      "line" : 78,
+      "char" : 1,
+      "deco" : "FNaNbNcNjS4risk8database11CountryDescZS4risk8database11CountryDesc",
+      "originalType" : "ref CountryDesc(CountryDesc p)return ",
+      "parameters" : [
+       {
+        "name" : "p",
+        "deco" : "S4risk8database11CountryDesc"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "CountryLink",
+    "kind" : "struct",
+    "line" : 88,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "variable",
+      "line" : 90,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 0
+     },
+     {
+      "name" : "b",
+      "kind" : "variable",
+      "line" : 90,
+      "char" : 15,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "UnitDesc",
+    "kind" : "struct",
+    "line" : 93,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 95,
+      "char" : 9,
+      "deco" : "S4risk8database6UnitID",
+      "offset" : 0
+     },
+     {
+      "name" : "hp",
+      "kind" : "variable",
+      "line" : 96,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 4
+     },
+     {
+      "name" : "attack",
+      "kind" : "variable",
+      "line" : 97,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 8
+     },
+     {
+      "name" : "cost",
+      "kind" : "variable",
+      "line" : 98,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 12
+     },
+     {
+      "name" : "texture",
+      "kind" : "variable",
+      "line" : 99,
+      "char" : 33,
+      "deco" : "S4util4hash6HashID",
+      "offset" : 16
+     },
+     {
+      "name" : "opAssign",
+      "kind" : "function",
+      "line" : 93,
+      "char" : 1,
+      "deco" : "FNaNbNcNjNfS4risk8database8UnitDescZS4risk8database8UnitDesc",
+      "parameters" : [
+       {
+        "name" : "p",
+        "deco" : "S4risk8database8UnitDesc"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "MissionDesc",
+    "kind" : "struct",
+    "line" : 102,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 104,
+      "char" : 12,
+      "deco" : "S4risk8database9MissionID",
+      "offset" : 0
+     },
+     {
+      "name" : "description",
+      "kind" : "variable",
+      "line" : 105,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 4
+     },
+     {
+      "name" : "winningCondition",
+      "kind" : "variable",
+      "line" : 106,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 12
+     }
+    ]
+   },
+   {
+    "name" : "ContinentDesc",
+    "kind" : "struct",
+    "line" : 109,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "name",
+      "kind" : "variable",
+      "line" : 111,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 0
+     },
+     {
+      "name" : "countries",
+      "kind" : "variable",
+      "line" : 112,
+      "char" : 42,
+      "deco" : "AS4risk8database9CountryID",
+      "offset" : 8
+     },
+     {
+      "name" : "bonus",
+      "kind" : "variable",
+      "line" : 113,
+      "char" : 9,
+      "deco" : "k",
+      "offset" : 16
+     }
+    ]
+   },
+   {
+    "name" : "Player",
+    "kind" : "struct",
+    "line" : 116,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "name",
+      "kind" : "variable",
+      "line" : 118,
+      "char" : 13,
+      "deco" : "Aya",
+      "offset" : 0
+     },
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 119,
+      "char" : 14,
+      "deco" : "S4risk8database8PlayerID",
+      "offset" : 8
+     },
+     {
+      "name" : "mission",
+      "kind" : "variable",
+      "line" : 120,
+      "char" : 15,
+      "deco" : "S4risk8database9MissionID",
+      "offset" : 12
+     },
+     {
+      "name" : "color",
+      "kind" : "variable",
+      "line" : 121,
+      "char" : 12,
+      "deco" : "S8graphics5color5Color",
+      "offset" : 16
+     },
+     {
+      "name" : "money",
+      "kind" : "variable",
+      "line" : 122,
+      "char" : 11,
+      "deco" : "k",
+      "offset" : 20
+     }
+    ]
+   },
+   {
+    "name" : "Country",
+    "kind" : "struct",
+    "line" : 125,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 127,
+      "char" : 14,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 0
+     },
+     {
+      "name" : "ruler",
+      "kind" : "variable",
+      "line" : 128,
+      "char" : 13,
+      "deco" : "S4risk8database8PlayerID",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "Unit",
+    "kind" : "struct",
+    "line" : 131,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 133,
+      "char" : 9,
+      "deco" : "S4risk8database6UnitID",
+      "offset" : 0
+     },
+     {
+      "name" : "location",
+      "kind" : "variable",
+      "line" : 134,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 4
+     },
+     {
+      "name" : "ruler",
+      "kind" : "variable",
+      "line" : 135,
+      "char" : 12,
+      "deco" : "S4risk8database8PlayerID",
+      "offset" : 8
+     }
+    ]
+   },
+   {
+    "name" : "SDLBoard",
+    "kind" : "struct",
+    "protection" : "private",
+    "line" : 138,
+    "char" : 9,
+    "members" : [
+     {
+      "name" : "continents",
+      "kind" : "variable",
+      "line" : 141,
+      "char" : 18,
+      "deco" : "AS4risk8database13ContinentDesc",
+      "offset" : 0
+     },
+     {
+      "name" : "countries",
+      "kind" : "variable",
+      "line" : 142,
+      "char" : 16,
+      "deco" : "AS4risk8database11CountryDesc",
+      "offset" : 8
+     },
+     {
+      "name" : "links",
+      "kind" : "variable",
+      "line" : 143,
+      "char" : 16,
+      "deco" : "AS4risk8database11CountryLink",
+      "offset" : 16
+     },
+     {
+      "name" : "units",
+      "kind" : "variable",
+      "line" : 144,
+      "char" : 14,
+      "deco" : "AS4risk8database8UnitDesc",
+      "offset" : 24
+     },
+     {
+      "name" : "missions",
+      "kind" : "variable",
+      "line" : 145,
+      "char" : 16,
+      "deco" : "AS4risk8database11MissionDesc",
+      "offset" : 32
+     },
+     {
+      "name" : "players",
+      "kind" : "variable",
+      "line" : 147,
+      "char" : 11,
+      "deco" : "AS4risk8database6Player",
+      "offset" : 40
+     },
+     {
+      "name" : "countryInstances",
+      "kind" : "variable",
+      "line" : 148,
+      "char" : 12,
+      "deco" : "AS4risk8database7Country",
+      "offset" : 48
+     },
+     {
+      "name" : "unitInstances",
+      "kind" : "variable",
+      "line" : 149,
+      "char" : 10,
+      "deco" : "AS4risk8database4Unit",
+      "offset" : 56
+     }
+    ]
+   },
+   {
+    "name" : "Board",
+    "kind" : "struct",
+    "line" : 153,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "continentDescs",
+      "kind" : "variable",
+      "line" : 156,
+      "char" : 18,
+      "deco" : "AS4risk8database13ContinentDesc",
+      "offset" : 0
+     },
+     {
+      "name" : "countryDescs",
+      "kind" : "variable",
+      "line" : 157,
+      "char" : 16,
+      "deco" : "AS4risk8database11CountryDesc",
+      "offset" : 8
+     },
+     {
+      "name" : "countryLinks",
+      "kind" : "variable",
+      "line" : 158,
+      "char" : 16,
+      "deco" : "AS4risk8database11CountryLink",
+      "offset" : 16
+     },
+     {
+      "name" : "unitDescs",
+      "kind" : "variable",
+      "line" : 159,
+      "char" : 14,
+      "deco" : "AS4risk8database8UnitDesc",
+      "offset" : 24
+     },
+     {
+      "name" : "missionDescs",
+      "kind" : "variable",
+      "line" : 160,
+      "char" : 16,
+      "deco" : "AS4risk8database11MissionDesc",
+      "offset" : 32
+     },
+     {
+      "name" : "players",
+      "kind" : "variable",
+      "line" : 163,
+      "char" : 23,
+      "deco" : "S11collections4list40__T11GrowingListTS4risk8database6PlayerZ11GrowingList",
+      "originalType" : "GrowingList!Player",
+      "offset" : 40
+     },
+     {
+      "name" : "units",
+      "kind" : "variable",
+      "line" : 164,
+      "char" : 22,
+      "deco" : "S11collections4list38__T11GrowingListTS4risk8database4UnitZ11GrowingList",
+      "originalType" : "GrowingList!Unit",
+      "offset" : 56
+     },
+     {
+      "name" : "countries",
+      "kind" : "variable",
+      "line" : 165,
+      "char" : 19,
+      "deco" : "S11collections4list33__T4ListTS4risk8database7CountryZ4List",
+      "originalType" : "List!Country",
+      "offset" : 72
+     },
+     {
+      "name" : "allocation",
+      "kind" : "import",
+      "line" : 167,
+      "char" : 9,
+      "protection" : "private"
+     },
+     {
+      "kind" : "template",
+      "line" : 168,
+      "char" : 15,
+      "name" : "load",
+      "parameters" : [
+       {
+        "name" : "A",
+        "kind" : "type"
+       }
+      ],
+      "members" : [
+       {
+        "name" : "load",
+        "kind" : "function",
+        "line" : 168,
+        "char" : 15,
+        "type" : "Board(ref A allocator, string file)",
+        "parameters" : [
+         {
+          "name" : "allocator",
+          "type" : "A",
+          "storageClass" : [
+           "ref"
+          ]
+         },
+         {
+          "name" : "file",
+          "type" : "string"
+         }
+        ],
+        "endline" : 188,
+        "endchar" : 2
+       }
+      ]
+     },
+     {
+      "name" : "save",
+      "kind" : "function",
+      "line" : 190,
+      "char" : 7,
+      "deco" : "FAyaZv",
+      "parameters" : [
+       {
+        "name" : "file",
+        "deco" : "Aya"
+       }
+      ],
+      "endline" : 202,
+      "endchar" : 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.database_operations",
+  "kind" : "module",
+  "file" : "risk\\database_operations.d",
+  "members" : [
+   {
+    "name" : "risk.database",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.algorithm",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "log",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "assignCountry",
+    "kind" : "function",
+    "line" : 8,
+    "char" : 6,
+    "deco" : "FPS4risk8database5BoardS4risk8database8PlayerIDS4risk8database9CountryIDZv",
+    "parameters" : [
+     {
+      "name" : "board",
+      "deco" : "PS4risk8database5Board"
+     },
+     {
+      "name" : "player",
+      "deco" : "S4risk8database8PlayerID"
+     },
+     {
+      "name" : "country",
+      "deco" : "S4risk8database9CountryID"
+     }
+    ],
+    "endline" : 17,
+    "endchar" : 1
+   },
+   {
+    "name" : "assignMission",
+    "kind" : "function",
+    "line" : 19,
+    "char" : 6,
+    "deco" : "FPS4risk8database5BoardS4risk8database8PlayerIDS4risk8database9MissionIDZv",
+    "parameters" : [
+     {
+      "name" : "board",
+      "deco" : "PS4risk8database5Board"
+     },
+     {
+      "name" : "player",
+      "deco" : "S4risk8database8PlayerID"
+     },
+     {
+      "name" : "mission",
+      "deco" : "S4risk8database9MissionID"
+     }
+    ],
+    "endline" : 22,
+    "endchar" : 1
+   }
+  ]
+ },
+ {
+  "name" : "risk.input",
+  "kind" : "module",
+  "file" : "risk\\input.d",
+  "members" : [
+   {
+    "name" : "risk.database",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "MissionAccepted",
+    "kind" : "struct",
+    "line" : 5,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 7,
+      "char" : 12,
+      "deco" : "S4risk8database9MissionID",
+      "offset" : 0
+     }
+    ]
+   },
+   {
+    "name" : "UnitPlaced",
+    "kind" : "struct",
+    "line" : 10,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "country",
+      "kind" : "variable",
+      "line" : 12,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 0
+     },
+     {
+      "name" : "unit",
+      "kind" : "variable",
+      "line" : 13,
+      "char" : 11,
+      "deco" : "S4risk8database6UnitID",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "UnitMoved",
+    "kind" : "struct",
+    "line" : 16,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "unit",
+      "kind" : "variable",
+      "line" : 18,
+      "char" : 9,
+      "deco" : "S4risk8database6UnitID",
+      "offset" : 0
+     },
+     {
+      "name" : "from",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 4
+     },
+     {
+      "name" : "to",
+      "kind" : "variable",
+      "line" : 19,
+      "char" : 18,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 8
+     }
+    ]
+   },
+   {
+    "name" : "PositionUnit",
+    "kind" : "struct",
+    "line" : 22,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "unit",
+      "kind" : "variable",
+      "line" : 24,
+      "char" : 9,
+      "deco" : "S4risk8database6UnitID",
+      "offset" : 0
+     },
+     {
+      "name" : "slot",
+      "kind" : "variable",
+      "line" : 25,
+      "char" : 9,
+      "deco" : "k",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "UnitDeath",
+    "kind" : "struct",
+    "line" : 28,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "slot",
+      "kind" : "variable",
+      "line" : 30,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     }
+    ]
+   },
+   {
+    "name" : "AttackUnit",
+    "kind" : "struct",
+    "line" : 33,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "fromSlot",
+      "kind" : "variable",
+      "line" : 35,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     },
+     {
+      "name" : "toSlot",
+      "kind" : "variable",
+      "line" : 35,
+      "char" : 17,
+      "deco" : "k",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "CombatResult",
+    "kind" : "struct",
+    "line" : 38,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "win",
+      "kind" : "variable",
+      "line" : 40,
+      "char" : 7,
+      "deco" : "b",
+      "offset" : 0
+     }
+    ]
+   },
+   {
+    "name" : "PlayerDone",
+    "kind" : "struct",
+    "line" : 44,
+    "char" : 1,
+    "members" : []
+   }
+  ]
+ },
+ {
+  "name" : "risk.output",
+  "kind" : "module",
+  "file" : "risk\\output.d",
+  "members" : [
+   {
+    "name" : "risk.database",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "InputState",
+    "kind" : "enum",
+    "line" : 4,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "selectMission",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 6,
+      "char" : 2
+     },
+     {
+      "name" : "build",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 7,
+      "char" : 2
+     },
+     {
+      "name" : "move",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 8,
+      "char" : 2
+     },
+     {
+      "name" : "combat",
+      "kind" : "enum member",
+      "value" : "3",
+      "line" : 9,
+      "char" : 2
+     },
+     {
+      "name" : "gameOver",
+      "kind" : "enum member",
+      "value" : "4",
+      "line" : 10,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "name" : "SendEnterState",
+    "kind" : "struct",
+    "line" : 13,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "stateID",
+      "kind" : "variable",
+      "line" : 15,
+      "char" : 13,
+      "deco" : "E4risk6output10InputState",
+      "offset" : 0
+     }
+    ]
+   },
+   {
+    "name" : "SendCombatStarted",
+    "kind" : "struct",
+    "line" : 18,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "defender",
+      "kind" : "variable",
+      "line" : 20,
+      "char" : 11,
+      "deco" : "S4risk8database8PlayerID",
+      "offset" : 0
+     },
+     {
+      "name" : "attacker",
+      "kind" : "variable",
+      "line" : 20,
+      "char" : 21,
+      "deco" : "S4risk8database8PlayerID",
+      "offset" : 4
+     },
+     {
+      "name" : "country",
+      "kind" : "variable",
+      "line" : 21,
+      "char" : 12,
+      "deco" : "S4risk8database9CountryID",
+      "offset" : 8
+     }
+    ]
+   },
+   {
+    "name" : "SendMission",
+    "kind" : "struct",
+    "line" : 24,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "id",
+      "kind" : "variable",
+      "line" : 26,
+      "char" : 12,
+      "deco" : "S4risk8database9MissionID",
+      "offset" : 0
+     },
+     {
+      "name" : "descriptions",
+      "kind" : "variable",
+      "line" : 27,
+      "char" : 9,
+      "deco" : "Aya",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "SendMoney",
+    "kind" : "struct",
+    "line" : 30,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "amount",
+      "kind" : "variable",
+      "line" : 32,
+      "char" : 7,
+      "deco" : "k",
+      "offset" : 0
+     }
+    ]
+   },
+   {
+    "name" : "SendCombatResult",
+    "kind" : "struct",
+    "line" : 35,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "win",
+      "kind" : "variable",
+      "line" : 37,
+      "char" : 7,
+      "deco" : "b",
+      "offset" : 0
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "risk.screen",
+  "kind" : "module",
+  "file" : "risk\\screen.d",
+  "members" : [
+   {
+    "name" : "app.screen",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.states.common",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.states.rendering",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "risk.states.start",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "RiskScreen",
+    "kind" : "class",
+    "line" : 9,
+    "char" : 1,
+    "base" : "app.screen.Screen",
+    "members" : [
+     {
+      "name" : "rContext",
+      "kind" : "variable",
+      "line" : 11,
+      "char" : 16,
+      "deco" : "S4risk6states9rendering13RenderContext",
+      "offset" : 16
+     },
+     {
+      "name" : "board",
+      "kind" : "variable",
+      "line" : 12,
+      "char" : 11,
+      "deco" : "S4risk8database5Board",
+      "offset" : 44
+     },
+     {
+      "name" : "input",
+      "kind" : "variable",
+      "line" : 13,
+      "char" : 16,
+      "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+      "originalType" : "GameChannel",
+      "offset" : 128
+     },
+     {
+      "name" : "output",
+      "kind" : "variable",
+      "line" : 13,
+      "char" : 23,
+      "deco" : "S12experimental7channel39__T7ChannelTS4risk8database8PlayerIDTkZ7Channel",
+      "originalType" : "GameChannel",
+      "offset" : 148
+     },
+     {
+      "name" : "states",
+      "kind" : "variable",
+      "line" : 15,
+      "char" : 29,
+      "deco" : "G4C4risk6states6common10IGameState",
+      "originalType" : "IGameState[GameStates.max]",
+      "offset" : 168
+     },
+     {
+      "name" : "transitions",
+      "kind" : "variable",
+      "line" : 16,
+      "char" : 29,
+      "deco" : "G4E4risk6states6common10GameStates",
+      "originalType" : "GameStates[GameStates.max]",
+      "offset" : 184
+     },
+     {
+      "name" : "current",
+      "kind" : "variable",
+      "line" : 17,
+      "char" : 13,
+      "deco" : "E4risk6states6common10GameStates",
+      "offset" : 200
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 19,
+      "char" : 2,
+      "deco" : "FC10allocation6common10IAllocatorAyaZC4risk6screen10RiskScreen",
+      "originalType" : "(IAllocator allocator, string boardFile)",
+      "parameters" : [
+       {
+        "name" : "allocator",
+        "deco" : "C10allocation6common10IAllocator"
+       },
+       {
+        "name" : "boardFile",
+        "deco" : "Aya"
+       }
+      ],
+      "endline" : 40,
+      "endchar" : 2
+     },
+     {
+      "name" : "initialize",
+      "kind" : "function",
+      "line" : 42,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FZv",
+      "endline" : 44,
+      "endchar" : 2,
+      "overrides" : [
+       "app.screen.Screen.initialize"
+      ]
+     },
+     {
+      "name" : "update",
+      "kind" : "function",
+      "line" : 46,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FS3app4core4TimeZv",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       }
+      ],
+      "endline" : 57,
+      "endchar" : 2,
+      "overrides" : [
+       "app.screen.Screen.update"
+      ]
+     },
+     {
+      "name" : "render",
+      "kind" : "function",
+      "line" : 59,
+      "char" : 16,
+      "storageClass" : [
+       "override"
+      ],
+      "deco" : "FS3app4core4TimeZv",
+      "parameters" : [
+       {
+        "name" : "time",
+        "deco" : "S3app4core4Time"
+       }
+      ],
+      "endline" : 64,
+      "endchar" : 2,
+      "overrides" : [
+       "app.screen.Screen.render"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "kind" : "module",
+  "file" : "main.d",
+  "members" : [
+   {
+    "name" : "std.stdio",
+    "kind" : "import",
+    "line" : 1,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "concurency.task",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "external_libraries",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "sdl",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "log",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "app.factories",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "app.screen",
+    "kind" : "import",
+    "line" : 9,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "main",
+    "kind" : "function",
+    "line" : 11,
+    "char" : 5,
+    "deco" : "FAAyaZi",
+    "parameters" : [
+     {
+      "name" : "argv",
+      "deco" : "AAya"
+     }
+    ],
+    "endline" : 39,
+    "endchar" : 1
+   },
+   {
+    "name" : "run",
+    "kind" : "function",
+    "line" : 41,
+    "char" : 6,
+    "deco" : "FS3app9factories16DesktopAppConfigZv",
+    "parameters" : [
+     {
+      "name" : "config",
+      "deco" : "S3app9factories16DesktopAppConfig"
+     }
+    ],
+    "endline" : 57,
+    "endchar" : 1
+   }
+  ]
+ }
+]
