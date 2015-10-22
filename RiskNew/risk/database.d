@@ -160,9 +160,9 @@ struct Board
 	MissionDesc[]	missionDescs;
 
 	//Semi-mutable data
-	GrowingList!(Player)	players;
-	GrowingList!(Unit)		units; 
-	List!(Country)			countries;
+	List!(Player)	players;
+	List!(Unit)		units; 
+	FixedList!(Country)			countries;
 
 	import allocation;
 	static Board load(A)(ref A allocator, string file)
@@ -176,9 +176,9 @@ struct Board
 		b.missionDescs   = sdl_board.missions;
 		b.unitDescs		 = sdl_board.units;
 
-		b.players		 = GrowingList!(Player)(allocator, 10);
-		b.units			 = GrowingList!(Unit)(allocator, 1024);
-		b.countries		 = List!(Country)(allocator, b.countryDescs.length);
+		b.players		 = List!(Player)(allocator, 10);
+		b.units			 = List!(Unit)(allocator, 1024);
+		b.countries		 = FixedList!(Country)(allocator, b.countryDescs.length);
 
 		b.players	    ~= sdl_board.players;
 		b.units		    ~= sdl_board.unitInstances;

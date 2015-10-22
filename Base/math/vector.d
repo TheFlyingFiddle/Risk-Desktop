@@ -35,7 +35,6 @@ struct Vector(size_t size, T)
 	static if(size > 3)
 		T w;
 
-
 	T* data()
 	{
 		return &x;
@@ -135,6 +134,7 @@ struct Vector(size_t size, T)
 	Vector!(size, T) opBinary(string s, U)(auto ref Vector!(size, U) vec)
 		if(is(U : T) && (s == "+" || s == "-" || s == "*" || s == "/"))
 		{
+			pragma(inline, true);
 			Vector!(size, T) res;
 			foreach(i; staticIota!(0, size))
 				mixin(format("res.data[%s] = this.data[%s] %s vec.data[%s];", i, i, s, i));
@@ -144,6 +144,7 @@ struct Vector(size_t size, T)
 	Vector!(size, T) opBinary(string op, U)(U u)
 		if(isNumeric!U && is(U : T) && (op == "+" || op == "-" || op == "/" || op == "*"))
 		{
+			pragma(inline, true);
 			Vector!(size, T) res;
 			foreach(i; staticIota!(0, size))
 				mixin(format("res.data[%s] = this.data[%s] %s u;", i, i, op));
@@ -153,6 +154,7 @@ struct Vector(size_t size, T)
 	ref Vector!(size, T) opOpAssign(string op, U)(auto ref Vector!(size, U) vec)
 		if(is(U : T) && op == "+" || op == "-" || op == "*")
 		{
+			pragma(inline, true);
 			foreach(i; staticIota!(0, size)) 
 				mixin(format("this.data[%s] = this.data[%s] %s vec.data[%s];", i, i, op, i));
 
@@ -162,6 +164,7 @@ struct Vector(size_t size, T)
 	ref Vector!(size, T) opOpAssign(string op, U)(U u)
 		if(is(U : T) && op == "+" || op == "-" || op == "*" || op == "/")
 		{
+			pragma(inline, true);
 			foreach(i; staticIota!(0, size)) 
 				mixin(format("this.data[%s] %s= u;", i, op));
 
@@ -173,6 +176,7 @@ struct Vector(size_t size, T)
 		   && s.length == Args[0] 
 			&& is(Args[1] : T))
 		{
+			pragma(inline, true);
 			foreach(i; staticIota!(0, s.length)) {
 				enum offset = swizzleTable[s[i]];
 				data[offset] = vec.data[i];
@@ -182,6 +186,7 @@ struct Vector(size_t size, T)
 	Vector!(s.length, T) opDispatch(string s)()
 		if(s.length > 1)
 		{	
+			pragma(inline, true);
 			Vector!(s.length, T) res;
 			foreach(i; staticIota!(0, s.length)) {
 				enum offset = swizzleTable[s[i]];
@@ -294,7 +299,6 @@ auto cross(T, U)(auto ref Vector!(3, T) vec0,
 auto rotate(T)(Vector!(2, T) toRotate, float angle)
 {
 	import std.math;
-
 	auto s = sin(angle), 
 		 c = cos(angle);
 
@@ -312,4 +316,13 @@ template staticIota(size_t s, size_t e, size_t step = 1)
 		alias staticIota = TypeTuple!(s, staticIota!(s + step, e));
 	else 
 		alias staticIota = TypeTuple!();
+}
+
+template isVector(T)
+{
+    static if (is(T t == Vector!(num, U), int num, U)) {
+        enum isVector = true;
+    }
+    else
+        enum isVector = false;
 }

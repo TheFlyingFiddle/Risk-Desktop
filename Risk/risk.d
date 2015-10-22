@@ -73,12 +73,12 @@ import network_events;
 class DesktopNetworkComponent : IApplicationComponent
 {
 	NetworkEventManager* netEvents;
-	HashMap!(InputState, Screen) screens;	
+	Map!(InputState, Screen) screens;	
 	DesktopCombatScreen combatScreen;
 
 	this(A)(ref A alloc)
 	{
-		screens = HashMap!(InputState, Screen)(Mallocator.cit);
+		screens = Map!(InputState, Screen)(Mallocator.cit);
 
 		//Desktop
 		auto mission		= alloc.allocate!(MissionScreen)(Mallocator.cit);

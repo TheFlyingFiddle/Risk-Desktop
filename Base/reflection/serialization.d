@@ -1,6 +1,6 @@
 module reflection.serialization;
 
-import content.sdl;
+import sdl;
 import util.hash;
 import util.variant;
 import util.traits;
@@ -467,38 +467,38 @@ unittest
 		
 	
 		//import tests;
-		try
-		{
-			ReflectionContext c;
-			c.assemblies = [&assembly];
-
-			auto data = fromSDLSource!Test(Mallocator.it, s, c);
-
-			assert(data.variants[0].get!int == 3);
-			assert(data.variants[1].get!double == 23.3);
-			assert(data.variants[2].get!(List!int).array == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-			assert(data.variants[3].get!(int[])          == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-			assert(data.variants[4].get!(char[]) == "Hello There you in the hoodie!");
-		//	assert(data.variants[5].get!(TestB)  == TestB(0, 3, "WEEEEE"));
-			assert(*data.variants[6].get!(int*)  == 7);
-
-			assert(data.variant.get!(int) == 3);
-			assert(data.map.first.get!(int) == 3);
-			assert(data.map.second.get!(double) == 23.3);
-
-			List!char store;
-			store = List!char(Mallocator.it, 100000);
-			//toSDL(data, store, &c);
-			//logInfo(store.array);
-
-			data = fromSDLSource!Test(Mallocator.it, cast(string)store.array, c);
-
-		}
-		catch(Throwable t)
-		{
-			import log;
-			logInfo(t);
-		}
+		//try
+		//{
+		//    ReflectionContext c;
+		//    c.assemblies = [&assembly];
+		//
+		//    auto data = fromSDLSource!Test(Mallocator.it, s, c);
+		//
+		//    assert(data.variants[0].get!int == 3);
+		//    assert(data.variants[1].get!double == 23.3);
+		//    assert(data.variants[2].get!(List!int).array == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+		//    assert(data.variants[3].get!(int[])          == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+		//    assert(data.variants[4].get!(char[]) == "Hello There you in the hoodie!");
+		////	assert(data.variants[5].get!(TestB)  == TestB(0, 3, "WEEEEE"));
+		//    assert(*data.variants[6].get!(int*)  == 7);
+		//
+		//    assert(data.variant.get!(int) == 3);
+		//    assert(data.map.first.get!(int) == 3);
+		//    assert(data.map.second.get!(double) == 23.3);
+		//
+		//    List!char store;
+		//    store = List!char(Mallocator.it, 100000);
+		//    //toSDL(data, store, &c);
+		//    //logInfo(store.array);
+		//
+		//    data = fromSDLSource!Test(Mallocator.it, cast(string)store.array, c);
+		//
+		//}
+		//catch(Throwable t)
+		//{
+		//    import log;
+		//    logInfo(t);
+		//}
 
 
 

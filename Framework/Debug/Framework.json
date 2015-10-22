@@ -668,9 +668,9 @@
       "name" : "components",
       "kind" : "variable",
       "line" : 42,
-      "char" : 29,
-      "deco" : "S11collections4list43__T4ListTC3app4core21IApplicationComponentZ4List",
-      "originalType" : "List!IApplicationComponent",
+      "char" : 34,
+      "deco" : "S11collections4list48__T9FixedListTC3app4core21IApplicationComponentZ9FixedList",
+      "originalType" : "FixedList!IApplicationComponent",
       "offset" : 12
      },
      {
@@ -1364,9 +1364,9 @@
       "kind" : "variable",
       "protection" : "private",
       "line" : 40,
-      "char" : 22,
-      "deco" : "S11collections4list29__T4ListTC3app6screen6ScreenZ4List",
-      "originalType" : "List!Screen",
+      "char" : 27,
+      "deco" : "S11collections4list34__T9FixedListTC3app6screen6ScreenZ9FixedList",
+      "originalType" : "FixedList!Screen",
       "offset" : 12
      },
      {
@@ -1592,7 +1592,7 @@
       "kind" : "function",
       "line" : 11,
       "char" : 1,
-      "deco" : "FNaNbNcNjNfS7content7content6HandleZS7content7content6Handle",
+      "deco" : "FNaNbNcNiNjNfS7content7content6HandleZS7content7content6Handle",
       "parameters" : [
        {
         "name" : "p",
@@ -1782,9 +1782,9 @@
       "name" : "fileLoaders",
       "kind" : "variable",
       "line" : 93,
-      "char" : 18,
-      "deco" : "S11collections4list39__T4ListTS7content7content10FileLoaderZ4List",
-      "originalType" : "List!FileLoader",
+      "char" : 23,
+      "deco" : "S11collections4list44__T9FixedListTS7content7content10FileLoaderZ9FixedList",
+      "originalType" : "FixedList!FileLoader",
       "offset" : 0
      },
      {
@@ -2757,7 +2757,7 @@
       "kind" : "function",
       "line" : 13,
       "char" : 1,
-      "deco" : "FNaNbNcNjNfS7content4file8FileItemZS7content4file8FileItem",
+      "deco" : "FNaNbNcNiNjNfS7content4file8FileItemZS7content4file8FileItem",
       "parameters" : [
        {
         "name" : "p",
@@ -9792,7 +9792,7 @@
       "kind" : "function",
       "line" : 63,
       "char" : 1,
-      "deco" : "FNaNbNcNjNfS8graphics4font4FontZS8graphics4font4Font",
+      "deco" : "FNaNbNcNiNjNfS8graphics4font4FontZS8graphics4font4Font",
       "parameters" : [
        {
         "name" : "p",
@@ -12983,7 +12983,7 @@
       "kind" : "function",
       "line" : 6,
       "char" : 1,
-      "deco" : "FNaNbNcNjS8graphics12textureatlas10SourceRectZS8graphics12textureatlas10SourceRect",
+      "deco" : "FNaNbNcNiNjS8graphics12textureatlas10SourceRectZS8graphics12textureatlas10SourceRect",
       "originalType" : "ref SourceRect(SourceRect p)return ",
       "parameters" : [
        {
@@ -14124,8 +14124,8 @@
         "name" : "renderData",
         "kind" : "variable",
         "line" : 50,
-        "char" : 26,
-        "type" : "List!RenderData"
+        "char" : 31,
+        "type" : "FixedList!RenderData"
        },
        {
         "name" : "sampler",

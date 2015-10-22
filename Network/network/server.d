@@ -57,9 +57,9 @@ struct Server
 	ServerConfig config;
 	ulong bytesProcessed;
 
-	List!ulong lostConnections;
-	List!Connection activeConnections;
-	List!Connection pendingConnections;
+	FixedList!ulong lostConnections;
+	FixedList!Connection activeConnections;
+	FixedList!Connection pendingConnections;
 	
 	Socket udpSocket;
 	Listener listener;
@@ -79,9 +79,9 @@ struct Server
 	{
 		this.config = config;
 
-		activeConnections  = List!Connection(allocator, config.maxConnections);
-		pendingConnections = List!Connection(allocator, config.maxConnections);
-		lostConnections	   = List!ulong(allocator,      config.maxConnections);
+		activeConnections  = FixedList!Connection(allocator, config.maxConnections);
+		pendingConnections = FixedList!Connection(allocator, config.maxConnections);
+		lostConnections	   = FixedList!ulong(allocator,      config.maxConnections);
 
 		listener =  allocator.allocate!Listener(allocator, config.maxConnections);
 		listener.blocking = false;
@@ -436,7 +436,7 @@ struct Server
 			fun(id);
 	}
 
-	void closeConnection(ref List!Connection connections, 
+	void closeConnection(ref FixedList!Connection connections, 
 						 int i, bool wasConnected, bool addToLost)
 	{
 		auto con = connections[i];

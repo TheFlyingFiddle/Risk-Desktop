@@ -17,12 +17,12 @@ struct NetworkServiceProvider
 
 struct NetworkServices 
 {
-	List!NetworkServiceProvider services; 
+	FixedList!NetworkServiceProvider services; 
 	UdpSocket socket;
 
 	this(A)(ref A allocator, ushort port, uint maxServices)
 	{
-		services = List!NetworkServiceProvider(allocator, maxServices);
+		services = FixedList!NetworkServiceProvider(allocator, maxServices);
 		socket = allocator.allocate!UdpSocket;
 		socket.setOption(SocketOptionLevel.SOCKET, SocketOption.REUSEADDR, 1);
 		socket.blocking = false;

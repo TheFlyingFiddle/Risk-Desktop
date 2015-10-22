@@ -303,6 +303,10 @@ collections.list (..\\Base\\collections\\list.d) : private : object (C:\\D\\dmd2
 collections.list (..\\Base\\collections\\list.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
 collections.list (..\\Base\\collections\\list.d) : private : allocation.common (..\\Base\\allocation\\common.d)
 collections.list (..\\Base\\collections\\list.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+collections.list (..\\Base\\collections\\list.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
+collections.list (..\\Base\\collections\\list.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
+collections.list (..\\Base\\collections\\list.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange,hasSlicing
+collections.list (..\\Base\\collections\\list.d) : private : std.algorithm (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\package.d):SwapStrategy,countUntil,swap
 collections.list (..\\Base\\collections\\list.d) : private : std.algorithm (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\package.d):SwapStrategy,countUntil,swap
 collections (..\\Base\\collections\\package.d) : public : collections.list (..\\Base\\collections\\list.d)
 collections.table (..\\Base\\collections\\table.d) : private : object (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\object.d)
@@ -319,7 +323,6 @@ util.servicelocator (..\\Base\\util\\servicelocator.d) : private : util.strings 
 util.servicelocator (..\\Base\\util\\servicelocator.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
 util.servicelocator (..\\Base\\util\\servicelocator.d) : private : std.algorithm (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\package.d)
 util.servicelocator (..\\Base\\util\\servicelocator.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
-util.servicelocator (..\\Base\\util\\servicelocator.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 app.core (app\\core.d) : private : util.servicelocator (..\\Base\\util\\servicelocator.d)
 app.core (app\\core.d) : private : collections.list (..\\Base\\collections\\list.d)
 app.core (app\\core.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
@@ -918,11 +921,10 @@ std.array (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\array.d) : priva
 std.array (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\array.d) : private : core.memory (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\memory.d)
 std.array (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\array.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 std.array (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\array.d) : private : std.utf (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\utf.d):encode
-app.components (app\\components.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
 app.components (app\\components.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text,to
 app.components (app\\components.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text
-app.components (app\\components.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
 app.components (app\\components.d) : private : std.utf (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\utf.d)
+app.components (app\\components.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
 app.components (app\\components.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
 app.components (app\\components.d) : private : std.uni (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\uni.d):isGraphical
 app.components (app\\components.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text,to
@@ -1157,6 +1159,7 @@ std.file (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\file.d) : private
 std.file (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\file.d) : private : std.typecons (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typecons.d):Rebindable
 std.file (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\file.d) : private : std.exception (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\exception.d):doesPointTo
 std.file (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\file.d) : private : std.array (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\array.d):overlap
+app.components (app\\components.d) : private : std.utf (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\utf.d)
 std.typecons (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typecons.d) : private : std.algorithm (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\package.d):swap
 std.algorithm.mutation (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\mutation.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d):hasAliasing,hasElaborateAssign,isAssignable,isStaticArray
 std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d) : private : std.typecons (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typecons.d):Rebindable
@@ -1194,11 +1197,18 @@ content.content (content\\content.d) : private : util.strings (..\\Base\\util\\s
 content.content (content\\content.d) : private : std.format (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\format.d)
 content.content (content\\content.d) : private : collections.list (..\\Base\\collections\\list.d)
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text,to
+content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text
+content.content (content\\content.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
+content.content (content\\content.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
+content.content (content\\content.d) : private : std.uni (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\uni.d):isGraphical
+content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text,to
+content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.content (content\\content.d) : private : util.strings (..\\Base\\util\\strings.d)
 content.content (content\\content.d) : private : util.strings (..\\Base\\util\\strings.d)
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):emplace
 content.content (content\\content.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 content.content (content\\content.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
 content.content (content\\content.d) : private : std.format (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\format.d):format
@@ -1232,6 +1242,7 @@ content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.content (content\\content.d) : private : concurency.task (..\\Base\\concurency\\task.d)
 content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+content.content (content\\content.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):emplace
 content.content (content\\content.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 content.content (content\\content.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
 content.content (content\\content.d) : private : std.format (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\format.d):format
@@ -1292,6 +1303,7 @@ content.sound (content\\sound.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin
 content.sound (content\\sound.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.sound (content\\sound.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):strlen
 content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):emplace
 content.texture (content\\texture.d) : private : util.strings (..\\Base\\util\\strings.d)
 content.texture (content\\texture.d) : private : std.format (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\format.d)
 content.texture (content\\texture.d) : private : collections.list (..\\Base\\collections\\list.d)
@@ -1300,6 +1312,7 @@ content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\
 content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+content.texture (content\\texture.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):emplace
 graphics.frame (graphics\\frame.d) : private : std.typetuple (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typetuple.d):TypeTuple
 graphics.frame (graphics\\frame.d) : private : std.typetuple (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typetuple.d):TypeTuple
 graphics.frame (graphics\\frame.d) : private : std.typetuple (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\typetuple.d):TypeTuple
@@ -1528,6 +1541,7 @@ graphics.framebuffer (graphics\\framebuffer.d) : private : std.format (C:\\D\\dm
 graphics.framebuffer (graphics\\framebuffer.d) : private : collections.list (..\\Base\\collections\\list.d)
 graphics.framebuffer (graphics\\framebuffer.d) : private : std.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\string.d)
 graphics.framebuffer (graphics\\framebuffer.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):text,to
+graphics.framebuffer (graphics\\framebuffer.d) : private : std.system (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\system.d):Endian
 graphics.framebuffer (graphics\\framebuffer.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 graphics.framebuffer (graphics\\framebuffer.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
 graphics.framebuffer (graphics\\framebuffer.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):to
@@ -1948,6 +1962,7 @@ window.mouse (window\\mouse.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\
 window.mouse (window\\mouse.d) : private : std.exception (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\exception.d):enforce
 window.window (window\\window.d) : private : allocation (..\\Base\\allocation\\package.d)
 window.window (window\\window.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+window.window (window\\window.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d):emplace
 window.window (window\\window.d) : private : allocation (..\\Base\\allocation\\package.d)
 window.window (window\\window.d) : private : std.format (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\format.d)
 window.window (window\\window.d) : private : collections.list (..\\Base\\collections\\list.d)

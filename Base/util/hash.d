@@ -2,9 +2,10 @@ module util.hash;
 
 import std.traits;
 
+@safe nothrow pure @nogc:
 struct HashID
 {
-	@safe nothrow pure:
+	@safe nothrow pure @nogc:
 
 	uint value;
 	alias value this;
@@ -17,6 +18,11 @@ struct HashID
 	this(T)(auto ref T t)
 	{
 		value = bytesHash(t).value;
+	}
+
+	this(HashID seed, const(char)[] s)
+	{
+		value = bytesHash(s.ptr, s.length, seed.value);
 	}
 
 	this(T...)(auto ref T t)
@@ -100,7 +106,7 @@ HashID bytesHash(const(void)* buf, size_t len, size_t seed = 0)
     //-----------------------------------------------------------------------------
     // Block read - if your platform needs to do endian-swapping or can only
     // handle aligned reads, do the conversion here
-    static uint get32bits(const (ubyte)* x) pure nothrow
+    static uint get32bits(const (ubyte)* x) pure nothrow @nogc
     {
         //Compiler can optimize this code to simple *cast(uint*)x if it possible.
         version(HasUnalignedOps)
@@ -120,7 +126,7 @@ HashID bytesHash(const(void)* buf, size_t len, size_t seed = 0)
 
     //-----------------------------------------------------------------------------
     // Finalization mix - force all bits of a hash block to avalanche
-    static uint fmix32(uint h) pure nothrow @safe
+    static uint fmix32(uint h) pure nothrow @safe @nogc
     {
         h ^= h >> 16;
         h *= 0x85ebca6b;

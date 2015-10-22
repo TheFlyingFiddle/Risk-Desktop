@@ -2613,27 +2613,27 @@
       "name" : "players",
       "kind" : "variable",
       "line" : 163,
-      "char" : 23,
-      "deco" : "S11collections4list40__T11GrowingListTS4risk8database6PlayerZ11GrowingList",
-      "originalType" : "GrowingList!Player",
+      "char" : 16,
+      "deco" : "S11collections4list32__T4ListTS4risk8database6PlayerZ4List",
+      "originalType" : "List!Player",
       "offset" : 40
      },
      {
       "name" : "units",
       "kind" : "variable",
       "line" : 164,
-      "char" : 22,
-      "deco" : "S11collections4list38__T11GrowingListTS4risk8database4UnitZ11GrowingList",
-      "originalType" : "GrowingList!Unit",
+      "char" : 15,
+      "deco" : "S11collections4list30__T4ListTS4risk8database4UnitZ4List",
+      "originalType" : "List!Unit",
       "offset" : 56
      },
      {
       "name" : "countries",
       "kind" : "variable",
       "line" : 165,
-      "char" : 19,
-      "deco" : "S11collections4list33__T4ListTS4risk8database7CountryZ4List",
-      "originalType" : "List!Country",
+      "char" : 24,
+      "deco" : "S11collections4list38__T9FixedListTS4risk8database7CountryZ9FixedList",
+      "originalType" : "FixedList!Country",
       "offset" : 72
      },
      {

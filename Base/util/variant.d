@@ -92,7 +92,7 @@ unittest
 {
 	auto test0 = VariantN!(32)("Hello");
 	auto test1 = VariantN!(32)(32);
-	auto test1 = VariantN!(32)(ubyte(0));
+	auto test2 = VariantN!(32)(ubyte(0));
 }
 
 

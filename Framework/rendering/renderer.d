@@ -47,13 +47,13 @@ struct Renderer(V)
 
 	private SubBufferRenderBuffer!V renderBuffer;
 	private Program!(Uniform, V) program;
-	private List!RenderData renderData;
+	private FixedList!RenderData renderData;
 
 	private Sampler sampler;
 
 	this(A)(ref A allocator, RenderConfig config, string vSource, string fSource)
 	{
-		this.renderData	  = List!RenderData(allocator, config.maxBatchSize / 6);
+		this.renderData	  = FixedList!RenderData(allocator, config.maxBatchSize / 6);
 		Shader vShader = Shader(ShaderType.vertex, vSource),
 			fShader = Shader(ShaderType.fragment, fSource);
 

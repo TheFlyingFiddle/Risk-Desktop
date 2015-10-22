@@ -1,0 +1,79 @@
+<html><head><META HTTP-EQUIV="Content-Type" content="text/html">
+</head><body><pre>
+<table width=100% bgcolor=#CFCFE5><tr><td>
+	<font face=arial size=+3>Build Log</font>
+</table>
+<table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Building win64\Risk.exe
+</font></table>
+<table width=100% bgcolor=#EFEFE5><tr><td><font face=arial size=+1>
+Command Line
+</font></table>
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+set DMD_LIB=;..\Base\Debug ..\Framework\Debug ..\ExternalLibs\Debug
+
+echo desktop\build.d &gt;win64\Risk.build.rsp
+echo desktop\combat.d &gt;&gt;win64\Risk.build.rsp
+echo desktop\mission.d &gt;&gt;win64\Risk.build.rsp
+echo desktop\move.d &gt;&gt;win64\Risk.build.rsp
+echo desktop\risk.d &gt;&gt;win64\Risk.build.rsp
+echo screens\attack.d &gt;&gt;win64\Risk.build.rsp
+echo screens\build.d &gt;&gt;win64\Risk.build.rsp
+echo screens\loading.d &gt;&gt;win64\Risk.build.rsp
+echo screens\move.d &gt;&gt;win64\Risk.build.rsp
+echo screens\risk_screen.d &gt;&gt;win64\Risk.build.rsp
+echo screens\start.d &gt;&gt;win64\Risk.build.rsp
+echo screens\world.d &gt;&gt;win64\Risk.build.rsp
+echo blob.d &gt;&gt;win64\Risk.build.rsp
+echo data.d &gt;&gt;win64\Risk.build.rsp
+echo eventmanager.d &gt;&gt;win64\Risk.build.rsp
+echo events.d &gt;&gt;win64\Risk.build.rsp
+echo event_queue.d &gt;&gt;win64\Risk.build.rsp
+echo game_events.d &gt;&gt;win64\Risk.build.rsp
+echo inplace.d &gt;&gt;win64\Risk.build.rsp
+echo main.d &gt;&gt;win64\Risk.build.rsp
+echo network_events.d &gt;&gt;win64\Risk.build.rsp
+echo network_manager.d &gt;&gt;win64\Risk.build.rsp
+echo risk.d &gt;&gt;win64\Risk.build.rsp
+
+dmd -g -debug -X -Xf&quot;win64\Risk.json&quot; -I..\Base -I..\Framework -I..\ExternalLibs -deps=&quot;win64\Risk.dep&quot; -c -of&quot;win64\Risk.obj&quot; @win64\Risk.build.rsp
+if errorlevel 1 goto reportError
+
+set LIB=&quot;C:\D\dmd2\windows\bin\..\lib&quot;
+echo. &gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo &quot;win64\Risk.obj&quot;,&quot;win64\Risk.exe&quot;,&quot;win64\Risk.map&quot;,Base.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo Framework.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo ExternalLibs.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo user32.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo kernel32.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo ..\Base\Debug\+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo ..\Framework\Debug\+ &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+echo ..\ExternalLibs\Debug\/NOMAP/CO/NOI/DELEXE &gt;&gt; C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+
+&quot;C:\Program Files (x86)\VisualD\pipedmd.exe&quot; -deps win64\Risk.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\Risk\Risk-Desktop\Risk\win64\Risk.build.lnkarg
+if errorlevel 1 goto reportError
+if not exist &quot;win64\Risk.exe&quot; (echo &quot;win64\Risk.exe&quot; not created! &amp;&amp; goto reportError)
+
+goto noError
+
+:reportError
+echo Building win64\Risk.exe failed!
+
+:noError
+<table width=100% bgcolor=#EFEFE5><tr><td><font face=arial size=+1>
+Output
+</font></table>
+..\Base\allocation\common.d(68): Error: &apos;allocation.stack.ScopeStack.allocate_impl&apos; is not nothrow
+..\Base\allocation\common.d(66): Error: function &apos;allocation.common.CAllocator!(ScopeStack).CAllocator.allocate_impl&apos; is nothrow yet may throw
+..\Base\allocation\common.d(73): Error: &apos;allocation.stack.ScopeStack.deallocate_impl&apos; is not nothrow
+..\Base\allocation\common.d(71): Error: function &apos;allocation.common.CAllocator!(ScopeStack).CAllocator.deallocate_impl&apos; is nothrow yet may throw
+main.d(46): Error: template instance allocation.common.CAllocator!(ScopeStack) error instantiating
+C:\D\dmd2\windows\bin\..\..\src\phobos\std\conv.d(4096): Error: static assert  &quot;AsyncContentLoader cannot be emplaced from (ScopeStack, ContentConfig).&quot;
+C:\D\dmd2\windows\bin\..\..\src\phobos\std\conv.d(4161):        instantiated from here: emplaceImpl!(ScopeStack, ContentConfig)
+C:\D\dmd2\windows\bin\..\..\src\phobos\std\conv.d(5087):        instantiated from here: emplace!(AsyncContentLoader, ScopeStack, ContentConfig)
+..\Base\allocation\common.d(109):        instantiated from here: emplace!(AsyncContentLoader, ScopeStack, ContentConfig)
+..\Base\allocation\common.d(121):        ... (2 instantiations, -v to show) ...
+..\Framework\app\factories.d(33):        instantiated from here: allocate!(AsyncContentLoader, ScopeStack, ContentConfig)
+main.d(47):        instantiated from here: createDesktopApp!(ScopeStack)
+Building win64\Risk.exe failed!
+</body></html>

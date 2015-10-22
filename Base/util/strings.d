@@ -29,7 +29,7 @@ const (char)[] text(Args...)(char[] buffer, Args args)
 		else enum staticFormatString = staticFormatString!(u - 1) ~ "%s";
 	}
 
-	auto appender = List!(char)(buffer);
+	auto appender = FixedList!(char)(buffer);
 	formattedWrite(&appender, staticFormatString!(Args.length), args);
 
 	return appender.array;
@@ -44,7 +44,7 @@ const (char)[] format(Args...)(char[] buffer, string s, Args args)
 {
 	import std.format, collections.list;
 
-	List!char appender = List!char(buffer);
+	FixedList!char appender = FixedList!char(buffer);
 	formattedWrite(&appender, s, args);
 
 	return appender.array;

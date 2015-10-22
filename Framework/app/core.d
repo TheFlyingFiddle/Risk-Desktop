@@ -39,14 +39,14 @@ struct Application
 	enum max_gc_time_msecs = 3;
 
 	ServiceLocator services;
-	List!IApplicationComponent components;
+	FixedList!IApplicationComponent components;
 	private bool shouldRun;
 	public string name;
 
 	this(A)(ref A al, size_t numServices, size_t numComponents, string name)
 	{		
 		services   = ServiceLocator(al, numServices);
-		components = List!IApplicationComponent(al, numComponents);
+		components = FixedList!IApplicationComponent(al, numComponents);
 
 		this.name = name;
 		this.shouldRun = true;

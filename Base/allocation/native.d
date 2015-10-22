@@ -7,6 +7,8 @@ version(X86)
 {
 	struct Mallocator
 	{
+		nothrow:
+
 		import core.stdc.stdlib;
 
 		size_t bytesAllocated;
@@ -70,12 +72,13 @@ version(X86_64)
 	version(Posix) extern(C) int posix_memalign(void**, size_t, size_t);
 	version(Windows)
 	{
-		extern(C) void* _aligned_malloc(size_t,size_t);
-		extern(C) void* _aligned_free(void* memblock);
+		extern(C) void* _aligned_malloc(size_t,size_t) nothrow;
+		extern(C) void* _aligned_free(void* memblock) nothrow;
 	}
 
 	struct Mallocator
 	{
+	nothrow:
 		import core.stdc.stdlib;	
 		uint bytesAllocated;
 		uint numAllocations;
@@ -171,14 +174,14 @@ struct MallocAppender(T)
 	}
 
     import collections.list;
-    List!T data()
+    FixedList!T data()
 	{
-        return List!T(_buffer[0.._offset]);
+        return FixedList!T(_buffer, _offset, _capacity);
 	}
 
-	List!T take()
+	FixedList!T take()
 	{
-		return List!T(_buffer, _offset, _capacity);
+		return FixedList!T(_buffer, _offset, _capacity);
 	}
     
     @disable this(this);

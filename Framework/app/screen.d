@@ -37,11 +37,11 @@ abstract class Screen
 
 final class ScreenComponent : IApplicationComponent
 {
-	private List!Screen screens;
+	private FixedList!Screen screens;
 
 	this(A)(ref A allocator, size_t numScreens)
 	{
-		screens = List!Screen(allocator, numScreens);
+		screens = FixedList!Screen(allocator, numScreens);
 	}
 
 	bool has(Screen screen)

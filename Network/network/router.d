@@ -31,10 +31,10 @@ alias HandlerTable = Table!(ushort, MessageHandler, SortStrategy.sorted);
 
 struct Router
 {
-	List!ConnectionHandler connectionHandlers;
-	List!ReconnectionHandler reconnectionHandlers;
-	List!DisconnectonHandler disconnectionHandlers;
-	List!RawMessageHandler messageHandlers;
+	FixedList!ConnectionHandler connectionHandlers;
+	FixedList!ReconnectionHandler reconnectionHandlers;
+	FixedList!DisconnectonHandler disconnectionHandlers;
+	FixedList!RawMessageHandler messageHandlers;
 
 	HandlerTable specificHandlers;
 
@@ -47,25 +47,25 @@ struct Router
 		server.onDisconnect = &disconected;
 		server.onMessage    = &message;
 
-		connectionHandlers    = List!ConnectionHandler(allocator, maxHandlers);
-		reconnectionHandlers  = List!ReconnectionHandler(allocator, maxHandlers);
-		disconnectionHandlers = List!DisconnectonHandler(allocator, maxHandlers);
-		messageHandlers       = List!RawMessageHandler(allocator, maxHandlers);
+		connectionHandlers    = FixedList!ConnectionHandler(allocator, maxHandlers);
+		reconnectionHandlers  = FixedList!ReconnectionHandler(allocator, maxHandlers);
+		disconnectionHandlers = FixedList!DisconnectonHandler(allocator, maxHandlers);
+		messageHandlers       = FixedList!RawMessageHandler(allocator, maxHandlers);
 
 		specificHandlers = HandlerTable(allocator, maxHandlers);
 	}
 
-	ref List!ConnectionHandler connections() 
+	ref FixedList!ConnectionHandler connections() 
 	{
 		return connectionHandlers;
 	}
 
-	ref List!ReconnectionHandler reconnections()
+	ref FixedList!ReconnectionHandler reconnections()
 	{
 		return reconnectionHandlers;
 	}
 
-	ref List!DisconnectonHandler disconnections()
+	ref FixedList!DisconnectonHandler disconnections()
 	{
 		return disconnectionHandlers;
 	}

@@ -149,8 +149,8 @@ struct SPMCQueue(Serializer)
 				{
 					found = true;
 					auto dataSize = Serializer.dataSize!type(header) + Serializer.header.sizeof;
-					data = (cast(ubyte*)alloca(dataSize))[0 .. dataSize];
-					data[] = 0;
+					data = GlobalAllocator.allocate!(ubyte[])(dataSize); 
+					scope(exit) GlobalAllocator.deallocate(data);
 
 					queue.nextMessage!type(data);
 					break;
@@ -213,7 +213,7 @@ struct SPSCQueue(Serializer)
 	uint remaining()
 	{
 		const first = this.first, last  = this.last;
-		return (first <= last) ? length - (last - first) : first - last;
+		return cast(uint)((first <= last) ? length - (last - first) : first - last);
 	}
 
 	bool trySend(T)(auto ref T value) if(Serializer.constraints!T)

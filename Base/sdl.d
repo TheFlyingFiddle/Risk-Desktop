@@ -1,4 +1,4 @@
-module content.sdl;
+module sdl;
 
 import std.exception;
 import std.conv : to;
@@ -11,7 +11,7 @@ import std.range : repeat;
 import collections.list;
 import collections.map;
 import allocation;
-import math.traits, math.vector;
+import math.vector;
 
 alias TypeID = SDLObject.Type;
 
@@ -360,9 +360,9 @@ struct SDLIterator(C)
 	}
 
 	//TODO: Code duplication (see above) iteration might be refactored into an opApply?
-	T as_impl(T)() if(is(T t == List!U, U))
+	T as_impl(T)() if(is(T t == FixedList!U, U))
 	{
-        static if(is(T t == List!U, U)) {
+        static if(is(T t == FixedList!U, U)) {
 			auto listLength = walkLength;
 			auto list = T(allocator, listLength);
 			goToChild();
@@ -403,9 +403,9 @@ struct SDLIterator(C)
 		assert(0);
 	}
 
-	T as_impl(T)() if(is(T t == HashMap!(K, V), K, V) && !is(T t1 == HashMap!(string, U), U))
+	T as_impl(T)() if(is(T t == Map!(K, V), K, V) && !is(T t1 == Map!(string, U), U))
 	{
-		static if(is(T t == HashMap!(K, V), K, V))
+		static if(is(T t == Map!(K, V), K, V))
 		{
 			struct Pair
 			{
@@ -414,7 +414,7 @@ struct SDLIterator(C)
 			}
 
             Pair[] items = as!(Pair[]);
-			auto m     = HashMap!(K, V)(Mallocator.cit, items.length);
+			auto m     = Map!(K, V)(Mallocator.cit, items.length);
 			foreach(ref item; items)
 			{
 				m.tryAdd(item.key, item.value);
@@ -427,12 +427,12 @@ struct SDLIterator(C)
 			static assert(0, T.stringof ~ " is not a HashMap type!");
 	}
 
-	T as_impl(T)() if(is(T t == HashMap!(string, V), V))
+	T as_impl(T)() if(is(T t == Map!(string, V), V))
 	{
-		static if(is(T t == HashMap!(string, V), V))
+		static if(is(T t == Map!(string, V), V))
 		{
 			auto length = walkLength;
-			auto m     = HashMap!(string, V)(Mallocator.cit, length);
+			auto m     = Map!(string, V)(Mallocator.cit, length);
 			if(length == 0) return m;
 
 
@@ -474,7 +474,7 @@ struct SDLIterator(C)
 	}
 
 	T as_impl(T : void*)() { return null; }
-	T as_impl(T)() if(is(T == struct) && !is(T t == HashMap!(K, V), K, V) && !is(T t == List!U, U) && 
+	T as_impl(T)() if(is(T == struct) && !is(T t == Map!(K, V), K, V) && !is(T t == FixedList!U, U) && 
 					  !isVector!T)
 	{
 		static if(hasMember!(T, "fromSDL") && is(typeof(T.fromSDL) == function))
@@ -752,7 +752,7 @@ void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level) if(is
 		sink.put("false");
 }
 
-void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level) if(is(T == struct) && !isList!(T) && !is(T t == HashMap!(K, V), K , V))
+void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level) if(is(T == struct) && !isList!(T) && !is(T t == Map!(K, V), K , V))
 {
 	static if(hasMember!(T, "toSDL"))
 	{
@@ -823,9 +823,9 @@ void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) i
 	sink.put(arrayCloser);
 }
 
-void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) if(is(T t == HashMap!(K, V), K, V) && !is(T t0 == HashMap!(string, U), U))
+void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) if(is(T t == Map!(K, V), K, V) && !is(T t0 == Map!(string, U), U))
 {
-	static if(is(T t == HashMap!(K, V), K, V))
+	static if(is(T t == Map!(K, V), K, V))
 	{
 		struct Pair
 		{
@@ -849,7 +849,7 @@ void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) i
 }
 
 
-void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) if(is(T t == HashMap!(string, V), V))
+void toSDL_impl(T, Sink, C)(T value, ref Sink sink, C* context, int level = 0) if(is(T t == Map!(string, V), V))
 {
 	if(level != 0) {
 		sink.put('\n');

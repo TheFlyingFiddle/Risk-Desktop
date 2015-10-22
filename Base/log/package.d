@@ -105,10 +105,8 @@ private void makeMsg(T...)(string channel, Verbosity verbosity, string file, siz
 		file = file[idx + 5 .. $];
 	}
 
-	char[8192] buffer = void;
-	auto list = List!(char)(buffer);
-	auto appender = &list;
-	formattedWrite(appender, staticFormatString!(T.length), t, file, line);
+	SList!(char, 8192) appender;
+	formattedWrite(&appender, staticFormatString!(T.length), t, file, line);
 	logger(channel, verbosity, appender.array);
 }
 
@@ -124,10 +122,8 @@ private void makeFormatMsg(T...)(string channel, string f, Verbosity verbosity, 
 		file = file[idx + 5 .. $];
 	}
 
-	char[8192] buffer = void;
-	auto list = List!(char)(buffer);
-	auto appender = &list;
-	formattedWrite(appender, f, t);
-	formattedWrite(appender, "\t%s(%s)", file, line);
+	SList!(char, 8192) appender;
+	formattedWrite(&appender, f, t);
+	formattedWrite(&appender, "\t%s(%s)", file, line);
 	logger(channel, verbosity, appender.array);
 }

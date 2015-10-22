@@ -12,12 +12,12 @@ alias eventHandler = void function(Event, ref RiskState);
 struct EventManager
 {
 	Blob	data;
-	HashMap!(TypeHash, eventHandler) handlers;
+	Map!(TypeHash, eventHandler) handlers;
 
 	this(IAllocator allocator)
 	{
 		data    = Blob(allocator, 1024);
-		handlers = HashMap!(TypeHash, eventHandler)(allocator, 10);
+		handlers = Map!(TypeHash, eventHandler)(allocator, 10);
 	}
 
 	static void invoker(T)(Event e, ref RiskState s)

@@ -13,10 +13,10 @@ struct ServiceLocator
 		void* ptr; 
 	}	
 
-	List!Service  services;
+	FixedList!Service  services;
 	this(A)(ref A allocator, size_t size)
 	{
-		services = List!Service(allocator, size);
+		services = FixedList!Service(allocator, size);
 	}
 
 	private HashID hashOf(T)(string name) nothrow

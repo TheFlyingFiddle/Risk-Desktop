@@ -378,6 +378,8 @@ collections.list (..\\Base\\collections\\list.d) : private : object (C:\\D\\dmd2
 collections.list (..\\Base\\collections\\list.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
 collections.list (..\\Base\\collections\\list.d) : private : allocation.common (..\\Base\\allocation\\common.d)
 collections.list (..\\Base\\collections\\list.d) : private : std.conv (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\conv.d)
+collections.list (..\\Base\\collections\\list.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
+collections.list (..\\Base\\collections\\list.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 collections.list (..\\Base\\collections\\list.d) : private : std.algorithm (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\algorithm\\package.d):SwapStrategy,countUntil,swap
 collections.table (..\\Base\\collections\\table.d) : private : collections.list (..\\Base\\collections\\list.d)
 collections.table (..\\Base\\collections\\table.d) : private : std.stdio (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\stdio.d)
@@ -396,7 +398,6 @@ rendering.asyncrenderbuffer (..\\Framework\\rendering\\asyncrenderbuffer.d) : pr
 rendering.asyncrenderbuffer (..\\Framework\\rendering\\asyncrenderbuffer.d) : private : graphics (..\\Framework\\graphics\\package.d)
 rendering.renderer (..\\Framework\\rendering\\renderer.d) : private : rendering.asyncrenderbuffer (..\\Framework\\rendering\\asyncrenderbuffer.d)
 rendering.renderer (..\\Framework\\rendering\\renderer.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
-rendering.renderer (..\\Framework\\rendering\\renderer.d) : private : core.stdc.string (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\core\\stdc\\string.d):memcpy
 rendering.renderer (..\\Framework\\rendering\\renderer.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
 rendering.combined (..\\Framework\\rendering\\combined.d) : private : rendering.renderer (..\\Framework\\rendering\\renderer.d)
 rendering.combined (..\\Framework\\rendering\\combined.d) : private : math.vector (..\\Base\\math\\vector.d)
@@ -747,6 +748,7 @@ risk.states.start (risk\\states\\start.d) : private : risk.output (risk\\output.
 risk.input (risk\\input.d) : private : object (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\object.d)
 risk.input (risk\\input.d) : private : risk.database (risk\\database.d)
 risk.states.start (risk\\states\\start.d) : private : risk.input (risk\\input.d)
+risk.states.start (risk\\states\\start.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange,hasSlicing
 risk.states.start (risk\\states\\start.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d):isInputRange,isForwardRange,isBidirectionalRange,isRandomAccessRange
 risk.screen (risk\\screen.d) : private : object (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\object.d)
 app.screen (..\\Framework\\app\\screen.d) : private : object (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\object.d)

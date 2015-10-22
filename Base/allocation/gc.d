@@ -6,6 +6,8 @@ import allocation.common;
 
 struct GC
 {
+	nothrow:
+
 	size_t bytesAllocated;
 	size_t numAllocations;
 

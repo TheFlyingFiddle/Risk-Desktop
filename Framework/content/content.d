@@ -90,7 +90,7 @@ struct FileMap
 
 struct ContentLoader
 {
-	List!FileLoader fileLoaders;
+	FixedList!FileLoader fileLoaders;
 	IAllocator allocator;
 	string resourceFolder;
 	Handle[] items;
@@ -108,7 +108,7 @@ struct ContentLoader
 		this.resourceFolder = resourceFolder;
 		
 		//We will not have more the 100 file formats.
-		this.fileLoaders   = List!(FileLoader)(allocator, 100);
+		this.fileLoaders   = FixedList!(FileLoader)(allocator, 100);
 		this.resourceCount = 0;
 
 		//Temporary hack! <- Don't do this!

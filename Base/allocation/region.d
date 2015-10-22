@@ -4,6 +4,7 @@ public import allocation.common;
 
 struct RegionAllocator
 {
+	nothrow:
 	IAllocator base;
 
 	void*  _buffer;
@@ -54,7 +55,7 @@ struct RegionAllocator
 
 	void deallocate_impl(void[] dealloc)
 	{
-		assert(0, "Should never call this");
+		//assert(0, "Should never call this");
 	}
 	
 	void rewind(void* rewindPos)
@@ -118,14 +119,14 @@ struct RegionAppender(T)
 		_allocator.rewind(_rewindPos);
 	}	
 
-	List!T data()
+	FixedList!T data()
 	{
-		return List!T(_buffer, cast(uint)_offset, cast(uint)_offset);
+		return FixedList!T(_buffer, cast(uint)_offset, cast(uint)_offset);
 	}
 
-	List!T take()
+	FixedList!T take()
 	{
-		auto list = List!T(_buffer, cast(uint)_offset, cast(uint)_offset);
+		auto list = FixedList!T(_buffer, cast(uint)_offset, cast(uint)_offset);
 
 		_rewindPos = cast(void*)&_buffer[_offset];
 		_buffer    = cast(T*)_rewindPos;

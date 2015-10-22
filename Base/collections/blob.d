@@ -35,7 +35,7 @@ struct Blob
 		length += T.sizeof;
 	}
 
-	void opOpAssign(string op, T)(auto ref List!(T) list) if(op == "~")
+	void opOpAssign(string op, T)(auto ref FixedList!(T) list) if(op == "~")
 	{
 		import std.c.string;
 		assert(list.length * T.sizeof + length <= capacity);

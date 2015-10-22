@@ -8,11 +8,11 @@ import std.algorithm;
 class MissionScreen : DesktopRiskScreen
 {
 	IAllocator allocator;
-	HashMap!(PlayerID, List!MissionID) missions;
+	Map!(PlayerID, List!MissionID) missions;
 	this(IAllocator allocator) 
 	{
 		this.allocator = allocator;
-		this.missions  = HashMap!(PlayerID, List!MissionID)(allocator);
+		this.missions  = Map!(PlayerID, List!MissionID)(allocator);
 	}
 
 	override void update(Time time) 

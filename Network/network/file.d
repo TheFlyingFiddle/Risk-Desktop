@@ -36,11 +36,11 @@ private struct GeneratedFile
 }
 
 //Need something here that will make generated stuff send
-__gshared List!GeneratedFile generatedFiles;
+__gshared FixedList!GeneratedFile generatedFiles;
 void addGeneratedFile(string name, void[] data)
 {
 	if(generatedFiles.capacity == 0)
-		generatedFiles = List!GeneratedFile(GlobalAllocator, 10);
+		generatedFiles = FixedList!GeneratedFile(GlobalAllocator, 10);
 
 	generatedFiles ~= GeneratedFile(name, data);
 }

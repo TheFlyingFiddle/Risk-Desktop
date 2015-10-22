@@ -3,6 +3,7 @@ module allocation.common;
 import log;
 import std.traits;
 
+nothrow:
 __gshared auto logChnl = LogChannel("ALLOCATION");
 __gshared auto destChnl = LogChannel("DESTRUCTOR ERROR");
 
@@ -43,6 +44,7 @@ template hasFinalizer(T)
 
 interface IAllocator
 {
+	nothrow:
 	void[] allocate_impl(size_t size, size_t alignment);
 	void   deallocate_impl(void[] memory);
 }
@@ -98,18 +100,32 @@ T allocate(T, A)(ref A allocator, size_t size, size_t alignment = 8) if (isArray
     return cast(T) allocator.allocate_impl(size * typeof(t[0]).sizeof, alignment);
 }
 
+__gshared static Error e = new Error("Failed to emplace!");
+auto safeEmplace(T, Args...)(void[] buffer, auto ref Args args) nothrow
+{
+	try
+	{
+		import std.conv : emplace;
+		return emplace!T(buffer, args);
+	}
+	catch(Throwable t)
+	{
+		throw e;
+	}
+}
+
 T* allocate(T, A, Args...)(ref A allocator, auto ref Args args) if(is(T == struct) || isNumeric!T)
 {
 	import std.conv;
 	void[] buffer = allocator.allocate_impl(T.sizeof, T.alignof);
-	return emplace!T(buffer, args);
+	return safeEmplace!T(buffer, args);
 }
 
 T allocate(T, A, Args...)(ref A allocator, auto ref Args args) if(is(T == class))
 {
 	import std.conv;
 	void[] buffer = allocator.allocate_impl(__traits(classInstanceSize, T), T.alignof);
-	return emplace!T(buffer, args);
+	return safeEmplace!T(buffer, args);
 }
 
 T allocate(T, A)(A* allocator, size_t size, size_t alignment = 8) if (isArray!T)
@@ -125,6 +141,13 @@ T* allocate(T, A, Args...)(A* allocator, auto ref Args args) if(is(T == struct) 
 T allocate(T, A, Args...)(A* allocator, auto ref Args args) if(is(T == class))
 {
 	return allocate!(T, A, Args)(*allocator, args);
+}
+
+void deallocate(T, A)(ref A allocator, T item) if(is(T == interface))
+{
+	void* ptr = cast(void*)item;
+	void[] d = ptr[0 .. 0];
+	allocator.deallocate_impl(d);
 }
 
 void deallocate(T,A)(ref A allocator, T item) if(is(T == class))

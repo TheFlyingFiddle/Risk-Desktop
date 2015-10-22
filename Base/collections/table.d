@@ -18,8 +18,8 @@ enum SortStrategy
 //Items are always packed in memory. (No holes)
 struct Table(K, V, SortStrategy s = SortStrategy.sorted) 
 {
-	List!V values;
-	List!K keys;
+	FixedList!V values;
+	FixedList!K keys;
 
 	@property uint length()
 	{
@@ -33,8 +33,8 @@ struct Table(K, V, SortStrategy s = SortStrategy.sorted)
 
 	this(A)(ref A allocator, size_t capacity)
 	{		
-		values = List!V(allocator, capacity);
-		keys   = List!K(allocator, capacity);
+		values = FixedList!V(allocator, capacity);
+		keys   = FixedList!K(allocator, capacity);
 	}
 
 	void deallocate(A)(ref A allocator)
@@ -294,7 +294,7 @@ version(benchmark_table)
 
 		auto unsorted = Table!(ulong, ulong)(ss, 100_000);
 		auto sorted   = Table!(ulong, ulong, SortStrategy.sorted)(ss, 100_000_0);
-		auto map	  = HashMap!(ulong, ulong, f)(Mallocator.cit, 100_000_0);
+		auto map	  = Map!(ulong, ulong, f)(Mallocator.cit, 100_000_0);
 
 		auto rng = rndGen();
 		auto seed = rng.front;
@@ -364,16 +364,16 @@ version(benchmark_table)
 							fillRandomSorted!(100000),
 							removeRandomSorted!(100000),
 
-							fillRandomHashMap!(10),
-							removeRandomHashMap!(10),
-							fillRandomHashMap!(100),
-							removeRandomHashMap!(100),
-							fillRandomHashMap!(1000),
-							removeRandomHashMap!(1000),
-							fillRandomHashMap!(10000),
-							removeRandomHashMap!(10000),
-							fillRandomHashMap!(100000),
-							removeRandomHashMap!(100000))(1);
+							fillRandomMap!(10),
+							removeRandomMap!(10),
+							fillRandomMap!(100),
+							removeRandomMap!(100),
+							fillRandomMap!(1000),
+							removeRandomMap!(1000),
+							fillRandomMap!(10000),
+							removeRandomMap!(10000),
+							fillRandomMap!(100000),
+							removeRandomMap!(100000))(1);
 
 		import std.stdio;
 		foreach(e; r)

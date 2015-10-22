@@ -20,9 +20,8 @@ size_t defaultHash(K)(ref K k) @nogc nothrow
 		return r(&k, K.sizeof, 0);
 }
 
-struct HashMap(K, V, alias hashFun = defaultHash!K) 
+struct Map(K, V, alias hashFun = defaultHash!K) 
 {
-
 	//Tightly packed!
 	struct Element
 	{
@@ -295,9 +294,169 @@ struct HashMap(K, V, alias hashFun = defaultHash!K)
 	}
 }
 
+struct SMap(K, V, ubyte size = 64, alias hf = defaultHash!K)
+{
+	import std.algorithm;
+
+	@nogc nothrow:
+
+	align(1) struct Element
+	{	
+		@nogc nothrow:
+		align(1):
+		K key;
+		V value;
+		ubyte next;
+	}
+
+	enum capacity = size == ubyte.max ? size - 1 : size;
+
+	ubyte ncollisions, longestChain;
+	ubyte length;
+	ubyte[capacity]		  indices;
+	Element[capacity + 1] elements;
+	
+	struct FindResult
+	{
+		uint hashIdx;
+		ubyte index;
+		ubyte prev;
+	}
+	
+	private FindResult find(ref K key)  nothrow
+	{
+		auto hashIdx = cast(uint)(hf(key) % capacity);
+		auto idx	 = indices[hashIdx];
+		
+		//No item found. 
+		if(idx == 0) 
+			return FindResult(hashIdx, 0, 0);
+
+		FindResult result = FindResult(hashIdx, idx, 0);
+		auto elem = elements[result.index];
+		ubyte cl = 0;
+		while(elem.key != key)
+		{
+			cl++;
+			result.prev  = result.index;
+			result.index = elem.next;
+			if(elem.next == 0)
+				break;
+
+			elem  = elements[elem.next];
+		}
+
+		if(cl > longestChain) longestChain = cl;
+
+		return result;
+	}
+
+	void add(K k, V v) 
+	{
+		assert(length < capacity);	
+		auto result = find(k);
+		assert(result.index == 0, "Item already present!");
+		length++;
+		if(result.prev == 0)
+		{
+			//new item.
+			indices[result.hashIdx] = length;
+		}
+		else 
+		{
+			ncollisions++;
+			elements[result.prev].next  = length;
+		}
+
+		elements[length] = Element(k, v, 0);
+	}
+
+	void set(K k, V v) 
+	{
+		auto element  = findOrFail(k);
+		element.value = v;
+	}
+
+	ref V get(K k) 
+	{
+		auto element  = findOrFail(k);
+		return element.value;
+	}
+
+	bool remove(K k) nothrow
+	{
+		auto res = find(k);
+		if(res.index == 0)
+			return false;
+
+		if(res.prev == 0)
+			indices[res.hashIdx] = elements[res.index].next;
+		else 
+		{
+			elements[res.prev].next = elements[res.index].next;
+			ncollisions--;
+		}
+
+		if(res.index != length - 1)
+		{
+			elements[res.index] = elements[length - 1];
+			auto last = find(elements[res.index].key);
+
+			if(last.prev == 0)
+				indices[last.hashIdx]    = res.index;
+			else 
+				elements[last.prev].next = res.index; 
+		}
+
+		length--;
+		return true;
+	}
+
+	bool has(K k) nothrow
+	{
+		auto res = find(k);
+		return res.index != 0;
+	}
+
+	private Element* findOrFail(ref K key) 
+	{
+		auto result = find(key);
+		assert(result.index != 0);
+		return &elements[result.index];
+	}
+
+	V* opBinaryRight(string op : "in")(K key) nothrow
+	{
+		auto res = find(key);
+		return res.index == 0 ? null : &elements[res.index].value;
+	}
+
+	void opIndexAssign(V value, K key) 
+	{
+		set(key, value);
+	}
+
+	ref V opIndex(K key) 
+	{
+		return get(key);
+	}
+
+	int opApply( int delegate(ref K, ref V) nothrow @nogc dg)
+	{
+		int result;
+		foreach(i; 0 .. length)
+		{
+			result = dg(elements[i].key, elements[i].value);
+			if(result) break;
+		}
+
+		return result;
+	}
+}
+
 unittest
 {
-	alias HM(K, V) = HashMap!(K, V);
+	alias HM(K, V) = Map!(K, V);
 	auto aa = HM!(string, int)(Mallocator.cit, 10);
 
 	aa.add("One", 1);
@@ -311,12 +470,55 @@ unittest
 
 unittest
 {
+	SMap!(uint, uint) sm;
+	
+	sm.add(10, 100);
+	assert(sm.has(10) && sm[10] == 100);
+	sm.add(200, 21);
+	assert(sm.has(200) && sm[200] == 21 &&
+		   sm.has(10) && sm[10] == 100);
+	sm.set(10, 42);
+	assert(sm.has(10) && sm[10] == 42);
+	sm.remove(10);
+	assert(!sm.has(10) && sm.has(200));
+}
+
+unittest
+{
+	SMap!(uint, uint, ubyte.max) items;
+
+	import std.random;
+	uint[ubyte.max] keys;
+	uint[ubyte.max] values;
+	foreach(i; 0 .. items.capacity)
+	{
+		keys[i] = uniform(0, uint.max);
+		values[i] = uniform(0, uint.max);
+		items.add(keys[i], values[i]);
+	}
+
+
+	foreach(i; 0 .. items.capacity)
+		assert(items[keys[i]] == values[i]);
+
+	foreach(i; 0 .. items.capacity)
+	{
+		items.remove(keys[i]);
+		assert(!items.has(keys[i]));
+	}
+
+	int k = 5;
+	assert(k == 5);
+}
+
+unittest
+{
 	//Performance tests
 	//import std.stdio;
 	//import std.conv, std.stdio, std.random;
 	//try
 	//{
-	//    alias HM(K, V) = HashMap!(K, V);
+	//    alias HM(K, V) = Map!(K, V);
 	//    auto aa = HM!(string, int)(Mallocator.cit, 10);
 	//    int counter = 0;
 	//    foreach(i; 0 .. 1000_000_0)

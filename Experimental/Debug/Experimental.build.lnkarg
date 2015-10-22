@@ -1,0 +1,5 @@
+ 
+"Debug\Experimental.obj","Debug\Experimental.exe","Debug\Experimental.map",Base.lib+ 
+user32.lib+ 
+kernel32.lib+ 
+..\Base\Debug\/NOMAP/NOI/DELEXE 
