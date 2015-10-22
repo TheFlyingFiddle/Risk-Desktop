@@ -77,7 +77,6 @@ struct TestRange2
 
 alias SR = SidalRange;
 enum startData = "float3[] coordinates = float3[](";
-enum testData  = "\t(x=0.0123,y=0.1234,z=0.1234),\n";
 enum endData   = ")\n"; 
 
 string testString;
@@ -104,7 +103,7 @@ void benchTokens()
 	//}
 
 	char[1024 * 64] buffer = void;
-	SR r = SR(TerminatorRange(StringRange(testString), buffer));
+	SR r = SR(StringRange(testString), buffer);
 	foreach(ref token; r) 
 	{
 		//if(token.tag == TokenTag.type || 
@@ -133,12 +132,15 @@ void benchTokens()
 	//}
 }
 
-int i = 0;
+__gshared int i = 0;
 void benchWalktrhough()
 {
-	foreach(c; testString)
+	auto p = testString.ptr;
+	while(true)
 	{
-		i++;
+		if(*p == '\0')
+			break;
+		p++;
 	}
 }
 
@@ -152,9 +154,34 @@ int main(string[] argv)
 			f.writeln("Player root = Player(hp=10,mana=20,gold=32)");
 	}
 
+	/*
+	x = []
+
+	1000000.times do
+	h = {
+    'x' => rand,
+    'y' => rand,
+    'z' => rand,
+    'name' => ('a'..'z').to_a.shuffle[0..5].join + ' ' + rand(10000).to_s,
+    'opts' => {'1' => [1, true]},
+	}
+	x << h
+	end
+
+	File.open("1.json", 'w') { |f| f.write JSON.pretty_generate('coordinates' => x, 'info' => "some info") }
+	*/
+
+	import std.random;
+	import std.format;
 	testString = startData;
-	foreach(i; 0 .. 10000000)
-		testString ~= testData;
+	foreach(i; 0 .. 1000000)
+	{
+		double x, y, z;
+		x = uniform(0.000001, 1.0);
+		y = uniform(0.000001, 1.0);
+		z = uniform(0.000001, 1.0);
+		testString ~= format("(x=%f,y=%f,z=%f,name=abcde,opts=1),", x,y,z);
+	}
 	testString = testString[0 .. $ - 1];
 	testString ~= endData;
 

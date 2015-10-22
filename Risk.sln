@@ -19,8 +19,6 @@ Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "RiskNew", "RiskNew\RiskNew.
 EndProject
 Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "Experimental", "Experimental\Experimental.visualdproj", "{56DEC0E6-51A3-40B7-9DDC-30F8250F16F1}"
 EndProject
-Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "LDC_Test", "LDC_Test\LDC_Test.visualdproj", "{15C6C19E-4554-451B-843E-F802AB0F5948}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,16 +109,6 @@ Global
 		{56DEC0E6-51A3-40B7-9DDC-30F8250F16F1}.win64|x64.Build.0 = win64|x64
 		{56DEC0E6-51A3-40B7-9DDC-30F8250F16F1}.win64|x86.ActiveCfg = win64|x64
 		{56DEC0E6-51A3-40B7-9DDC-30F8250F16F1}.win64|x86.Build.0 = win64|x64
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Debug|x64.ActiveCfg = Debug|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Debug|x86.ActiveCfg = Debug|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Debug|x86.Build.0 = Debug|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Release|x64.ActiveCfg = Release|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Release|x86.ActiveCfg = Release|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.Release|x86.Build.0 = Release|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.win64|x64.ActiveCfg = Release|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.win64|x64.Build.0 = Release|Win32
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.win64|x86.ActiveCfg = Release|x64
-		{15C6C19E-4554-451B-843E-F802AB0F5948}.win64|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
