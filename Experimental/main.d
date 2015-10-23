@@ -142,6 +142,7 @@ void benchWalktrhough()
 			break;
 	}
 }
+import math.vector;
 
 int main(string[] argv)
 {
@@ -152,23 +153,6 @@ int main(string[] argv)
 		foreach(i; 0 .. 10000000)
 			f.writeln("Player root = Player(hp=10,mana=20,gold=32)");
 	}
-
-	/*
-	x = []
-
-	1000000.times do
-	h = {
-    'x' => rand,
-    'y' => rand,
-    'z' => rand,
-    'name' => ('a'..'z').to_a.shuffle[0..5].join + ' ' + rand(10000).to_s,
-    'opts' => {'1' => [1, true]},
-	}
-	x << h
-	end
-
-	File.open("1.json", 'w') { |f| f.write JSON.pretty_generate('coordinates' => x, 'info' => "some info") }
-	*/
 
 	import std.random;
 	import std.format;
@@ -220,7 +204,12 @@ alias deco2 = decode!test;
 import std.traits;
 import std.range;
 
-
+unittest
+{
+	ulong value = void;
+	assert(parseInt("12345", value));
+	assert(value == 12345);
+}
 
 
 void decode(T)(string s, T[] t) 
