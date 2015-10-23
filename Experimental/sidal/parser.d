@@ -50,15 +50,27 @@ nothrow:
 struct StringRange
 {
 	private	const(char)[] front;
-	this(const(char)[] str)
+	private bool inplace;
+	
+	this(char[] str)
 	{
 		this.front = str;
+		auto p = &str[$ - 1];
+		if(*p++ == '\0' || *p == '\0')
+			inplace = true;
+	}
+	
+	this(const(char)[] str)
+	{
+		this.front   = str;
+		this.inplace = false;
 	}
 
 nothrow:
 	bool empty() { return front.length == 0; }
 	void fill(ref char[] toFill)
 	{
+		if(inplace) toFill = cast(char[])front;
 		size_t size = min(toFill.length, front.length);
 		toFill[0 .. size] = front[0 .. size];
 		toFill	= toFill[0 .. size];
@@ -70,16 +82,16 @@ nothrow:
 enum ValueKind
 {
 	none,
-	undecided,
-	type,
-	divider,
-	objectStart,
-	objectEnd,
-	number,
-	string,
-	ident,
-	name,
-	error
+		undecided,
+		type,
+		divider,
+		objectStart,
+		objectEnd,
+		number,
+		string,
+		ident,
+		name,
+		error
 }
 
 enum TokenTag : ubyte
@@ -134,6 +146,7 @@ struct SidalRange
 	char[] buffer;
 	char*  bptr;
 	size_t length;
+	bool inplace;
 
 	size_t level, lines;
 	SidalToken front;
@@ -147,6 +160,9 @@ struct SidalRange
 		this.length = 0;
 		this.level = 0;
 		this.empty = subEmpty();
+		this.inplace = false;
+		this.intp  = number_buffer.ptr;
+
 		if(!empty)
 		{
 			nextBuffer();
@@ -162,6 +178,8 @@ struct SidalRange
 		this.length = 0;
 		this.level = 0;
 		this.empty = subEmpty();
+		this.intp  = number_buffer.ptr;
+
 		if(!empty)
 		{
 			nextBuffer();
@@ -201,7 +219,15 @@ nothrow:
 		final switch(type)
 		{
 			case RangeType.file:	chunk.fill(data);  break;
-			case RangeType.string:	string.fill(data); break;
+			case RangeType.string:	
+				string.fill(data); 
+				if(string.inplace) {
+					inplace = true;
+					bptr = data.ptr;
+					length = data.length;
+					return;
+				}
+				break;
 		}
 		data.ptr[data.length] = '\0';
 		bptr	= buffer.ptr;
@@ -210,6 +236,8 @@ nothrow:
 
 	void moveBuffer(ref char* start)
 	{
+		if(inplace) return;
+
 		size_t size = length - (start - buffer.ptr);
 		import std.c.string;
 		memmove(buffer.ptr, start, size);
@@ -229,9 +257,10 @@ nothrow:
 
 	void parseSuperValue()
 	{
-outer:	
+		int sign = 1;
+	outer:	
 		for(;;advance()) 
-retry:
+			retry:
 		switch(bfront)
 		{
 			case '\n': 
@@ -261,14 +290,21 @@ retry:
 			case '"':
 				parseString(bptr);
 				return;
+			case '-':
+				sign = -1;
+				advance();
+				goto numberStart;	
+			case '+': 
+				advance();
+				goto numberStart;
 			case '0': .. case '9':
-			case '.': case '+': case '-':
+			case '.': 
+			numberStart:
 				//We have a number :O cool. 
 				//We inline it since the compiler does not want to
 				//and it makes it faste gcc might do this but i cannot test :(
-				//parseNumber(bptr);
-				char* b = bptr;
-				int sign = 1;
+				//parseNumber(sign);
+				intp = number_buffer.ptr;
 				for(;; advance()) 
 					numberRetry:	
 				switch(bfront)
@@ -278,38 +314,28 @@ retry:
 					case '_': 
 						break;
 					case terminator:
-						moveBuffer(b);
+						nextBuffer();
 						if(bfront == terminator)
 							goto numberSuccess;
 						goto numberRetry;
-					case '0': .. case '9':
-						*bptr -= '0';
-						break;
+					case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
 					case 'x': case 'X':
 						//Numbers like: 1234xavier
-						if(!(bptr - b == 1 && *b == cast(char)0))
+						if(*(bptr - 1) != '0')
 							goto numberFail; //Since x is valid after a number? Sure why not. 
 
 						//We have a hex number on the form 0xyyyyyyyyyyyyyyy
 						advance();
 						//We inline it for speed since the complier refuses to inline it.
-						//parseHex(sign);
-
-				hex:	for(;; advance()) 
-				hexRetry:
+					hex:	for(;; advance()) 
+						hexRetry:
 						switch(bfront)
 						{
-							case '0': .. case '9':
-								*bptr		-= '0';
-								break;
-							case 'a': .. case 'f':
-								*bptr		-= cast(char)('a' + 10);
-								break;
-							case 'A': .. case 'F':
-								*bptr		-= cast(char)('A' + 10);
-								break;
+							case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+							case 'a': .. case 'f': *intp++ = cast(ubyte)(bfront - 'a'); break;
+							case 'A': .. case 'F': *intp++ = cast(ubyte)(bfront - 'A'); break;
 							case terminator:
-								moveBuffer(b);
+								nextBuffer();
 								if(bfront == terminator)
 									break hex;
 								goto hexRetry;
@@ -317,35 +343,34 @@ retry:
 						}
 
 						uint value = 0;
-						auto end    = bptr;
-						switch(min(8, end - b)) 
+						switch(min(8, intp - number_buffer.ptr)) //Think this is correct.  
 						{
-							case 8: value += end[-8] * 0x10000000; goto case;
-							case 7: value += end[-7] * 0x1000000; goto case;
-							case 6: value += end[-6] * 0x100000; goto case;
-							case 5: value += end[-5] * 0x10000; goto case;
-							case 4: value += end[-4] * 0x1000; goto case;
-							case 3: value += end[-3] * 0x100; goto case;
-							case 2: value += end[-2] * 0x10; goto case;
-							case 1: value += end[-1];	break;
+							case 8: value += intp[-8] * 0x10000000; goto case;
+							case 7: value += intp[-7] * 0x1000000; goto case;
+							case 6: value += intp[-6] * 0x100000; goto case;
+							case 5: value += intp[-5] * 0x10000; goto case;
+							case 4: value += intp[-4] * 0x1000; goto case;
+							case 3: value += intp[-3] * 0x100; goto case;
+							case 2: value += intp[-2] * 0x10; goto case;
+							case 1: value += intp[-1];	break;
 							default: break;
 						}
 
-						if(end - b > 8)
+						if(intp - number_buffer.ptr > 8)
 						{
 							ulong lvalue = cast(ulong)value << 32;
 							value		 = 0;
-							end			-= 8;
-							switch(end - b)  
+							intp			-= 8;
+							switch(intp - number_buffer.ptr) //Think this is correct.  
 							{
-								case 8: value += end[-7] * 0x10000000; goto case;
-								case 7: value += end[-6] * 0x1000000; goto case;
-								case 6: value += end[-5] * 0x100000; goto case;
-								case 5: value += end[-4] * 0x10000; goto case;
-								case 4: value += end[-3] * 0x1000; goto case;
-								case 3: value += end[-2] * 0x100; goto case;
-								case 2: value += end[-1] * 0x10; goto case;
-								case 1: value += end[0];	break;
+								case 8: value += intp[-7] * 0x10000000; goto case;
+								case 7: value += intp[-6] * 0x1000000; goto case;
+								case 6: value += intp[-5] * 0x100000; goto case;
+								case 5: value += intp[-4] * 0x10000; goto case;
+								case 4: value += intp[-3] * 0x1000; goto case;
+								case 3: value += intp[-2] * 0x100; goto case;
+								case 2: value += intp[-1] * 0x10; goto case;
+								case 1: value += intp[0];  break;
 								default: break;
 							}
 							lvalue |= value;
@@ -358,47 +383,37 @@ retry:
 							front.integer = value;
 						}
 						return;
-					case '+':
-						//Numbers like 10+14 don't work
-						if(b !is bptr)
-							goto numberFail;
-						break;
-					case '-': 
-						//Numbers like 10-14 don't work
-						if(b !is bptr)
-							goto numberFail;
-						sign = -1;
-						break;
 					case '.':
 						//Number has a dot! That means they are floating!
 						//We inline it since the function overhead is actually relevant.
-						//parseFloat(sign, b); 
+						//parseFloat(sign);
 						double begin = void, end = void;
 						uint value = 0;
-						switch (bptr - b) 
+						switch (intp - number_buffer.ptr) 
 						{ // handle up to 10 digits, 32-bit ints
-							case 10:    value += bptr[-10] * 1000000000; goto case;
-							case  9:    value += bptr[-9 ] * 100000000; goto case;
-							case  8:    value += bptr[-8 ] * 10000000; goto case;	
-							case  7:    value += bptr[-7 ] * 1000000; goto case;
-							case  6:    value += bptr[-6 ] * 100000;	goto case;
-							case  5:    value += bptr[-5 ] * 10000; goto case;
-							case  4:    value += bptr[-4 ] * 1000; goto case;
-							case  3:    value += bptr[-3 ] * 100; goto case;
-							case  2:    value += bptr[-2 ] * 10;	goto case;
-							case  1:    value += bptr[-1 ]; break;
+							case 10:    value += intp[-10] * 1000000000; goto case;
+							case  9:    value += intp[-9 ] * 100000000; goto case;
+							case  8:    value += intp[-8 ] * 10000000; goto case;	
+							case  7:    value += intp[-7 ] * 1000000; goto case;
+							case  6:    value += intp[-6 ] * 100000;	goto case;
+							case  5:    value += intp[-5 ] * 10000; goto case;
+							case  4:    value += intp[-4 ] * 1000; goto case;
+							case  3:    value += intp[-3 ] * 100; goto case;
+							case  2:    value += intp[-2 ] * 10;	goto case;
+							case  1:    value += intp[-1 ]; break;
 							default: break;
 						}
 						begin = value;
 
 						advance();
-				float_:	for(b = bptr;; advance())
-				floatNext:	
+						intp = number_buffer.ptr;		
+					float_:	for(;; advance())
+						floatNext:	
 						switch(bfront)
 						{
-							case '0': .. case '9': *bptr -= '0'; break;
+							case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
 							case terminator:
-								moveBuffer(b);
+								nextBuffer();
 								if(bfront == terminator)
 									break float_;
 								goto floatNext;
@@ -406,23 +421,39 @@ retry:
 						}
 
 						value = 0;
-						switch (bptr - b) 
+						switch (intp - number_buffer.ptr) 
 						{ // handle up to 10 digits, 32-bit ints
-							case 10:    value += bptr[-10] * 1000000000; goto case;
-							case  9:    value += bptr[-9 ] * 100000000; goto case;
-							case  8:    value += bptr[-8 ] * 10000000; goto case;	
-							case  7:    value += bptr[-7 ] * 1000000; goto case;
-							case  6:    value += bptr[-6 ] * 100000;	goto case;
-							case  5:    value += bptr[-5 ] * 10000; goto case;
-							case  4:    value += bptr[-4 ] * 1000; goto case;
-							case  3:    value += bptr[-3 ] * 100; goto case;
-							case  2:    value += bptr[-2 ] * 10;	goto case;
-							case  1:    value += bptr[-1 ]; break;
+							case 10:    value += intp[-10] * 1000000000; goto case;
+							case  9:    value += intp[-9 ] * 100000000; goto case;
+							case  8:    value += intp[-8 ] * 10000000; goto case;	
+							case  7:    value += intp[-7 ] * 1000000; goto case;
+							case  6:    value += intp[-6 ] * 100000;	goto case;
+							case  5:    value += intp[-5 ] * 10000; goto case;
+							case  4:    value += intp[-4 ] * 1000; goto case;
+							case  3:    value += intp[-3 ] * 100; goto case;
+							case  2:    value += intp[-2 ] * 10;	goto case;
+							case  1:    value += intp[-1 ]; break;
 							default: break;
 						}
-						__gshared static double[11] powE = [ 0.0, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5,
-						1.0e-6, 1.0e-7, 1.0e-8, 1.0e-9, 1.0e-10];
-						end = powE.ptr[bptr - b] * value;
+
+						end = value;
+						switch(intp - number_buffer.ptr)
+						{
+							case 10: end *= 10e-10; break;
+							case 9:  end *= 10e-9;  break;
+							case 8:  end *= 10e-8;   break;
+							case 7:  end *= 10e-7;   break;
+							case 6:  end *= 10e-6;   break;
+							case 5:  end *= 10e-5;   break;
+							case 4:  end *= 10e-4;   break;
+							case 3:  end *= 10e-3;   break;
+							case 2:  end *= 10e-2;   break;
+							case 1:  end *= 10e-1;   break;
+							default:
+								end = 0; //We don't care about higher precision then 10e-10
+								break;
+						}
+
 						front.tag = TokenTag.floating;
 						front.floating = (begin + end) * sign;
 						return;
@@ -435,36 +466,37 @@ retry:
 			numberSuccess:
 				front.tag  = TokenTag.integer;
 				uint value = 0;
-				switch (bptr - b) 
+				switch (intp - number_buffer.ptr) 
 				{ // handle up to 10 digits, 32-bit ints
-					case 10:    value += bptr[-10] * 1000000000; goto case;
-					case  9:    value += bptr[-9 ] * 100000000; goto case;
-					case  8:    value += bptr[-8 ] * 10000000; goto case;	
-					case  7:    value += bptr[-7 ] * 1000000; goto case;
-					case  6:    value += bptr[-6 ] * 100000;	goto case;
-					case  5:    value += bptr[-5 ] * 10000; goto case;
-					case  4:    value += bptr[-4 ] * 1000; goto case;
-					case  3:    value += bptr[-3 ] * 100; goto case;
-					case  2:    value += bptr[-2 ] * 10;	goto case;
-					case  1:    value += bptr[-1 ]; break;
+					case 10:    value += intp[-10] * 1000000000; goto case;
+					case  9:    value += intp[-9 ] * 100000000; goto case;
+					case  8:    value += intp[-8 ] * 10000000; goto case;	
+					case  7:    value += intp[-7 ] * 1000000; goto case;
+					case  6:    value += intp[-6 ] * 100000;	goto case;
+					case  5:    value += intp[-5 ] * 10000; goto case;
+					case  4:    value += intp[-4 ] * 1000; goto case;
+					case  3:    value += intp[-3 ] * 100; goto case;
+					case  2:    value += intp[-2 ] * 10;	goto case;
+					case  1:    value += intp[-1 ]; break;
 					default: break;
 				}
-				if(bptr - b > 10)
+				if(intp - number_buffer.ptr > 10)
 				{	
 					ulong lval = value;
 					value = 0;
-					switch (bptr - b) 
+					intp -= 10;
+					switch (intp - number_buffer.ptr) 
 					{ // handle up to 10 digits, 32-bit ints
-						case 10:    value += bptr[-10] * 1000000000; goto case;
-						case  9:    value += bptr[-9 ] * 100000000; goto case;
-						case  8:    value += bptr[-8 ] * 10000000; goto case;	
-						case  7:    value += bptr[-7 ] * 1000000; goto case;
-						case  6:    value += bptr[-6 ] * 100000; goto case;
-						case  5:    value += bptr[-5 ] * 10000; goto case;
-						case  4:    value += bptr[-4 ] * 1000; goto case;
-						case  3:    value += bptr[-3 ] * 100; goto case;
-						case  2:    value += bptr[-2 ] * 10; goto case;
-						case  1:    value += bptr[-1 ]; break;
+						case 10:    value += intp[-10] * 1000000000; goto case;
+						case  9:    value += intp[-9 ] * 100000000; goto case;
+						case  8:    value += intp[-8 ] * 10000000; goto case;	
+						case  7:    value += intp[-7 ] * 1000000; goto case;
+						case  6:    value += intp[-6 ] * 100000; goto case;
+						case  5:    value += intp[-5 ] * 10000; goto case;
+						case  4:    value += intp[-4 ] * 1000; goto case;
+						case  3:    value += intp[-3 ] * 100; goto case;
+						case  2:    value += intp[-2 ] * 10; goto case;
+						case  1:    value += intp[-1 ]; break;
 						default: assert(false, "Integer overflow!"); break;
 					}
 					lval |= cast(ulong)(value) << 32;
@@ -474,7 +506,6 @@ retry:
 				{
 					front.integer = value * sign;
 				}
-
 				return;
 			case 'a': .. case 'z':
 			case 'A': .. case 'Z':
@@ -576,10 +607,10 @@ retry:
 	void parseString(char* b)
 	{
 		advance();
-outer:
+	outer:
 		for(;; advance()) 
 		{
-retry:
+		retry:
 			switch(bfront)
 			{
 				case '"': 
@@ -599,23 +630,20 @@ retry:
 		makeError();
 	}
 
-	void parseHex(char* b, int sign)
+	ubyte[20] number_buffer;
+	ubyte*	  intp;
+
+	void parseHex(int sign)
 	{
-hex:	for(;; advance()) 
-hexRetry:
+	hex:	for(;; advance()) 
+		hexRetry:
 		switch(bfront)
 		{
-			case '0': .. case '9':
-				*bptr		-= '0';
-				break;
-			case 'a': .. case 'f':
-				*bptr		-= cast(char)('a' + 10);
-				break;
-			case 'A': .. case 'F':
-				*bptr		-= cast(char)('A' + 10);
-				break;
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+			case 'a': .. case 'f': *intp++ = cast(ubyte)(bfront - 'a'); break;
+			case 'A': .. case 'F': *intp++ = cast(ubyte)(bfront - 'A'); break;
 			case terminator:
-				moveBuffer(b);
+				nextBuffer();
 				if(bfront == terminator)
 					break hex;
 				goto hexRetry;
@@ -623,35 +651,34 @@ hexRetry:
 		}
 
 		uint value = 0;
-		auto end    = bptr;
-		switch(min(8, end - b)) //Think this is correct.  
+		switch(min(8, intp - number_buffer.ptr)) //Think this is correct.  
 		{
-			case 8: value += end[-8] * 0x10000000; goto case;
-			case 7: value += end[-7] * 0x1000000; goto case;
-			case 6: value += end[-6] * 0x100000; goto case;
-			case 5: value += end[-5] * 0x10000; goto case;
-			case 4: value += end[-4] * 0x1000; goto case;
-			case 3: value += end[-3] * 0x100; goto case;
-			case 2: value += end[-2] * 0x10; goto case;
-			case 1: value += end[-1];	break;
+			case 8: value += intp[-8] * 0x10000000; goto case;
+			case 7: value += intp[-7] * 0x1000000; goto case;
+			case 6: value += intp[-6] * 0x100000; goto case;
+			case 5: value += intp[-5] * 0x10000; goto case;
+			case 4: value += intp[-4] * 0x1000; goto case;
+			case 3: value += intp[-3] * 0x100; goto case;
+			case 2: value += intp[-2] * 0x10; goto case;
+			case 1: value += intp[-1];	break;
 			default: break;
 		}
 
-		if(end - b > 8)
+		if(intp - number_buffer.ptr > 8)
 		{
 			ulong lvalue = cast(ulong)value << 32;
 			value		 = 0;
-			end			-= 8;
-			switch(end - b) //Think this is correct.  
+			intp			-= 8;
+			switch(intp - number_buffer.ptr) //Think this is correct.  
 			{
-				case 8: value += end[-7] * 0x10000000; goto case;
-				case 7: value += end[-6] * 0x1000000; goto case;
-				case 6: value += end[-5] * 0x100000; goto case;
-				case 5: value += end[-4] * 0x10000; goto case;
-				case 4: value += end[-3] * 0x1000; goto case;
-				case 3: value += end[-2] * 0x100; goto case;
-				case 2: value += end[-1] * 0x10; goto case;
-				case 1: value += end[0];	break;
+				case 8: value += intp[-7] * 0x10000000; goto case;
+				case 7: value += intp[-6] * 0x1000000; goto case;
+				case 6: value += intp[-5] * 0x100000; goto case;
+				case 5: value += intp[-4] * 0x10000; goto case;
+				case 4: value += intp[-3] * 0x1000; goto case;
+				case 3: value += intp[-2] * 0x100; goto case;
+				case 2: value += intp[-1] * 0x10; goto case;
+				case 1: value += intp[0];  break;
 				default: break;
 			}
 			lvalue |= value;
@@ -665,35 +692,35 @@ hexRetry:
 		}
 	}
 
-	void parseFloat(int sign, char* b)
+	void parseFloat(int sign)
 	{
 		double begin = void, end = void;
-
 		uint value = 0;
-		switch (bptr - b) 
+		switch (intp - number_buffer.ptr) 
 		{ // handle up to 10 digits, 32-bit ints
-			case 10:    value += bptr[-10] * 1000000000; goto case;
-			case  9:    value += bptr[-9 ] * 100000000; goto case;
-			case  8:    value += bptr[-8 ] * 10000000; goto case;	
-			case  7:    value += bptr[-7 ] * 1000000; goto case;
-			case  6:    value += bptr[-6 ] * 100000;	goto case;
-			case  5:    value += bptr[-5 ] * 10000; goto case;
-			case  4:    value += bptr[-4 ] * 1000; goto case;
-			case  3:    value += bptr[-3 ] * 100; goto case;
-			case  2:    value += bptr[-2 ] * 10;	goto case;
-			case  1:    value += bptr[-1 ]; break;
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
 			default: break;
 		}
 		begin = value;
 
 		advance();
-float_:	for(b = bptr;; advance())
-floatNext:	
+		intp = number_buffer.ptr;		
+	float_:	for(;; advance())
+		floatNext:	
 		switch(bfront)
 		{
-			case '0': .. case '9': *bptr -= '0'; break;
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
 			case terminator:
-				moveBuffer(b);
+				nextBuffer();
 				if(bfront == terminator)
 					break float_;
 				goto floatNext;
@@ -701,23 +728,23 @@ floatNext:
 		}
 
 		value = 0;
-		switch (bptr - b) 
+		switch (intp - number_buffer.ptr) 
 		{ // handle up to 10 digits, 32-bit ints
-			case 10:    value += bptr[-10] * 1000000000; goto case;
-			case  9:    value += bptr[-9 ] * 100000000; goto case;
-			case  8:    value += bptr[-8 ] * 10000000; goto case;	
-			case  7:    value += bptr[-7 ] * 1000000; goto case;
-			case  6:    value += bptr[-6 ] * 100000;	goto case;
-			case  5:    value += bptr[-5 ] * 10000; goto case;
-			case  4:    value += bptr[-4 ] * 1000; goto case;
-			case  3:    value += bptr[-3 ] * 100; goto case;
-			case  2:    value += bptr[-2 ] * 10;	goto case;
-			case  1:    value += bptr[-1 ]; break;
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
 			default: break;
 		}
 
 		end = value;
-		switch(bptr - b)
+		switch(intp - number_buffer.ptr)
 		{
 			case 10: end *= 10e-10; break;
 			case 9:  end *= 10e-9;  break;
@@ -739,11 +766,11 @@ floatNext:
 	}	
 
 	import std.c.stdio;
-	void parseNumber(char* b)
+	void parseNumber(int sign)
 	{
-		int sign = 1;
+		intp = number_buffer.ptr;
 		for(;; advance()) 
-numberRetry:	
+			numberRetry:	
 		switch(bfront)
 		{
 			default:
@@ -751,38 +778,28 @@ numberRetry:
 			case '_': 
 				break;
 			case terminator:
-				moveBuffer(b);
+				nextBuffer();
 				if(bfront == terminator)
 					goto numberSuccess;
 				goto numberRetry;
-			case '0': .. case '9':
-				*bptr -= '0';
-				break;
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
 			case 'x': case 'X':
 				//Numbers like: 1234xavier
-				if(!(bptr - b == 1 && *b == cast(char)0))
+				if(*(bptr - 1) != '0')
 					goto numberFail; //Since x is valid after a number? Sure why not. 
 
 				//We have a hex number on the form 0xyyyyyyyyyyyyyyy
 				advance();
 				//We inline it for speed since the complier refuses to inline it.
-				//parseHex(sign);
-
-		hex:	for(;; advance()) 
-		hexRetry:
+			hex:	for(;; advance()) 
+				hexRetry:
 				switch(bfront)
 				{
-					case '0': .. case '9':
-						*bptr		-= '0';
-						break;
-					case 'a': .. case 'f':
-						*bptr		-= cast(char)('a' + 10);
-						break;
-					case 'A': .. case 'F':
-						*bptr		-= cast(char)('A' + 10);
-						break;
+					case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+					case 'a': .. case 'f': *intp++ = cast(ubyte)(bfront - 'a'); break;
+					case 'A': .. case 'F': *intp++ = cast(ubyte)(bfront - 'A'); break;
 					case terminator:
-						moveBuffer(b);
+						nextBuffer();
 						if(bfront == terminator)
 							break hex;
 						goto hexRetry;
@@ -790,35 +807,34 @@ numberRetry:
 				}
 
 				uint value = 0;
-				auto end    = bptr;
-				switch(min(8, end - b)) //Think this is correct.  
+				switch(min(8, intp - number_buffer.ptr)) //Think this is correct.  
 				{
-					case 8: value += end[-8] * 0x10000000; goto case;
-					case 7: value += end[-7] * 0x1000000; goto case;
-					case 6: value += end[-6] * 0x100000; goto case;
-					case 5: value += end[-5] * 0x10000; goto case;
-					case 4: value += end[-4] * 0x1000; goto case;
-					case 3: value += end[-3] * 0x100; goto case;
-					case 2: value += end[-2] * 0x10; goto case;
-					case 1: value += end[-1];	break;
+					case 8: value += intp[-8] * 0x10000000; goto case;
+					case 7: value += intp[-7] * 0x1000000; goto case;
+					case 6: value += intp[-6] * 0x100000; goto case;
+					case 5: value += intp[-5] * 0x10000; goto case;
+					case 4: value += intp[-4] * 0x1000; goto case;
+					case 3: value += intp[-3] * 0x100; goto case;
+					case 2: value += intp[-2] * 0x10; goto case;
+					case 1: value += intp[-1];	break;
 					default: break;
 				}
 
-				if(end - b > 8)
+				if(intp - number_buffer.ptr > 8)
 				{
 					ulong lvalue = cast(ulong)value << 32;
 					value		 = 0;
-					end			-= 8;
-					switch(end - b) //Think this is correct.  
+					intp			-= 8;
+					switch(intp - number_buffer.ptr) //Think this is correct.  
 					{
-						case 8: value += end[-7] * 0x10000000; goto case;
-						case 7: value += end[-6] * 0x1000000; goto case;
-						case 6: value += end[-5] * 0x100000; goto case;
-						case 5: value += end[-4] * 0x10000; goto case;
-						case 4: value += end[-3] * 0x1000; goto case;
-						case 3: value += end[-2] * 0x100; goto case;
-						case 2: value += end[-1] * 0x10; goto case;
-						case 1: value += end[0];	break;
+						case 8: value += intp[-7] * 0x10000000; goto case;
+						case 7: value += intp[-6] * 0x1000000; goto case;
+						case 6: value += intp[-5] * 0x100000; goto case;
+						case 5: value += intp[-4] * 0x10000; goto case;
+						case 4: value += intp[-3] * 0x1000; goto case;
+						case 3: value += intp[-2] * 0x100; goto case;
+						case 2: value += intp[-1] * 0x10; goto case;
+						case 1: value += intp[0];  break;
 						default: break;
 					}
 					lvalue |= value;
@@ -831,47 +847,37 @@ numberRetry:
 					front.integer = value;
 				}
 				return;
-			case '+':
-				//Numbers like 10+14 don't work
-				if(b !is bptr)
-					goto numberFail;
-				break;
-			case '-': 
-				//Numbers like 10-14 don't work
-				if(b !is bptr)
-					goto numberFail;
-				sign = -1;
-				break;
 			case '.':
 				//Number has a dot! That means they are floating!
 				//We inline it since the function overhead is actually relevant.
-				//parseFloat(sign, b); 
+				//parseFloat(sign);
 				double begin = void, end = void;
 				uint value = 0;
-				switch (bptr - b) 
+				switch (intp - number_buffer.ptr) 
 				{ // handle up to 10 digits, 32-bit ints
-					case 10:    value += bptr[-10] * 1000000000; goto case;
-					case  9:    value += bptr[-9 ] * 100000000; goto case;
-					case  8:    value += bptr[-8 ] * 10000000; goto case;	
-					case  7:    value += bptr[-7 ] * 1000000; goto case;
-					case  6:    value += bptr[-6 ] * 100000;	goto case;
-					case  5:    value += bptr[-5 ] * 10000; goto case;
-					case  4:    value += bptr[-4 ] * 1000; goto case;
-					case  3:    value += bptr[-3 ] * 100; goto case;
-					case  2:    value += bptr[-2 ] * 10;	goto case;
-					case  1:    value += bptr[-1 ]; break;
+					case 10:    value += intp[-10] * 1000000000; goto case;
+					case  9:    value += intp[-9 ] * 100000000; goto case;
+					case  8:    value += intp[-8 ] * 10000000; goto case;	
+					case  7:    value += intp[-7 ] * 1000000; goto case;
+					case  6:    value += intp[-6 ] * 100000;	goto case;
+					case  5:    value += intp[-5 ] * 10000; goto case;
+					case  4:    value += intp[-4 ] * 1000; goto case;
+					case  3:    value += intp[-3 ] * 100; goto case;
+					case  2:    value += intp[-2 ] * 10;	goto case;
+					case  1:    value += intp[-1 ]; break;
 					default: break;
 				}
 				begin = value;
 
 				advance();
-		float_:	for(b = bptr;; advance())
-		floatNext:	
+				intp = number_buffer.ptr;		
+			float_:	for(;; advance())
+				floatNext:	
 				switch(bfront)
 				{
-					case '0': .. case '9': *bptr -= '0'; break;
+					case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
 					case terminator:
-						moveBuffer(b);
+						nextBuffer();
 						if(bfront == terminator)
 							break float_;
 						goto floatNext;
@@ -879,65 +885,82 @@ numberRetry:
 				}
 
 				value = 0;
-				switch (bptr - b) 
+				switch (intp - number_buffer.ptr) 
 				{ // handle up to 10 digits, 32-bit ints
-					case 10:    value += bptr[-10] * 1000000000; goto case;
-					case  9:    value += bptr[-9 ] * 100000000; goto case;
-					case  8:    value += bptr[-8 ] * 10000000; goto case;	
-					case  7:    value += bptr[-7 ] * 1000000; goto case;
-					case  6:    value += bptr[-6 ] * 100000;	goto case;
-					case  5:    value += bptr[-5 ] * 10000; goto case;
-					case  4:    value += bptr[-4 ] * 1000; goto case;
-					case  3:    value += bptr[-3 ] * 100; goto case;
-					case  2:    value += bptr[-2 ] * 10;	goto case;
-					case  1:    value += bptr[-1 ]; break;
+					case 10:    value += intp[-10] * 1000000000; goto case;
+					case  9:    value += intp[-9 ] * 100000000; goto case;
+					case  8:    value += intp[-8 ] * 10000000; goto case;	
+					case  7:    value += intp[-7 ] * 1000000; goto case;
+					case  6:    value += intp[-6 ] * 100000;	goto case;
+					case  5:    value += intp[-5 ] * 10000; goto case;
+					case  4:    value += intp[-4 ] * 1000; goto case;
+					case  3:    value += intp[-3 ] * 100; goto case;
+					case  2:    value += intp[-2 ] * 10;	goto case;
+					case  1:    value += intp[-1 ]; break;
 					default: break;
 				}
-				__gshared static double[11] powE = [ 0.0, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5,
-														  1.0e-6, 1.0e-7, 1.0e-8, 1.0e-9, 1.0e-10];
-				end = powE.ptr[bptr - b] * value;
+
+				end = value;
+				switch(intp - number_buffer.ptr)
+				{
+					case 10: end *= 10e-10; break;
+					case 9:  end *= 10e-9;  break;
+					case 8:  end *= 10e-8;   break;
+					case 7:  end *= 10e-7;   break;
+					case 6:  end *= 10e-6;   break;
+					case 5:  end *= 10e-5;   break;
+					case 4:  end *= 10e-4;   break;
+					case 3:  end *= 10e-3;   break;
+					case 2:  end *= 10e-2;   break;
+					case 1:  end *= 10e-1;   break;
+					default:
+						end = 0; //We don't care about higher precision then 10e-10
+						break;
+				}
+
 				front.tag = TokenTag.floating;
 				front.floating = (begin + end) * sign;
 				return;
 		}
 
-numberFail:
+	numberFail:
 		makeError();
 		return;
 
-numberSuccess:
+	numberSuccess:
 		front.tag  = TokenTag.integer;
 		uint value = 0;
-		switch (bptr - b) 
+		switch (intp - number_buffer.ptr) 
 		{ // handle up to 10 digits, 32-bit ints
-			case 10:    value += bptr[-10] * 1000000000; goto case;
-			case  9:    value += bptr[-9 ] * 100000000; goto case;
-			case  8:    value += bptr[-8 ] * 10000000; goto case;	
-			case  7:    value += bptr[-7 ] * 1000000; goto case;
-			case  6:    value += bptr[-6 ] * 100000;	goto case;
-			case  5:    value += bptr[-5 ] * 10000; goto case;
-			case  4:    value += bptr[-4 ] * 1000; goto case;
-			case  3:    value += bptr[-3 ] * 100; goto case;
-			case  2:    value += bptr[-2 ] * 10;	goto case;
-			case  1:    value += bptr[-1 ]; break;
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
 			default: break;
 		}
-		if(bptr - b > 10)
+		if(intp - number_buffer.ptr > 10)
 		{	
 			ulong lval = value;
 			value = 0;
-			switch (bptr - b) 
+			intp -= 10;
+			switch (intp - number_buffer.ptr) 
 			{ // handle up to 10 digits, 32-bit ints
-				case 10:    value += bptr[-10] * 1000000000; goto case;
-				case  9:    value += bptr[-9 ] * 100000000; goto case;
-				case  8:    value += bptr[-8 ] * 10000000; goto case;	
-				case  7:    value += bptr[-7 ] * 1000000; goto case;
-				case  6:    value += bptr[-6 ] * 100000; goto case;
-				case  5:    value += bptr[-5 ] * 10000; goto case;
-				case  4:    value += bptr[-4 ] * 1000; goto case;
-				case  3:    value += bptr[-3 ] * 100; goto case;
-				case  2:    value += bptr[-2 ] * 10; goto case;
-				case  1:    value += bptr[-1 ]; break;
+				case 10:    value += intp[-10] * 1000000000; goto case;
+				case  9:    value += intp[-9 ] * 100000000; goto case;
+				case  8:    value += intp[-8 ] * 10000000; goto case;	
+				case  7:    value += intp[-7 ] * 1000000; goto case;
+				case  6:    value += intp[-6 ] * 100000; goto case;
+				case  5:    value += intp[-5 ] * 10000; goto case;
+				case  4:    value += intp[-4 ] * 1000; goto case;
+				case  3:    value += intp[-3 ] * 100; goto case;
+				case  2:    value += intp[-2 ] * 10; goto case;
+				case  1:    value += intp[-1 ]; break;
 				default: assert(false, "Integer overflow!"); break;
 			}
 			lval |= cast(ulong)(value) << 32;
@@ -965,7 +988,7 @@ numberSuccess:
 	{
 		size_t lbrackcount, rbrackcount;
 		for(;;advance()) 
-typeRetry:			
+			typeRetry:			
 		switch(bfront)
 		{
 			case terminator:
@@ -991,11 +1014,11 @@ typeRetry:
 			case '_': 								   
 				break;
 		}
-typeFail:
-	makeError();
-	return;
+	typeFail:
+		makeError();
+		return;
 
-typeSuccess:
+	typeSuccess:
 		if(lbrackcount != rbrackcount)
 			goto typeFail;
 
@@ -1003,7 +1026,7 @@ typeSuccess:
 		lbrackcount = rbrackcount = 0;
 		for(;; advance())
 		{
-typeRetry2:
+		typeRetry2:
 			switch(bfront)
 			{
 				case terminator:
@@ -1104,3 +1127,352 @@ uint stringToInt(char* p, size_t s)
 
 	return value;
 }
+
+/*
+	//Other number implementation.
+	//This  implementation does not change 
+	//string inplace if the mode is inplace. 
+	ubyte[20] number_buffer;
+	ubyte*	  intp;
+	void parseHex(int sign)
+	{
+	hex:	for(;; advance()) 
+		hexRetry:
+		switch(bfront)
+		{
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+			case 'a': .. case 'f': *intp++ = cast(ubyte)(bfront - 'a'); break;
+			case 'A': .. case 'F': *intp++ = cast(ubyte)(bfront - 'A'); break;
+			case terminator:
+				nextBuffer();
+				if(bfront == terminator)
+					break hex;
+				goto hexRetry;
+			default: break hex;
+		}
+
+		uint value = 0;
+		switch(min(8, intp - number_buffer.ptr)) //Think this is correct.  
+		{
+			case 8: value += intp[-8] * 0x10000000; goto case;
+			case 7: value += intp[-7] * 0x1000000; goto case;
+			case 6: value += intp[-6] * 0x100000; goto case;
+			case 5: value += intp[-5] * 0x10000; goto case;
+			case 4: value += intp[-4] * 0x1000; goto case;
+			case 3: value += intp[-3] * 0x100; goto case;
+			case 2: value += intp[-2] * 0x10; goto case;
+			case 1: value += intp[-1];	break;
+			default: break;
+		}
+
+		if(intp - number_buffer.ptr > 8)
+		{
+			ulong lvalue = cast(ulong)value << 32;
+			value		 = 0;
+			intp			-= 8;
+			switch(intp - number_buffer.ptr) //Think this is correct.  
+			{
+				case 8: value += intp[-7] * 0x10000000; goto case;
+				case 7: value += intp[-6] * 0x1000000; goto case;
+				case 6: value += intp[-5] * 0x100000; goto case;
+				case 5: value += intp[-4] * 0x10000; goto case;
+				case 4: value += intp[-3] * 0x1000; goto case;
+				case 3: value += intp[-2] * 0x100; goto case;
+				case 2: value += intp[-1] * 0x10; goto case;
+				case 1: value += intp[0];  break;
+				default: break;
+			}
+			lvalue |= value;
+			front.tag	  = TokenTag.integer;
+			front.integer = lvalue * sign; 
+		}
+		else 
+		{	
+			front.tag	  = TokenTag.integer;
+			front.integer = value;
+		}
+	}
+
+	void parseFloat(int sign)
+	{
+		double begin = void, end = void;
+		uint value = 0;
+		switch (intp - number_buffer.ptr) 
+		{ // handle up to 10 digits, 32-bit ints
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
+			default: break;
+		}
+		begin = value;
+
+		advance();
+		intp = number_buffer.ptr;		
+	float_:	for(;; advance())
+		floatNext:	
+		switch(bfront)
+		{
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+			case terminator:
+				nextBuffer();
+				if(bfront == terminator)
+					break float_;
+				goto floatNext;
+			default: break float_;
+		}
+
+		value = 0;
+		switch (intp - number_buffer.ptr) 
+		{ // handle up to 10 digits, 32-bit ints
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
+			default: break;
+		}
+
+		end = value;
+		switch(intp - number_buffer.ptr)
+		{
+			case 10: end *= 10e-10; break;
+			case 9:  end *= 10e-9;  break;
+			case 8:  end *= 10e-8;   break;
+			case 7:  end *= 10e-7;   break;
+			case 6:  end *= 10e-6;   break;
+			case 5:  end *= 10e-5;   break;
+			case 4:  end *= 10e-4;   break;
+			case 3:  end *= 10e-3;   break;
+			case 2:  end *= 10e-2;   break;
+			case 1:  end *= 10e-1;   break;
+			default:
+				end = 0; //We don't care about higher precision then 10e-10
+				break;
+		}
+
+		front.tag = TokenTag.floating;
+		front.floating = (begin + end) * sign;
+	}	
+
+	import std.c.stdio;
+	void parseNumber(int sign)
+	{
+		intp = number_buffer.ptr;
+		for(;; advance()) 
+			numberRetry:	
+		switch(bfront)
+		{
+			default:
+				goto numberSuccess;
+			case '_': 
+				break;
+			case terminator:
+				nextBuffer();
+				if(bfront == terminator)
+					goto numberSuccess;
+				goto numberRetry;
+			case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+			case 'x': case 'X':
+				//Numbers like: 1234xavier
+				if(*(bptr - 1) != '0')
+					goto numberFail; //Since x is valid after a number? Sure why not. 
+
+				//We have a hex number on the form 0xyyyyyyyyyyyyyyy
+				advance();
+				//We inline it for speed since the complier refuses to inline it.
+			hex:	for(;; advance()) 
+				hexRetry:
+				switch(bfront)
+				{
+					case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+					case 'a': .. case 'f': *intp++ = cast(ubyte)(bfront - 'a'); break;
+					case 'A': .. case 'F': *intp++ = cast(ubyte)(bfront - 'A'); break;
+					case terminator:
+						nextBuffer();
+						if(bfront == terminator)
+							break hex;
+						goto hexRetry;
+					default: break hex;
+				}
+
+				uint value = 0;
+				switch(min(8, intp - number_buffer.ptr)) //Think this is correct.  
+				{
+					case 8: value += intp[-8] * 0x10000000; goto case;
+					case 7: value += intp[-7] * 0x1000000; goto case;
+					case 6: value += intp[-6] * 0x100000; goto case;
+					case 5: value += intp[-5] * 0x10000; goto case;
+					case 4: value += intp[-4] * 0x1000; goto case;
+					case 3: value += intp[-3] * 0x100; goto case;
+					case 2: value += intp[-2] * 0x10; goto case;
+					case 1: value += intp[-1];	break;
+					default: break;
+				}
+
+				if(intp - number_buffer.ptr > 8)
+				{
+					ulong lvalue = cast(ulong)value << 32;
+					value		 = 0;
+					intp			-= 8;
+					switch(intp - number_buffer.ptr) //Think this is correct.  
+					{
+						case 8: value += intp[-7] * 0x10000000; goto case;
+						case 7: value += intp[-6] * 0x1000000; goto case;
+						case 6: value += intp[-5] * 0x100000; goto case;
+						case 5: value += intp[-4] * 0x10000; goto case;
+						case 4: value += intp[-3] * 0x1000; goto case;
+						case 3: value += intp[-2] * 0x100; goto case;
+						case 2: value += intp[-1] * 0x10; goto case;
+						case 1: value += intp[0];  break;
+						default: break;
+					}
+					lvalue |= value;
+					front.tag	  = TokenTag.integer;
+					front.integer = lvalue * sign; 
+				}
+				else 
+				{	
+					front.tag	  = TokenTag.integer;
+					front.integer = value;
+				}
+				return;
+			case '.':
+				//Number has a dot! That means they are floating!
+				//We inline it since the function overhead is actually relevant.
+				//parseFloat(sign);
+				double begin = void, end = void;
+				uint value = 0;
+				switch (intp - number_buffer.ptr) 
+				{ // handle up to 10 digits, 32-bit ints
+					case 10:    value += intp[-10] * 1000000000; goto case;
+					case  9:    value += intp[-9 ] * 100000000; goto case;
+					case  8:    value += intp[-8 ] * 10000000; goto case;	
+					case  7:    value += intp[-7 ] * 1000000; goto case;
+					case  6:    value += intp[-6 ] * 100000;	goto case;
+					case  5:    value += intp[-5 ] * 10000; goto case;
+					case  4:    value += intp[-4 ] * 1000; goto case;
+					case  3:    value += intp[-3 ] * 100; goto case;
+					case  2:    value += intp[-2 ] * 10;	goto case;
+					case  1:    value += intp[-1 ]; break;
+					default: break;
+				}
+				begin = value;
+
+				advance();
+				intp = number_buffer.ptr;		
+			float_:	for(;; advance())
+				floatNext:	
+				switch(bfront)
+				{
+					case '0': .. case '9': *intp++ = cast(ubyte)(bfront - '0'); break;
+					case terminator:
+						nextBuffer();
+						if(bfront == terminator)
+							break float_;
+						goto floatNext;
+					default: break float_;
+				}
+
+				value = 0;
+				switch (intp - number_buffer.ptr) 
+				{ // handle up to 10 digits, 32-bit ints
+					case 10:    value += intp[-10] * 1000000000; goto case;
+					case  9:    value += intp[-9 ] * 100000000; goto case;
+					case  8:    value += intp[-8 ] * 10000000; goto case;	
+					case  7:    value += intp[-7 ] * 1000000; goto case;
+					case  6:    value += intp[-6 ] * 100000;	goto case;
+					case  5:    value += intp[-5 ] * 10000; goto case;
+					case  4:    value += intp[-4 ] * 1000; goto case;
+					case  3:    value += intp[-3 ] * 100; goto case;
+					case  2:    value += intp[-2 ] * 10;	goto case;
+					case  1:    value += intp[-1 ]; break;
+					default: break;
+				}
+
+				end = value;
+				switch(intp - number_buffer.ptr)
+				{
+					case 10: end *= 10e-10; break;
+					case 9:  end *= 10e-9;  break;
+					case 8:  end *= 10e-8;   break;
+					case 7:  end *= 10e-7;   break;
+					case 6:  end *= 10e-6;   break;
+					case 5:  end *= 10e-5;   break;
+					case 4:  end *= 10e-4;   break;
+					case 3:  end *= 10e-3;   break;
+					case 2:  end *= 10e-2;   break;
+					case 1:  end *= 10e-1;   break;
+					default:
+						end = 0; //We don't care about higher precision then 10e-10
+						break;
+				}
+
+				front.tag = TokenTag.floating;
+				front.floating = (begin + end) * sign;
+				return;
+		}
+
+	numberFail:
+		makeError();
+		return;
+
+	numberSuccess:
+		front.tag  = TokenTag.integer;
+		uint value = 0;
+		switch (intp - number_buffer.ptr) 
+		{ // handle up to 10 digits, 32-bit ints
+			case 10:    value += intp[-10] * 1000000000; goto case;
+			case  9:    value += intp[-9 ] * 100000000; goto case;
+			case  8:    value += intp[-8 ] * 10000000; goto case;	
+			case  7:    value += intp[-7 ] * 1000000; goto case;
+			case  6:    value += intp[-6 ] * 100000;	goto case;
+			case  5:    value += intp[-5 ] * 10000; goto case;
+			case  4:    value += intp[-4 ] * 1000; goto case;
+			case  3:    value += intp[-3 ] * 100; goto case;
+			case  2:    value += intp[-2 ] * 10;	goto case;
+			case  1:    value += intp[-1 ]; break;
+			default: break;
+		}
+		if(intp - number_buffer.ptr > 10)
+		{	
+			ulong lval = value;
+			value = 0;
+			intp -= 10;
+			switch (intp - number_buffer.ptr) 
+			{ // handle up to 10 digits, 32-bit ints
+				case 10:    value += intp[-10] * 1000000000; goto case;
+				case  9:    value += intp[-9 ] * 100000000; goto case;
+				case  8:    value += intp[-8 ] * 10000000; goto case;	
+				case  7:    value += intp[-7 ] * 1000000; goto case;
+				case  6:    value += intp[-6 ] * 100000; goto case;
+				case  5:    value += intp[-5 ] * 10000; goto case;
+				case  4:    value += intp[-4 ] * 1000; goto case;
+				case  3:    value += intp[-3 ] * 100; goto case;
+				case  2:    value += intp[-2 ] * 10; goto case;
+				case  1:    value += intp[-1 ]; break;
+				default: assert(false, "Integer overflow!"); break;
+			}
+			lval |= cast(ulong)(value) << 32;
+			front.integer = lval * sign;
+		}
+		else 
+		{
+			front.integer = value * sign;
+		}
+
+		return;
+	}
+}
+*/

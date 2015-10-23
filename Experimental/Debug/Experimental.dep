@@ -335,6 +335,8 @@ allocation.freelist (..\\Base\\allocation\\freelist.d) : private : std.conv (C:\
 allocation.freelist (..\\Base\\allocation\\freelist.d) : public : allocation.common (..\\Base\\allocation\\common.d)
 allocation (..\\Base\\allocation\\package.d) : public : allocation.freelist (..\\Base\\allocation\\freelist.d)
 main (main.d) : private : allocation (..\\Base\\allocation\\package.d)
+main (main.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)
+main (main.d) : private : std.range (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\package.d)
 std.random (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\random.d) : private : object (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\druntime\\import\\object.d)
 std.random (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\random.d) : private : std.range.primitives (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\range\\primitives.d)
 std.random (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\random.d) : private : std.traits (C:\\D\\dmd2\\windows\\bin\\..\\..\\src\\phobos\\std\\traits.d)

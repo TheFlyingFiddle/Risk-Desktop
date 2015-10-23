@@ -1,6 +1,6 @@
 set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
 set DMD_LIB=;..\Base\Debug 
-dmd -O -inline -release -noboundscheck -X -Xf"Debug\Experimental.json" -I..\Base -deps="Debug\Experimental.dep" -c -of"Debug\Experimental.obj" sidal\parser.d sidal\serializer.d main.d
+dmd -O -inline -release -profile -noboundscheck -X -Xf"Debug\Experimental.json" -I..\Base -deps="Debug\Experimental.dep" -c -of"Debug\Experimental.obj" sidal\parser.d sidal\serializer.d main.d
 if errorlevel 1 goto reportError
 
 set LIB="C:\D\dmd2\windows\bin\..\lib"

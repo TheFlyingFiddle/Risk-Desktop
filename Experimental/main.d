@@ -77,9 +77,9 @@ struct TestRange2
 
 alias SR = SidalRange;
 enum startData = "float3[] coordinates = float3[](";
-enum endData   = ")\n"; 
+enum endData   = ")\n\0"; 
 
-string testString;
+char[] testString;
 string terminatedString;
 struct Player
 {
@@ -138,9 +138,8 @@ void benchWalktrhough()
 	auto p = testString.ptr;
 	while(true)
 	{
-		if(*p == '\0')
+		if(*p++ == '\0')
 			break;
-		p++;
 	}
 }
 
@@ -173,17 +172,18 @@ int main(string[] argv)
 
 	import std.random;
 	import std.format;
-	testString = startData;
+	testString ~= startData;
 	foreach(i; 0 .. 1000000)
 	{
 		double x, y, z;
 		x = uniform(0.000001, 1.0);
 		y = uniform(0.000001, 1.0);
 		z = uniform(0.000001, 1.0);
-		testString ~= format("(x=%f,y=%f,z=%f,name=abcde,opts=1),", x,y,z);
+		testString ~= format("(x=%f,y=%f,z=%f,name=\"abcde\",opts=1),", x,y,z);
 	}
 	testString = testString[0 .. $ - 1];
 	testString ~= endData;
+	testString = testString[0 .. $ - 1];
 
 	size_t size = testString.length / (1024 * 1024);
 	writeln("Data Size: ", size, "mb");
@@ -210,4 +210,21 @@ int main(string[] argv)
 
 	readln;
 	return 0;
+}
+
+struct test { int a; int b; }
+
+alias deco = decode!int;
+alias deco2 = decode!test;
+
+import std.traits;
+import std.range;
+
+
+
+
+void decode(T)(string s, T[] t) 
+	if(!hasIndirections!T && (is(T == struct) || isNumeric!T))
+{
+	
 }
