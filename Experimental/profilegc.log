@@ -1,0 +1,5 @@
+bytes allocated, allocations, type, function, file:line
+       55000000	        1000000	char[] D main main.d:101
+       16000000	        1000000	std.array.Appender!string.Appender.Data std.array.Appender!string.Appender.this C:\D\dmd2\windows\bin\..\..\src\phobos\std\array.d:2653
+             32	              1	char[] D main main.d:94
+              3	              1	char[] D main main.d:105

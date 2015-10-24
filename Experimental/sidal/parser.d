@@ -1,48 +1,179 @@
 module sidal.parser;
 
-import std.ascii;
-import std.variant;
-import collections.list;
 import std.algorithm;
-import std.range : ElementType;
+import std.range : ElementType, isInputRange;
 import std.stdio : File;
 
 enum RangeType
 {
 	file,
-	string
+	string,
+	generic
 }
 
-struct RangeError
+struct GenericRange
 {
-	Throwable t;
-}
+	alias Empty = bool function(void*) nothrow @nogc;
+	alias Fill  = Throwable function(ref GenericRange, void*, ref char[]) nothrow @nogc;
+	alias Finalize = void function(void*) nothrow @nogc;
 
+	enum max_data_size = 32;
+
+	void[max_data_size] data_store;
+	size_t used;
+	Empty rEmpty;
+	Fill rFill;
+	Finalize rFinalize;
+
+	this(T)(auto ref T t) if(isInputRange!T && is(ElementType!T == char))
+	{
+		*cast(T*)data_store.ptr = t;
+		static Throwable range_fill(T* range, ref char[] toFill)
+		{
+			if(range.empty) return null;
+			try
+			{
+				foreach(i, ref c; toFill)
+				{
+					c = range.front;
+					range.popFront();
+					if(range.empty)
+					{
+						toFill.length = i + 1;
+						break;
+					}
+				}
+			}
+			catch(Throwable t)
+			{
+				return t;
+			}
+
+			return null;
+		}
+
+		static bool range_empty(T* range) 
+		{
+			return range.empty;
+		}
+
+		static void range_finalize(T* range)
+		{
+			static if(__traits(compiles, range.__dtor()))
+					range.__dtor();
+
+		}	
+
+		rEmpty = cast(Empty)&range_empty;
+		rFill  = cast(Fill)&range_fill;
+		rFinalize = cast(Finalize)&range_finalize;
+	}
+
+	this(T)(auto ref T t) if(isInputRange!T && is(ElementType!T == char[]) && T.sizeof <= max_data_size)
+	{
+		*cast(T*)data_store.ptr = t;
+		static Throwable range_fill(ref GenericRange this_, T* range, ref char[] toFill)
+		{
+			if(range.empty) return null;
+			try
+			{
+				size_t filled = 0, size = 0;
+				do
+				{
+					size = min(range.front.length - this_.used, toFill.length - filled);
+					toFill[filled .. filled + size] = range.front[this_.used .. this_.used + size];
+					this_.used   += size;
+					filled += size;
+					if(this_.used >= range.front.length)
+					{
+						this_.used = 0;
+						range.popFront();
+						if(range.empty) 
+							break;
+					}
+				} 
+				while(size > 0);
+				toFill = toFill[0 .. filled];
+			}
+			catch(Throwable t)
+			{
+				return t;
+			}
+			return null;
+		}
+
+		static bool range_empty(T* range)
+		{
+			return range.empty;
+		}
+
+		static void range_finalize(T* range)
+		{
+			static if(__traits(compiles, range.__dtor()))
+			{
+				range.__dtor();
+			}
+		}	
+
+
+		rEmpty = cast(Empty)&range_empty;
+		rFill  = cast(Fill)&range_fill;
+		rFinalize = cast(Finalize)&range_finalize;
+	}
+
+	void finalize() { return rFinalize(data_store.ptr); }
+
+	nothrow @nogc:
+	bool empty() { return rEmpty(data_store.ptr); }
+	Throwable fill(ref char[] data) { return rFill(this, data_store.ptr, data); }
+
+}
 
 struct ByChunkRange
 {
 private:
 	File file;
+	bool empty;
 public:
 	this(File f)
 	{
 		file = f;
+		empty = !file.isOpen;
 	}
 
 nothrow:
-	bool empty()   { return file.isOpen; }
-	void fill(ref char[] toFill)
+	Throwable finalize()
 	{
+		try
+		{
+			file.detach();
+		}
+		catch(Throwable t)
+		{
+			return t;
+		}
+
+		return null;
+	}
+
+	Throwable fill(ref char[] toFill)
+	{
+		if(empty) return null;
 		try
 		{
 			toFill = file.rawRead(toFill);
 			if (toFill.length == 0)
+			{
 				file.detach();
-		} 
+				empty = true;
+			}
+		}
 		catch(Throwable t)
 		{
-			throw new Error(t.msg);
+			return t;
 		}
+
+		return null;
 	}
 
 }
@@ -68,24 +199,26 @@ struct StringRange
 
 nothrow:
 	bool empty() { return front.length == 0; }
-	void fill(ref char[] toFill)
+	Throwable fill(ref char[] toFill)
 	{
+		if(empty) return null;
+
 		if(inplace) 
 		{	
 			toFill = cast(char[])front;
-			auto p = &front.ptr[front.length - 1];
-			if(*p == '\0' || *(++p) == '\0')
-				front = p[0 .. 0];
-			return;
+			front  = front[$ .. $];
+			return null;
 		}
+
 		size_t size = min(toFill.length, front.length);
 		toFill[0 .. size] = front[0 .. size];
 		toFill	= toFill[0 .. size];
 		front = front[size .. $];
+
+		return null;
 	}
 }
 
-@nogc nothrow:
 enum ValueKind
 {
 	none,
@@ -115,14 +248,6 @@ enum TokenTag : ubyte
 	error
 }
 
-//Unimplemented features:
-//type1 name as type2 = type1(...)
-//alias Type = type
-//Ex: 
-//string texture as HashID = "boat"
-//alias Map = string[int[]] 
-//Map m = Map( (1, 2, 3) : "hello" ) --Retarded example i know. 
-
 struct SidalToken
 {
 	TokenTag tag;
@@ -132,23 +257,30 @@ struct SidalToken
 		double	   floating;
 		ulong	   integer;
 		size_t	   level;
+		Throwable  error;
 	}
 }
+
 struct SidalRange
 {
 	enum terminator = '\0';
 	RangeType type;
-	//Workaround for union. 
+	//Workaround for union. Destructor in file prevents us from using it properly :S
 	//union
 	//{
 	//	ByChunkRange chunk;
 	//  StringRange  string;
+	//  GenericRange generic
 	//}
-	void[max(ByChunkRange.sizeof, StringRange.sizeof)] range_data;
+	void[max(ByChunkRange.sizeof, StringRange.sizeof, GenericRange.sizeof)] range_data;
 	void chunk(ref ByChunkRange range) { *(cast(ByChunkRange*)range_data) = range; } 
-	void string(ref StringRange range) { *(cast(StringRange*)range_data) = range; } 
+	void string(ref StringRange range) { *(cast(StringRange*)range_data) = range; }
+	void generic(ref GenericRange range) { *cast(GenericRange*)range_data = range; }
+
 	nothrow ByChunkRange* chunk()  { return cast(ByChunkRange*)range_data.ptr; }
 	nothrow StringRange*  string() { return cast(StringRange*)range_data.ptr; }
+	nothrow GenericRange* generic() { return cast(GenericRange*)range_data.ptr; }
+
 	char[] buffer;
 	char*  bptr;
 	size_t length;
@@ -163,12 +295,14 @@ struct SidalRange
 		this.type   = RangeType.file;
 		this.chunk  = range;
 		this.buffer = buffer;
-		this.length = 0;
-		this.level = 0;
-		this.empty = subEmpty();
+		this.level = this.length = this.column = 0;
+		this.empty = range.empty;
 		if(!empty)
 		{
 			nextBuffer();
+			if(front.tag == TokenTag.error)
+				throw front.error;
+
 			popFront();
 		}
 	}
@@ -178,32 +312,48 @@ struct SidalRange
 		this.type	= RangeType.string;
 		this.string = range;
 		this.buffer = buffer;
-		this.length = 0;
-		this.level = 0;
-		this.empty = subEmpty();
-
+		this.level = this.length = this.column = 0;
+		this.empty = range.empty;
 		if(!empty)
 		{
 			nextBuffer();
+			if(front.tag == TokenTag.error)
+				throw front.error;
 			popFront();
 		}
 	}
 
-	bool subEmpty() 
+	this(GenericRange range, char[] buffer)
 	{
-		if(length == 0)
+		this.type = RangeType.generic;
+		this.generic = range;
+		this.buffer  = buffer;
+		this.level = this.length = this.column = 0;
+		this.empty = range.empty;
+		if(!empty)
 		{
-			final switch(type)
-			{
-				case RangeType.file:   return chunk.empty; break;
-				case RangeType.string: return string.empty; break;
-			}
+			nextBuffer();
+			if(front.tag == TokenTag.error)
+				throw front.error;
+			popFront();
 		}
-		return false;
 	}
 
+	~this()
+	{
+		switch(type)
+		{
+			case RangeType.file: 
+				chunk.finalize();
+				break;
+			case RangeType.generic:
+				generic.finalize();
+				break;
+			default: break;
+		}
+	}
 
-nothrow: 
+nothrow:
 	void advance()
 	{
 		++bptr;
@@ -215,39 +365,47 @@ nothrow:
 		parseSuperValue();
 	}
 
-	void nextBuffer()
+	bool getData(size_t size, ref char[] data)
 	{
-		char[] data	= buffer[0 .. $ - 1];
+		Throwable t;
 		final switch(type)
 		{
-			case RangeType.file:	chunk.fill(data);  break;
-			case RangeType.string:	string.fill(data); break;
+			case RangeType.file:	 empty = chunk.empty; t = chunk.fill(data);     break;
+			case RangeType.string:	 empty = string.empty; t = string.fill(data);   break;
+			case RangeType.generic:  empty = generic.empty; t = generic.fill(data); break;
 		}
+
 		data.ptr[data.length] = '\0';
-		bptr	= data.ptr;
-		length  = data.length;
+		bptr   = data.ptr;
+		length = data.length + size;		
 		column += length;
+		if(t)
+		{
+			front.tag   = TokenTag.error;
+			front.error = t; 
+			return empty;
+		}
+
+		return !empty;
+	}
+
+	bool nextBuffer()
+	{
+		char[] data	= buffer[0 .. $ - 1];
+		return getData(0, data);
 	}	
 
-	void moveBuffer(ref char* start)
+	bool moveBuffer(ref char* start)
 	{
 		size_t size = length - (start - buffer.ptr);
 		import std.c.string;
 		memmove(buffer.ptr, start, size);
 
 		char[] data	= buffer[size .. $ - 1];
-		final switch(type)
-		{
-			case RangeType.file:	chunk.fill(data);  break;
-			case RangeType.string:	string.fill(data); break;
-		}
-		data.ptr[data.length] = '\0';
+		bool res = getData(0, data);
 		start  = buffer.ptr;
-		bptr   = data.ptr;
-		length = data.length + size;		
-		column += length;
+		return res;
 	}
-
 
 	void parseSuperValue()
 	{
@@ -278,6 +436,7 @@ nothrow:
 				advance();
 				break outer;
 			case '"':
+				advance();
 				parseString(bptr);
 				return;
 			case '-':
@@ -290,181 +449,26 @@ nothrow:
 			case '0': .. case '9':
 			case '.': 
 		numberStart:
-				//return parseNumber(sign);
-				//Inlining it for profit.
-				ulong value = 0;
-				for(;;advance())
-				{
-					if(bfront >= '0' && bfront <= '9')
-						value = value * 10 + bfront - '0';
-					else if(bfront == terminator)
-					{
-						nextBuffer();
-						if(bfront == terminator)
-							break;
-					}
-					else
-						break;
-				}
-
-				switch(bfront)
-				{
-					default: break;
-					case 'x' :  case 'X':
-						advance();
-						//parseHex(sign);
-						value = 0;
-						for(;; advance()) 
-						{
-							if(bfront >= '0' && bfront <= '9')
-								value *= 0x10 + bfront - '0';
-							else if((bfront | 0x20)  >= 'a' && (bfront | 0x20) <= 'f')
-								value *= 0x10 + (bfront | 0x20) - 'a';
-							else if(bfront == terminator)
-							{
-								nextBuffer();
-								if(bfront == terminator)
-									break;
-							}	
-							else 
-								break;
-						}
-
-						front.tag	  = TokenTag.integer;
-						front.integer = value;
-						return;
-					case '.':
-						advance();
-						//parseFloat(sign, value);
-						double begin = value, end = void;
-						auto start   = bptr;
-						for(;;advance())
-						{
-							if(bfront >= '0' && bfront <= '9')
-								value = value * 10 + bfront - '0';
-							else if(bfront == terminator)
-							{
-								nextBuffer();
-								if(bfront == terminator)
-									break;
-							}
-							else
-								break;
-						}
-						end  = value;
-						end *= powE[bptr - start];
-						front.tag = TokenTag.floating;
-						front.floating = (begin + end) * sign;
-						return;
-				}
-
-				front.tag     = TokenTag.integer;
-				front.integer = value * sign;
-				return;
+				return parseNumber(sign);
 			case 'a': .. case 'z':
 			case 'A': .. case 'Z':
 			case '_': 
 				//We parse an identifier name or type
-				//return parseType(bptr);
-				//Inlining it for profit.
-				char* b = bptr;
-				size_t lbrackcount, rbrackcount;
-			typeOuter:
-				for(;;advance()) 
-					typeRetry:			
-				switch(bfront)
-				{
-					case terminator:
-						moveBuffer(b);
-						if(bfront == terminator)
-							break typeOuter;
-						else 
-							goto typeRetry;
-					default:  
-						break typeOuter;
-					case '\n': lines++; column = 0; goto case;
-					case ' ': case '\t': case '\r': 
-						break typeOuter;
-					case ']':
-						rbrackcount++;
-						break;
-					case '[':
-						lbrackcount++;
-						break;
-					case '0': .. case '9':
-					case 'a': .. case 'z': 
-					case 'A': .. case 'Z':
-					case '_': 								   
-						break;
-				}
-
-				size_t size = bptr - b;
-				if(lbrackcount != rbrackcount)
-					goto typeFail;
-
-				lbrackcount = rbrackcount = 0;
-				for(;; advance())
-				{
-				typeRetry2:
-					switch(bfront)
-					{
-						case terminator:
-							moveBuffer(b);
-							if(bfront == terminator)
-							{
-								//Last thing in the stream. 
-								//It can only be an ident here.
-								//If it's not then the stream is wrong anyway!
-								front.tag = TokenTag.ident;
-								front.value = b[0 .. size];
-								return;
-							}
-							else 
-								goto typeRetry2;
-						default:
-							goto typeFail;
-						case '\n': lines++; column = 0; break;
-						case ' ': case '\t': case '\r': break;
-						case '=':
-							front.tag = TokenTag.name;
-							front.value = b[0 .. size];
-							advance();
-							return;
-						case ',': case ')':
-							front.tag = TokenTag.ident;
-							front.value = b[0 .. size];
-							return;
-						case 'a': .. case 'z':
-						case 'A': .. case 'Z':
-						case '_': 
-						case '(': 
-							front.tag = TokenTag.type;
-							front.value = b[0 .. size];
-							return;
-					}
-				}
-			typeFail:
-				makeError();
-				return;
+				return parseType(bptr);
 			case terminator:
-				nextBuffer();
-				if(bfront == terminator)
-				{
-					this.empty = true;
-					return;
-				}
-				goto retry;		
+				if(nextBuffer)
+					goto retry;
+				return;		
 			default: assert(0);
 		}
 	}	
 
 	void parseString(char* b)
 	{
-		advance();
-	outer:
+	stringOuter:
 		for(;; advance()) 
 		{
-		retry:
+		stringRetry:
 			switch(bfront)
 			{
 				case '"': 
@@ -473,14 +477,16 @@ nothrow:
 					advance();
 					return;
 				case terminator:
-					moveBuffer(b);
-					if(bfront == terminator)
-						break outer;
-					goto retry;
+					if(!moveBuffer(b))
+					{
+						if(front.tag == TokenTag.error)
+							return;
+						break stringOuter;
+					}
+					goto stringRetry;
 				default: break;
 			}
 		}
-
 		makeError();
 	}
 
@@ -495,9 +501,13 @@ nothrow:
 				value *= 0x10 + (bfront | 0x20) - 'a';
 			else if(bfront == terminator)
 			{
-				nextBuffer();
-				if(bfront == terminator)
+				if(!nextBuffer)
+				{
+					if(front.tag == TokenTag.error)
+						return;
+
 					break;
+				}
 			}	
 			else 
 				break;
@@ -515,21 +525,28 @@ __gshared static double[20] powE =
 	{
 		double begin = value, end = void;
 		auto start   = bptr;
+		auto size    = 0;
 		for(;;advance())
 		{
 			if(bfront >= '0' && bfront <= '9')
 				value = value * 10 + bfront - '0';
 			else if(bfront == terminator)
 			{
-				nextBuffer();
-				if(bfront == terminator)
+				size   = bptr - start;
+				if(!nextBuffer)
+				{
+					start = bptr;
+					if(front.tag == TokenTag.error)
+						return;
 					break;
+				}
+				start = bptr;
 			}
 			else
 				break;
 		}
 		end  = value;
-		end *= powE[bptr - start];
+		end *= powE[size + bptr - start];
 		front.tag = TokenTag.floating;
 		front.floating = (begin + end) * sign;
 	}	
@@ -544,9 +561,12 @@ __gshared static double[20] powE =
 				value = value * 10 + bfront - '0';
 			else if(bfront == terminator)
 			{
-				nextBuffer();
-				if(bfront == terminator)
+				if(!nextBuffer)
+				{
+					if(front.tag == TokenTag.error)
+						return;
 					break;
+				}
 			}
 			else
 				break;
@@ -557,49 +577,11 @@ __gshared static double[20] powE =
 			default: break;
 			case 'x' :  case 'X':
 				advance();
-				//parseHex(sign);
-				value = 0;
-				for(;; advance()) 
-				{
-					if(bfront >= '0' && bfront <= '9')
-						value *= 0x10 + bfront - '0';
-					else if((bfront | 0x20)  >= 'a' && (bfront | 0x20) <= 'f')
-						value *= 0x10 + (bfront | 0x20) - 'a';
-					else if(bfront == terminator)
-					{
-						nextBuffer();
-						if(bfront == terminator)
-							break;
-					}	
-					else 
-						break;
-				}
-
-				front.tag	  = TokenTag.integer;
-				front.integer = value;
+				parseHex(sign);
 				return;
 			case '.':
 				advance();
-				//parseFloat(sign, value);
-				double begin = value, end = void;
-				auto start   = bptr;
-				for(;;advance())
-				{
-					if(bfront >= '0' && bfront <= '9')
-						value = value * 10 + bfront - '0';
-					else if(bfront == terminator)
-					{
-						nextBuffer();
-						if(bfront == terminator)
-							break;
-					}
-					else
-						break;
-				}
-				end  = value;
-				end *= powE[bptr - start];
-				front.tag = TokenTag.floating;
-				front.floating = (begin + end) * sign;
+				parseFloat(sign, value);
 				return;
 		}
 		
@@ -627,9 +609,13 @@ typeRetry:
 		switch(bfront)
 		{
 			case terminator:
-				moveBuffer(b);
-				if(bfront == terminator)
+				if(!moveBuffer(b))
+				{
+					if(front.tag == TokenTag.error)
+						return;
+
 					break typeOuter;
+				}
 				else 
 					goto typeRetry;
 			default:  
@@ -661,8 +647,7 @@ typeRetry:
 			switch(bfront)
 			{
 				case terminator:
-					moveBuffer(b);
-					if(bfront == terminator)
+					if(!moveBuffer(b))
 					{
 						//Last thing in the stream. 
 						//It can only be an ident here.
@@ -707,4 +692,6 @@ typeFail:
 		//front = sidalToken(TokenTag.error, 0);
 		front.tag = TokenTag.error;
 	}
+
+	@disable this(this);
 }

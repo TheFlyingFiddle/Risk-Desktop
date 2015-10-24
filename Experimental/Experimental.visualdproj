@@ -9,7 +9,7 @@
   <singleFileCompilation>0</singleFileCompilation>
   <oneobj>0</oneobj>
   <mscoff>0</mscoff>
-  <trace>0</trace>
+  <trace>1</trace>
   <quiet>0</quiet>
   <verbose>0</verbose>
   <vtls>0</vtls>
@@ -53,7 +53,7 @@
   <cccmd>$(CC) -c</cccmd>
   <ccTransOpt>1</ccTransOpt>
   <program>$(DMDInstallDir)windows\bin\dmd.exe</program>
-  <imppath>..\Base; </imppath>
+  <imppath />
   <fileImppath />
   <outdir>$(ConfigurationName)</outdir>
   <objdir>$(OutDir)</objdir>
@@ -89,15 +89,15 @@
   <cv2pdbOptions />
   <objfiles />
   <linkswitches />
-  <libfiles>Base.lib </libfiles>
-  <libpaths>..\Base\Debug </libpaths>
+  <libfiles />
+  <libpaths />
   <deffile />
   <resfile />
   <exefile>$(OutDir)\$(ProjectName).exe</exefile>
   <useStdLibPath>1</useStdLibPath>
   <cRuntime>2</cRuntime>
   <privatePhobos>0</privatePhobos>
-  <additionalOptions />
+  <additionalOptions>-vgc -profile=gc</additionalOptions>
   <preBuildCommand />
   <postBuildCommand />
   <filesToClean>*.obj;*.cmd;*.build;*.json;*.dep</filesToClean>

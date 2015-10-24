@@ -423,10 +423,6 @@ struct SList(T, size_t N)
 	T[N] buffer;
 	enum capacity = N;
 
-	alias fixedList this;
-
-	FixedList!T fixedList() { return FixedList!T(buffer.ptr, length, capacity); }
-
 	const(T)[] array()
 	{
 		return buffer[0 .. length];
@@ -506,17 +502,17 @@ struct SList(T, size_t N)
 		return true;
 	}
 
-	FixedList!T opSlice()
+	T[] opSlice()
 	{
-		return FixedList!T(buffer.ptr, length, capacity);
+		return buffer.ptr[0 .. length];
 	}
 
-	FixedList!T opSlice(size_t x, size_t y)
+	T[] opSlice(size_t x, size_t y)
 	{
 		assert(x <= y && x <= length && y <= length, text("[", x, " .. ", y, "] Length: ", length));
 		T* b = &buffer[x];
 		uint length = cast(uint)(y - x);
-		return FixedList!T(b, length, length);
+		return buffer.ptr[x .. y];
 	}	
 
 	int opApply(int delegate(ref T) dg)

@@ -5,75 +5,8 @@ import std.range;
 import std.array;
 import std.datetime;
 
-static string bigAssString = buildString();
 
-string buildString()
-{
-	string s = "float3[] root = [";
-	import std.random;
-	import std.format;
-	import std.conv;
-	foreach(i; 0 .. 10000)
-	{
-		float a = 0.0, b = 1.0, c = 2.0;
-		s ~= "(0.0, 1.0, 2.0),";
-	}
 
-	return s;
-}
-
-struct TestRange 
-{
-	@nogc nothrow:
-	string front_;
-	size_t count;
-	this(string f) { this.front_ = f; count = 0; }
-
-	char[] front() nothrow
-	{
-		return cast(char[])front_;
-	}
-
-	bool empty() nothrow { return count == 1000000; }
-
-	void popFront() nothrow
-	{
-		count++;
-	}
-}
-
-struct TestRange2
-{
-	@nogc nothrow:
-	TestRange r;
-	size_t offset;
-	this(TestRange r) 
-	{ 
-		this.r = r;
-	}
-
-	char front() nothrow
-	{
-		return cast(char)r.front[offset];
-	}
-
-	bool empty() nothrow { return offset == 0 && r.empty; }
-
-	void popFront() nothrow
-	{
-		if(offset == r.front.length - 1)
-		{
-			offset = 0;
-			if(!r.empty)
-				r.popFront();
-		}
-		else 
-		{
-			offset++;
-		}
-
-	}
-}
 
 alias SR = SidalRange;
 enum startData = "float3[] coordinates = float3[](";
@@ -88,7 +21,32 @@ struct Player
 	uint   gold;
 }
 
-import allocation;
+struct TestGenericChar
+{
+	char[] s;
+	this(char[] s)
+	{
+		this.s = s;
+	}
+
+	char front() { return s[0]; }
+	bool empty() { return s.length == 0; }
+	void popFront() { s = s[1 .. $]; }
+}
+import std.algorithm;
+struct TestGenericCharArray
+{
+	char[] s;
+	this(char[] s)
+	{
+		this.s = s;
+	}
+
+	char[] front() { return s[0 .. min(1024, $)]; }
+	bool empty() { return s.length == 0; }
+	void popFront() { s = s[min(1024, $) .. $]; }
+}
+
 void benchTokens()
 {
 	//ubyte[1024 * 64] buffer = void;
@@ -103,8 +61,9 @@ void benchTokens()
 	//}
 
 	char[1024 * 64] buffer = void;
-	SR r = SR(StringRange(testString), buffer);
-	foreach(ref token; r) 
+	//SR r = SR(ByChunkRange(File("data.txt", "rb")), buffer);
+	//foreach(ref token; SR(ByChunkRange(File("data.txt", "rb")), buffer)) 
+	foreach(ref token; SR(GenericRange(TestGenericCharArray(testString)), buffer)) 
 	{
 		//if(token.tag == TokenTag.type || 
 		//   token.tag == TokenTag.name || 
@@ -114,25 +73,8 @@ void benchTokens()
 		//else 
 		//    writeln(token.tag);
 	}
-
-
-	//s = SidalRange(BufferedRange(new TR("float2 f2 = float2(x = 10, y = 10)")));
-	//while(!s.empty)
-	//{
-	//    auto f = s.front;
-	//    f.visit!(
-	//             (Start s)	=>  writeln(Start.stringof, s.type.array()),
-	//             (End e)		=>  writeln(End.stringof),
-	//             (Primitive p) => writeln(Primitive.stringof, p.token.tag),
-	//             (Name n)	  => writeln(Name.stringof, n.name.array),
-	//             (Variable v)  => writeln(Variable.stringof, v.type.array),
-	//             (Ident i)     => writeln(Ident.stringof, i.ident.array))();
-	//
-	//    s.popFront();
-	//}
 }
 
-__gshared int i = 0;
 void benchWalktrhough()
 {
 	auto p = testString.ptr;
@@ -142,17 +84,10 @@ void benchWalktrhough()
 			break;
 	}
 }
-import math.vector;
 
 int main(string[] argv)
 {
 	import std.file;
-	if(!exists("data2.txt"))
-	{
-		File f = File("data2.txt", "wb");
-		foreach(i; 0 .. 10000000)
-			f.writeln("Player root = Player(hp=10,mana=20,gold=32)");
-	}
 
 	import std.random;
 	import std.format;
@@ -165,55 +100,41 @@ int main(string[] argv)
 		z = uniform(0.000001, 1.0);
 		testString ~= format("(x=%f,y=%f,z=%f,name=\"abcde\",opts=1),", x,y,z);
 	}
+
 	testString = testString[0 .. $ - 1];
 	testString ~= endData;
 	testString = testString[0 .. $ - 1];
 
+	if(!exists("data.txt"))
+	{
+		File f = File("data.txt", "wb");
+		f.rawWrite(testString);
+	}
+
+
 	size_t size = testString.length / (1024 * 1024);
 	writeln("Data Size: ", size, "mb");
 
-	StopWatch sw;
+	//while(true)
+	{
+		StopWatch sw;
 
-	sw.start();
-	benchTokens();
-	sw.stop();
+		sw.start();
+		benchTokens();
+		sw.stop();
+		uint sidal_msecs = cast(uint)sw.peek.msecs;
 
-	writeln("SidalProcessing took: ", sw.peek.msecs);
-	writeln("Processed: ", cast(double)size / (cast(double)sw.peek.msecs /  1000.0));
+		sw.reset();
 
-	sw.reset();
+		sw.start();
+		benchWalktrhough();
+		sw.stop();
 
-	sw.start();
-	benchWalktrhough();
-	sw.stop();
+		writeln("Sidal took:    ", sidal_msecs, "	",  cast(uint)(size / (sidal_msecs /  1000.0)), " mb/s");
+		writeln("Walkthrough:   ", sw.peek.msecs, "	",  cast(uint)(size / (sw.peek.msecs /  1000.0)), " mb/s");
+		writef("Sidal was %s times slower then walkthrough\n", cast(double)sidal_msecs / cast(double)sw.peek.msecs);
+	}
 
-	writeln("Walkthrough took: ", sw.peek.msecs);
-	writeln("Processed: ", cast(double)size / (cast(double)sw.peek.msecs /  1000.0));
-
-
-
-	readln;
+	//readln;
 	return 0;
-}
-
-struct test { int a; int b; }
-
-alias deco = decode!int;
-alias deco2 = decode!test;
-
-import std.traits;
-import std.range;
-
-unittest
-{
-	ulong value = void;
-	assert(parseInt("12345", value));
-	assert(value == 12345);
-}
-
-
-void decode(T)(string s, T[] t) 
-	if(!hasIndirections!T && (is(T == struct) || isNumeric!T))
-{
-	
 }
