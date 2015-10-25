@@ -23,6 +23,9 @@ $RECYCLE.BIN/
 /ExternalLibs/Debug
 /Network/Debug
 /Risk/Debug
+*.txt
+*.log
+*.txt
 
 # =========================
 # Operating System Files
