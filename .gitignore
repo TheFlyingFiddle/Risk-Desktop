@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 *.log
 *.txt
 
+/win64
 /Debug
 
 # =========================
