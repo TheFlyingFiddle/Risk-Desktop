@@ -27,6 +27,8 @@ $RECYCLE.BIN/
 *.log
 *.txt
 
+/Debug
+
 # =========================
 # Operating System Files
 # =========================
