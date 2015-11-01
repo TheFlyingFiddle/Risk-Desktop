@@ -8,7 +8,7 @@ import util.variant;
 import util.hash;
 import util.traits;
 
-private __gshared static this()
+private shared static this()
 {
 	alias primitives = TypeTuple!(ubyte,  byte,
 								  ushort, short,
@@ -25,7 +25,7 @@ private __gshared static this()
 
 mixin template GenerateMetaData(alias typeFilter, modules...)
 {
-	private __gshared static this()
+	private shared static this()
 	{
 		try
 		{

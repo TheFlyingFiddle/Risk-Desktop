@@ -68,24 +68,19 @@ template GetMember(alias T)
 }
 
 template FullyUnqual(T) //Remove all typequalifiers!
-
 {
 	static if(is(T t == U[], U))
-	{
 		alias FullyUnqual = FullyUnqual!(U)[];
-	}
 	else
-	{
 		alias FullyUnqual = Unqual!T;
-	}
 }
 
-template GetReflectionType(alias aggrigate, string symbol)
+template GetCtType(alias aggrigate, string symbol)
 {
 	//Might be generated typeinfo which is not very interesting
 	static if(!__traits(compiles, Alias!(__traits(getMember, aggrigate, symbol))))
 	{
-		enum GetReflectionType = ReflectionType.noType;
+		enum GetCtType = CtType.noType;
 	}
 	else 
 	{
@@ -121,10 +116,10 @@ template GetReflectionType(alias aggrigate, string symbol)
 			
 			template isInstanceField()
 			{
-				//Need to fix this 
-				static if(__traits(compiles, typeof(mem)))
+				static if(is(aggrigate))
 				{
-					static if(!__traits(compiles, () => mem))
+					enum cantakeaddr = __traits(compiles, mixin("&aggrigate.init." ~ symbol));
+					static if(cantakeaddr)
 						enum isInstanceField = true;
 					else 
 						enum isInstanceField = false;
@@ -135,10 +130,9 @@ template GetReflectionType(alias aggrigate, string symbol)
 
 			template isEnumConstant()
 			{
-				//Need to fix this 
 				static if(__traits(compiles, typeof(mem)))
 				{
-					static if(__traits(compiles, () => mem))
+					static if(!__traits(compiles, () => &mem))
 						enum isEnumConstant = true;
 					else 
 						enum isEnumConstant = false;
@@ -146,8 +140,6 @@ template GetReflectionType(alias aggrigate, string symbol)
 				else 
 					enum isEnumConstant = false;
 			}
-
-
 
 			template isTemplate()
 			{
@@ -158,43 +150,43 @@ template GetReflectionType(alias aggrigate, string symbol)
 			{		
 				static if(is(mem == class))
 				{
-					enum GetReflectionType = ReflectionType.class_;
+					enum GetCtType = CtType.class_;
 				}
 				else static if(is(mem == struct))
 				{
-					enum GetReflectionType = ReflectionType.struct_;
+					enum GetCtType = CtType.struct_;
 				}
 				else static if(is(mem == interface))
 				{
-					enum GetReflectionType = ReflectionType.interface_;
+					enum GetCtType = CtType.interface_;
 				}
 				else static if(is(mem == enum))
 				{
-					enum GetReflectionType = ReflectionType.enum_;
+					enum GetCtType = CtType.enum_;
 				}
 				else static if(isModule!())
 				{
-					enum GetReflectionType = ReflectionType.module_;
+					enum GetCtType = CtType.module_;
 				}
 				else static if(is(typeof(mem) == function))
 				{
-					enum GetReflectionType = ReflectionType.function_;
+					enum GetCtType = CtType.function_;
 				}
 				else static if(isTemplate!())
 				{
-					enum GetReflectionType = ReflectionType.template_;
+					enum GetCtType = CtType.template_;
 				}
 				else static if(isStaticField!())
 				{
-					enum GetReflectionType = ReflectionType.staticField_;
+					enum GetCtType = CtType.staticField_;
 				}
 				else static if(isInstanceField!())
 				{
-					enum GetReflectionType = ReflectionType.instanceField_;
+					enum GetCtType = CtType.instanceField_;
 				}
 				else static if(isEnumConstant!())
 				{
-					enum GetReflectionType = ReflectionType.enumConstant_ ;
+					enum GetCtType = CtType.enumConstant_ ;
 				}
 				else 
 				{
@@ -203,21 +195,21 @@ template GetReflectionType(alias aggrigate, string symbol)
 			} 
 			else 
 			{
-				enum GetReflectionType = ReflectionType.alias_;
+				enum GetCtType = CtType.alias_;
 			}
 		}
 		else 
 		{
 			static if(__traits(isStaticFunction, mem))
 			{
-				enum GetReflectionType = ReflectionType.function_;
+				enum GetCtType = CtType.function_;
 			}
 			else static if(isSomeFunction!mem) 
 			{
-				enum GetReflectionType = ReflectionType.method_;
+				enum GetCtType = CtType.method_;
 			}
 			else 
-				enum GetReflectionType = ReflectionType.primitive_;
+				enum GetCtType = CtType.primitive_;
 		}
 	}
 }
@@ -227,22 +219,22 @@ template AllMembers(T...) if(T.length == 1)
 	template commonFilter(string sym)
 	{
 		enum type = MemberType!(T[0], sym);
-		enum commonFilter = type != ReflectionType.noType;
+		enum commonFilter = type != CtType.noType;
 	}
 	alias Filter!(commonFilter, __traits(allMembers, T[0])) AllMembers;
 }
 
-template Members(ReflectionType type, alias aggregate)
+template Members(CtType type, alias aggregate)
 {
 	alias staticMap!(GetMember!(aggregate), MemberSymbols!(type, aggregate)) Members;
 }
 
-template MemberSymbols(ReflectionType type, alias aggregate)
+template MemberSymbols(CtType type, alias aggregate)
 {
 	template filt(string sym)
 	{
-		enum reflType = GetReflectionType!(aggregate, sym);
-		enum filt = (reflType & type) == reflType && reflType != ReflectionType.noType;
+		enum reflType = GetCtType!(aggregate, sym);
+		enum filt = (reflType & type) == reflType && reflType != CtType.noType;
 	}
 
 	alias Filter!(filt, __traits(allMembers, aggregate)) MemberSymbols;
@@ -269,7 +261,7 @@ template isDelegateType(T) if(isDelegate!T)
 	}
 }
 
-enum ReflectionType
+enum CtType
 {
 	noType			= 0x0000,
 	class_			= 0x0001,
@@ -287,24 +279,6 @@ enum ReflectionType
 	enumConstant_   = 0x1000,
 }
 
-
-alias Classes		    (alias T) = Members!(ReflectionType.class_				, T);
-alias Structs		    (alias T) = Members!(ReflectionType.struct_				, T);
-alias Interfaces	    (alias T) = Members!(ReflectionType.interface_			, T);
-alias Enums			    (alias T) = Members!(ReflectionType.enum_				, T);
-alias Imports		    (alias T) = Members!(ReflectionType.module_				, T);
-alias Functions		    (alias T) = Members!(ReflectionType.function_			, T);
-alias Methods		    (alias T) = Members!(ReflectionType.method_				, T);
-alias StaticFields	    (alias T) = Members!(ReflectionType.staticField_		, T);
-alias InstanceFields	(alias T) = Members!(ReflectionType.instanceField_		, T);
-alias EnumConstants	    (alias T) = Members!(ReflectionType.enumConstant_		, T);
-alias Templates	    	(alias T) = Members!(ReflectionType.template_			, T);
-alias Types		    	(alias T) = Members!(ReflectionType.class_		| 
-									 ReflectionType.struct_		|
-									 ReflectionType.interface_, T);
-alias Callables (alias T) = Members!(ReflectionType.function_ | ReflectionType.method_, T);
-
-
 template Aliases(alias T)
 {
 	template helper(string symbol)
@@ -313,13 +287,147 @@ template Aliases(alias T)
 		alias helper = AliasInfo!(symbol, mem);
 	}
 
-	alias Aliases = staticMap!(helper, MemberSymbols!(ReflectionType.alias_, T));
+	alias Aliases = staticMap!(helper, MemberSymbols!(CtType.alias_, T));
 }
 
-struct AliasInfo(string id, T...)
+template AliasInfo(string id, T...)
 {
 	alias value = T;
 	enum ident = id;
+}
+
+template HasAttribute(T)
+{
+	enum test(alias symbol) = exists!(T, symbol.attribs);
+	alias HasAttribute = test;
+}
+
+template CtTypes(alias T, CtType type, alias Construct)
+{
+	alias helper(string symbol) = Construct!(T, symbol);
+	alias all					= staticMap!(helper, MemberSymbols!(type, T));
+	alias That(alias pred)		= Filter!(pred, all);
+}
+
+alias Fields(alias T) = CtTypes!(T, CtType.instanceField_, Field);
+template Field(alias parent, string symbol)
+{
+	enum id        = symbol;
+	alias mem      = AliasSeq!(__traits(getMember, parent, symbol))[0];
+	alias type     = typeof(mem);
+	enum offset    = mem.offsetof;
+	alias attribs  = AliasSeq!(__traits(getAttributes, mem));
+
+	alias parentType = parent;
+	void set(T)(ref parentType p, auto ref T t) if(is(T == type))
+	{
+		mixin("p." ~ symbol ~ " = " ~ t ~ ";");
+	}
+}
+
+alias SFields(alias T) = CtTypes!(T, CtType.staticField_, SField);
+template SField(alias parent, string symbol)
+{
+	enum id		   = symbol;
+	alias mem	   = AliasSeq!(__traits(getMember, parent, symbol))[0];
+	enum addr	   = &mem;
+
+	alias type     = typeof(mem);
+	alias attribs  = AliasSeq!(__traits(getAttributes, mem));
+}
+
+alias Structs(alias T) = CtTypes!(T, CtType.struct_, Struct);
+template Struct(alias parent, string symbol)
+{
+	enum  id		 = symbol;
+	alias type       = AliasSeq!(__traits(getMember, parent, symbol));
+	alias fields     = Fields!(type);
+	alias functions  = Functions!(type);
+	alias methods    = Methods!(type);
+	alias sfields	 = SFields!(type);
+	alias enums		 = Enums!(type);
+	alias structs    = Structs!(type);
+	alias classes    = Classes!(type);
+	alias interfaces = Interfaces!(type);
+	alias constants  = Constants!(type);
+	alias aliases	 = Aliases!(type);
+	alias attribs    = AliasSeq!(__traits(getAttributes, mixin("parent." ~ symbol)));
+}
+
+
+alias Classes(alias T)   = CtTypes!(T, CtType.class_, Class);
+template Class(alias parent, string symbol)
+{
+	enum id          = symbol;
+	alias type       = AliasSeq!(__traits(getMember, parent, symbol));
+	alias fields     = Fields!(type);
+	alias functions  = SFields!(type);
+	alias methods    = Methods!(type);
+	alias sfields    = SFields!(type);
+	alias enums		 = Enums!(type);
+	alias structs    = Structs!(type);
+	alias classes    = Classes!(type);
+	alias interfaces = Interfaces!(type);
+	alias constants  = Constants!(type);
+	alias aliases    = Aliases!(type);
+	alias attribs	 = AliasSeq!(__traits(getAttributes, mixin("parent." ~ symbol)));
+}
+
+alias Interfaces(alias T) = CtTypes!(T, CtType.interface_, Interface);
+template Interface(alias parent, string symbol)
+{
+	enum id			 = symbol;
+	alias type		 = AliasSeq!(__traits(getMember, parent, symbol));
+	alias methods	 = Methods!(type);
+}
+
+alias Enums(alias T) = CtTypes!(T, CtType.enum_, Enum);
+template Enum(alias parent, string symbol)
+{
+	alias id		= symbol;
+	alias type      = AliasSeq!(__traits(getMember, parent, symbol));
+	alias members   = EnumMembers!(type);
+}
+
+alias Constants(alias T) = CtTypes!(T, CtType.enumConstant_, Constant);
+template Constant(alias parent, string symbol)
+{
+	enum id			= symbol;
+	enum value		= __traits(getMember, parent, symbol);
+	alias type      = typeof(value);
+}
+
+alias Functions(alias T) = CtTypes!(T, CtType.function_, Function);
+template Function(alias parent, string symbol)
+{
+	enum id = symbol;
+}
+
+alias Methods(alias T)   = CtTypes!(T, CtType.method_, Method);
+template Method(alias parent, string symbol)
+{
+	enum id = symbol;
+}
+
+alias Imports(alias T)  = CtTypes!(T, CtType.module_, Import);
+template Import(alias parent, string symbol)
+{
+	enum id = symbol;
+}
+
+template Module(alias symbol)
+{
+	enum id = __traits(identifier, symbol);
+	alias fields     = SFields!(symbol);
+	alias structs    = Structs!(symbol);
+	alias classes    = Classes!(symbol);
+	alias interfaces = Interfaces!(symbol);
+	alias enums		 = Enums!(symbol);
+	alias constants	 = EnumConstants!(symbol);
+	alias aliases	 = Aliases!(symbol);
+	alias functions  = Function!(symbol);
+	alias imports	 = Imports!(symbol); //Does not go through them. 
+	
 }
 
 //Attributes below.
@@ -331,7 +439,6 @@ template hasAttribute(alias symbol, Attrib)
 
 	alias hasAttribute = anySatisfy!(isAttributeT, __traits(getAttributes, symbol));
 }
-
 
 version(unittest) 
 {
