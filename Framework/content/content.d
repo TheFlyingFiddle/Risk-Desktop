@@ -314,8 +314,6 @@ struct AsyncContentLoader
 			auto item       = loader.items[index];
 			auto fileLoader = loader.fileLoaders.find!(x => x.typeHash == item.typeHash)[0];
 
-			enum maxNameSize = 25; //Assumes 11bytes for hash and 14bytes for extension
-
 			auto buffer = Mallocator.it.allocate!(char[])(loader.resourceFolder.length + maxNameSize);
 			auto absPath = text(buffer, loader.resourceFolder, dirSeparator, hash.value, fileLoader.extension);
 			numRequests++;
@@ -338,10 +336,8 @@ struct AsyncContentLoader
 		auto buffer = Mallocator.it.allocate!(char[])(loader.resourceFolder.length + maxNameSize);
 		auto absPath = text(buffer, loader.resourceFolder, dirSeparator, bytesHash(path).value, fileLoader.extension);
 		
-		auto adder = &addAsyncItem;
-
 		numRequests++;
-		taskpool.doTask!(asyncLoadFile)(cast(string)absPath, bytesHash(path), fileLoader, adder);			   
+		taskpool.doTask!(asyncLoadFile)(cast(string)absPath, bytesHash(path), fileLoader, &addAsyncItem);			   
 		
 	}
 
@@ -356,10 +352,9 @@ struct AsyncContentLoader
 		auto fileLoader = loader.fileLoaders.find!(x => x.extension == ext)[0];
 		auto buffer = Mallocator.it.allocate!(char[])(loader.resourceFolder.length + maxNameSize);
 		auto absPath = text(buffer, loader.resourceFolder, dirSeparator, hash.value, ext);
-		auto adder = &addAsyncItem;
 
 		numRequests++;
-		taskpool.doTask!(asyncLoadFile)(cast(string)absPath, hash, fileLoader, adder);
+		taskpool.doTask!(asyncLoadFile)(cast(string)absPath, hash, fileLoader, &addAsyncItem);
 	}
 
 	private void addAsyncItem(HashID hash, TypeHash typeHash, void* item)
@@ -367,7 +362,6 @@ struct AsyncContentLoader
 		loader.addItem(hash, typeHash, item);
 		numRequests--;
 	}
-
 
 	private void addReloadedAsyncFile(HashID hash, TypeHash typeHash, void* item)
 	{
@@ -403,7 +397,7 @@ void asyncLoadFile(string path, HashID hash, FileLoader loader, void delegate(Ha
 
 	import concurency.task;
 	auto item = loader.load(Mallocator.cit, path, true);
-	auto t = task(adder, hash, loader.typeHash, item);
+	auto t    = task(adder, hash, loader.typeHash, item);
 	doTaskOnMain(t);
 	Mallocator.it.deallocate(cast(void[])path);
 }

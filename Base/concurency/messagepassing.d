@@ -179,10 +179,8 @@ struct SPMCQueue(Serializer)
 
 struct SPSCQueue(Serializer)
 {
-	//Possible Bug -> Make first and last reads atomic 
-	//through atomic load/store.
-	private size_t first; 
-	private size_t last; 
+	private shared size_t first; 
+	private shared size_t last; 
 	private size_t length;
 	private ubyte* buffer;
 
@@ -190,8 +188,8 @@ struct SPSCQueue(Serializer)
 	{
 		import allocation;
 
-		this.first = this.last = 0;
-		this.length = size;
+		atomicStore(first, 0);
+		atomicStore(last, 0);
 		buffer = allocator.allocate!(ubyte[])(size).ptr;
 	}
 
@@ -218,10 +216,10 @@ struct SPSCQueue(Serializer)
 
 	bool trySend(T)(auto ref T value) if(Serializer.constraints!T)
 	{	
-		const dataSize = Serializer.dataSize(value);
-		auto nLast = (last + dataSize) % length;
-
-		const first = this.first;
+		immutable dataSize = Serializer.dataSize(value);
+		immutable first    = atomicLoad(this.first);
+		immutable last     = atomicLoad(this.last);
+		immutable nLast    = (last + dataSize) % length;
 
 		if(last < nLast)
 		{
@@ -235,18 +233,20 @@ struct SPSCQueue(Serializer)
 			ubyte* tmp = cast(ubyte*)alloca(dataSize);
 			Serializer.serialize(value, tmp[0 .. dataSize]);
 
-			auto left					 = length - last;
+			immutable left				 = length - last;
 			buffer[last .. length]		 = tmp[0 .. left];
 			buffer[0 .. nLast]			 = tmp[left .. dataSize];
 		}
 
-		last = nLast;
+		atomicStore(this.last, nLast);
 		return true;
 	}
 
 	bool tryReceive(Handlers...)(Handlers handlers) if(allSatisfy!(isMessageHandler, Handlers))
 	{
 		import std.typetuple, std.traits;
+		immutable first    = atomicLoad(this.first);
+		immutable last     = atomicLoad(this.last);
 
 		if(first == last) return false;
 		auto header = deserializeHeader();
@@ -274,7 +274,7 @@ struct SPSCQueue(Serializer)
 					handler(value);
 				}
 
-				first = (start + dataSize) % length;
+				atomicStore(this.first, (start + dataSize) % length);
 				return true;
 			}
 		}

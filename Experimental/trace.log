@@ -6,101 +6,105 @@ _D3std3utf12__T5byUTFTuZ75__T5byUTFTS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitF
 _D3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFNaNbNiNfAxaZS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImpl	1	0	0
 ------------------
 	    8	_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res
-_D3std3utf90__T6encodeVE3std8typecons55__T4FlagVAyaa19_7573655265706c6163656d656e744463686172Z4Flagi1Z6encodeFNaNbNiNfKG2uwZk	8	1	1
+_D3std3utf90__T6encodeVE3std8typecons55__T4FlagVAyaa19_7573655265706c6163656d656e744463686172Z4Flagi1Z6encodeFNaNbNiNfKG2uwZk	8	5	5
 ------------------
 	    1	_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv
 	    2	_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv
 	    1	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
-_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv	4	17	14
+_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv	4	11	10
 	    4	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv
 ------------------
 	    1	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
-_D3std4conv55__T11toTextRangeTlTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNflS3std5stdio4File17LockingTextWriterZv	1	2	2
+_D3std4conv55__T11toTextRangeTlTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNflS3std5stdio4File17LockingTextWriterZv	1	3	3
 	    1	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv
 ------------------
 	    1	_Dmain
-_D3std4file15__T6existsTAyaZ6existsFNbNiNfAyaZb	1	331	304
+_D3std4file15__T6existsTAyaZ6existsFNbNiNfAyaZb	1	325	311
 	    1	_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res
 	    1	_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res6__dtorMFNbNiNeZv
 ------------------
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFNaNbNfAaZv
-_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa	3000000	2236607	490269
+_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa	3000000	1699145	371770
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender13ensureAddableMFNaNbNekZv
 ------------------
 	3000000	_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFNaNbNfAaZv	3000000	2791644	555037
+_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFNaNbNfAaZv	3000000	2197458	498313
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa
 ------------------
 	4000000	_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFNaNbNfAxaZv
-_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa	4000000	1338705	613446
+_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa	4000000	1412861	489600
 	4000000	_D3std5array17__T8AppenderTAyaZ8Appender13ensureAddableMFNaNbNekZv
 ------------------
 	4000000	_D3std6format18__T10FormatSpecTaZ10FormatSpec63__T17writeUpToNextSpecTS3std5array17__T8AppenderTAyaZ8AppenderZ17writeUpToNextSpecMFNaNfS3std5array17__T8AppenderTAyaZ8AppenderZb
-_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFNaNbNfAxaZv	4000000	2234088	895383
+_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFNaNbNfAxaZv	4000000	2178155	765294
 	4000000	_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa
 ------------------
 	4000000	_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa
-_D3std5array17__T8AppenderTAyaZ8Appender13ensureAddableMFNaNbNekZv	7000000	2471597	2158844
+_D3std5array17__T8AppenderTAyaZ8Appender13ensureAddableMFNaNbNekZv	7000000	2250636	1979638
 	3000000	_D3std5array29__T19appenderNewCapacityVki1Z19appenderNewCapacityFNaNbNiNfkkZk
 ------------------
 	1000000	_D3std6format19__T6formatTaTdTdTdZ6formatFNfxAadddZAya
-_D3std5array17__T8AppenderTAyaZ8Appender6__ctorMFNaNbNcNeAyaZS3std5array17__T8AppenderTAyaZ8Appender	1000000	2267514	2267514
+_D3std5array17__T8AppenderTAyaZ8Appender6__ctorMFNaNbNcNeAyaZS3std5array17__T8AppenderTAyaZ8Appender	1000000	320322	320322
 ------------------
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender13ensureAddableMFNaNbNekZv
-_D3std5array29__T19appenderNewCapacityVki1Z19appenderNewCapacityFNaNbNiNfkkZk	3000000	312753	312753
+_D3std5array29__T19appenderNewCapacityVki1Z19appenderNewCapacityFNaNbNiNfkkZk	3000000	270998	270998
 ------------------
 	    1	_Dmain
-_D3std5stdio17__T6writefTAyaTdZ6writefFNfAyadZv	1	44	2
+_D3std5stdio17__T6writefTAyaTdZ6writefFNfAyadZv	1	69	2
 	    1	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk
 ------------------
 	    1	_Dmain
-_D3std5stdio22__T7writelnTAyaTkTAyaZ7writelnFNfAyakAyaZv	1	494	2
+_D3std5stdio22__T7writelnTAyaTkTAyaZ7writelnFNfAyakAyaZv	1	512	2
 	    1	_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv
 ------------------
 	    1	_Dmain
-_D3std5stdio28__T7writelnTAyaTkTAyaTkTAyaZ7writelnFNfAyakAyakAyaZv	1	395	2
+_D3std5stdio28__T7writelnTAyaTkTAyaTkTAyaZ7writelnFNfAyakAyakAyaZv	1	408	1
 	    1	_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv
 ------------------
 	    1	_Dmain
-_D3std5stdio28__T7writelnTAyaTlTAyaTkTAyaZ7writelnFNfAyalAyakAyaZv	1	261	2
+_D3std5stdio28__T7writelnTAyaTlTAyaTkTAyaZ7writelnFNfAyalAyakAyaZv	1	224	0
 	    1	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
+------------------
+	    1	_Dmain
+_D3std5stdio4File13__T6readlnTaZ6readlnMFKAawZk	1	13876370	13876370
+	    1	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 ------------------
 	    1	_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv
 	    1	_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv
 	    1	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
-_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv	3	957	957
+_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv	3	1013	1013
 ------------------
 	    4	_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv
 	    1	_D3std4conv55__T11toTextRangeTlTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNflS3std5stdio4File17LockingTextWriterZv
 	    1	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv	6	3	3
+_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv	6	2	2
 ------------------
 	    2	_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb
-_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv	2	2	2
+_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv	2	15	15
 ------------------
 	    2	_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv
 	    3	_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv
 	    3	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
-_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv	8	96	96
+_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv	8	98	98
 ------------------
 	    1	_D3std5stdio22__T7writelnTAyaTkTAyaZ7writelnFNfAyakAyaZv
-_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv	1	492	19
+_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv	1	510	6
 	    1	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 	    2	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
 	    1	_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv
 	    1	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
 ------------------
 	    1	_D3std5stdio28__T7writelnTAyaTkTAyaTkTAyaZ7writelnFNfAyakAyakAyaZv
-_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv	1	393	6
+_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv	1	407	8
 	    1	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 	    3	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
 	    2	_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv
 	    1	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
 ------------------
 	    1	_D3std5stdio28__T7writelnTAyaTlTAyaTkTAyaZ7writelnFNfAyalAyakAyaZv
-_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv	1	259	45
+_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv	1	224	2
 	    1	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 	    3	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
 	    1	_D3std4conv55__T11toTextRangeTlTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNflS3std5stdio4File17LockingTextWriterZv
@@ -108,59 +112,59 @@ _D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv	1	259	45
 	    1	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
 ------------------
 	    2	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk
-_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb	2	7	5
+_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb	2	18	3
 	    2	_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv
 ------------------
 	4000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format18__T10FormatSpecTaZ10FormatSpec63__T17writeUpToNextSpecTS3std5array17__T8AppenderTAyaZ8AppenderZ17writeUpToNextSpecMFNaNfS3std5array17__T8AppenderTAyaZ8AppenderZb	4000000	3152211	918123
+_D3std6format18__T10FormatSpecTaZ10FormatSpec63__T17writeUpToNextSpecTS3std5array17__T8AppenderTAyaZ8AppenderZ17writeUpToNextSpecMFNaNfS3std5array17__T8AppenderTAyaZ8AppenderZb	4000000	3034389	856234
 	4000000	_D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFNaNbNfAxaZv
 ------------------
 	1000000	_Dmain
-_D3std6format19__T6formatTaTdTdTdZ6formatFNfxAadddZAya	1000000	16020578	242846
+_D3std6format19__T6formatTaTdTdTdZ6formatFNfxAadddZAya	1000000	12424805	222083
 	1000000	_D3std5array17__T8AppenderTAyaZ8Appender6__ctorMFNaNbNcNeAyaZS3std5array17__T8AppenderTAyaZ8Appender
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
 ------------------
 	    1	_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTdTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1	13	3
+_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1	10	2
 	    1	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya
 	    1	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi
 	    1	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv
 ------------------
 	    1	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi	1	9	9
+_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi	1	7	7
 ------------------
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk
-_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTdTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1	14	1
+_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTdTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1	12	2
 	    1	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 ------------------
 	    1	_D3std5stdio17__T6writefTAyaTdZ6writefFNfAyadZv
-_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk	1	41	20
+_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk	1	67	36
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAadZ9__lambda5FNaNbNiNeZPFNaNbNfS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAadZ16__T9__lambda6TdZ9__lambda6FNaNbNiNeKdZxPv
 	    2	_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb
 	    1	_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTdTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 ------------------
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk
-_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAadZ16__T9__lambda6TdZ9__lambda6FNaNbNiNeKdZxPv	1	0	0
+_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAadZ16__T9__lambda6TdZ9__lambda6FNaNbNiNeKdZxPv	1	1	1
 ------------------
 	    1	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAadZk
 _D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTdZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAadZ9__lambda5FNaNbNiNeZPFNaNbNfS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1	0	0
 ------------------
 	3000000	_D3std6format63__T13formatGenericTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ13formatGenericFS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	3000000	8219541	1390779
+_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	3000000	6994239	1222551
 	3000000	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya
 	3000000	_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi
 	3000000	_D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFNaNbNfAaZv
 ------------------
 	3000000	_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi	3000000	3765675	3765675
+_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi	3000000	3319442	3319442
 ------------------
 	3000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format63__T13formatGenericTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ13formatGenericFS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	3000000	8755444	535903
+_D3std6format63__T13formatGenericTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ13formatGenericFS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	3000000	7470864	476625
 	3000000	_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 ------------------
 	1000000	_D3std6format19__T6formatTaTdTdTdZ6formatFNfxAadddZAya
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk	1000000	13510218	1240396
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk	1000000	11882400	1050807
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda7FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ16__T9__lambda8TdZ9__lambda8FNaNbNiNeKdZxPv
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda9FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
@@ -171,25 +175,25 @@ _D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTd
 	3000000	_D3std6format63__T13formatGenericTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ13formatGenericFS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ10__lambda11FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	55693	55693
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ10__lambda11FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	69590	69590
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ16__T9__lambda8TdZ9__lambda8FNaNbNiNeKdZxPv	1000000	61860	61860
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ16__T9__lambda8TdZ9__lambda8FNaNbNiNeKdZxPv	1000000	51246	51246
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ18__T10__lambda10TdZ10__lambda10FNaNbNiNeKdZxPv	1000000	61120	61120
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ18__T10__lambda10TdZ10__lambda10FNaNbNiNeKdZxPv	1000000	49841	49841
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ18__T10__lambda12TdZ10__lambda12FNaNbNiNeKdZxPv	1000000	60047	60047
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ18__T10__lambda12TdZ10__lambda12FNaNbNiNeKdZxPv	1000000	53808	53808
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda7FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	62508	62508
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda7FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	49553	49553
 ------------------
 	1000000	_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFNfS3std5array17__T8AppenderTAyaZ8AppenderxAadddZk
-_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda9FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	60939	60939
+_D3std6format68__T14formattedWriteTS3std5array17__T8AppenderTAyaZ8AppenderTaTdTdTdZ14formattedWriteFS3std5array17__T8AppenderTAyaZ8AppenderxAadddZ9__lambda9FNaNbNiNeZPFNaNbNfS3std5array17__T8AppenderTAyaZ8AppenderPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	1000000	52302	52302
 ------------------
 	3000000	_Dmain
-_D3std6random175__T7uniformVAyaa2_5b29TdTdTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNfddKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZd	3000000	1077107	891512
+_D3std6random175__T7uniformVAyaa2_5b29TdTdTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNfddKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZd	3000000	937607	786596
 	3000000	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
 ------------------
 	    1	_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res
@@ -199,7 +203,7 @@ _D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res15trustedV
 _D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res6__dtorMFNbNiNeZv	1	1	1
 ------------------
 	    1	_D3std4file15__T6existsTAyaZ6existsFNbNiNfAyaZb
-_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res	1	26	25
+_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res	1	13	8
 	    1	_D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res15trustedVoidInitFNbNiNeZS3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFAyaZ3Res
 	    1	_D3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFNaNbNiNfAxaZS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImpl
 	    1	_D3std3utf12__T5byUTFTuZ75__T5byUTFTS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImplZ5byUTFFNaNbNiNfS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImplZS3std3utf12__T5byUTFTuZ75__T5byUTFTS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImplZ5byUTFFNcS3std3utf20__T10byCodeUnitTAxaZ10byCodeUnitFAxaZ14ByCodeUnitImplZ6Result
@@ -207,84 +211,63 @@ _D3std8internal7cstring23__T11tempCStringTuTAyaZ11tempCStringFNbNiNfAyaZS3std8in
 ------------------
 	3000000	_D3std6format61__T11formatValueTS3std5array17__T8AppenderTAyaZ8AppenderTdTaZ11formatValueFNfS3std5array17__T8AppenderTAyaZ8AppenderdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
 	    1	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTdTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterdKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
-_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya	3000001	271444	271444
+_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya	3000001	254788	254788
 ------------------
 	3000000	_D3std6random175__T7uniformVAyaa2_5b29TdTdTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNfddKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZd
 	    1	_D3std5stdio4File22__T5writeTAyaTkTAyaTaZ5writeMFNfAyakAyaaZv
 	    1	_D3std5stdio4File28__T5writeTAyaTkTAyaTkTAyaTaZ5writeMFNfAyakAyakAyaaZv
 	    1	_D3std5stdio4File28__T5writeTAyaTlTAyaTkTAyaTaZ5writeMFNfAyalAyakAyaaZv
 	    1	_D3std5stdio17__T6writefTAyaTdZ6writefFNfAyadZv
-_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb	3000004	185598	185598
+	    1	_D3std5stdio4File13__T6readlnTaZ6readlnMFKAawZk
+_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb	3000005	151011	151011
 ------------------
 	    1	_Dmain
-_D4main11benchTokensFZv	1	5229174	945100
-	    1	_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNaNbNcNiS4main20TestGenericCharArrayZS5sidal6parser12GenericRange
-	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange
-	12000004	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
+_D4main11benchTokensFZv	1	4830293	895466
+	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser11StringRangeAaZS5sidal6parser10SidalRange
+	12000005	_D5sidal6parser10SidalRange8popFrontMFNbZv
 	    1	_D5sidal6parser10SidalRange6__dtorMFZv
 ------------------
 	    1	_Dmain
-_D4main16benchWalktrhoughFZv	1	195531	195531
+_D4main16benchWalktrhoughFZv	1	206089	206089
 ------------------
-	2999585	_D5sidal6parser10SidalRange11parseNumberMFNbiZv
-_D5sidal6parser10SidalRange10parseFloatMFNbiKmZv	2999585	843658	843524
-	    4	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
+	3000000	_D5sidal6parser10SidalRange11parseNumberMFNbiZv
+_D5sidal6parser10SidalRange10parseFloatMFNbiKmZv	3000000	677965	677965
 ------------------
-	4000000	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
-_D5sidal6parser10SidalRange11parseNumberMFNbiZv	4000000	1413045	554940
-	2999585	_D5sidal6parser10SidalRange10parseFloatMFNbiKmZv
-	  416	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
+	4000000	_D5sidal6parser10SidalRange8popFrontMFNbZv
+_D5sidal6parser10SidalRange11parseNumberMFNbiZv	4000000	1226176	548211
+	3000000	_D5sidal6parser10SidalRange10parseFloatMFNbiKmZv
 ------------------
-	1000000	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
-_D5sidal6parser10SidalRange11parseStringMFNbPaZv	1000000	115998	101599
-	  415	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
-------------------
-	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange
-	12000004	_D4main11benchTokensFZv
-_D5sidal6parser10SidalRange15parseSuperValueMFNbZv	12000005	4284023	2196391
-	5000003	_D5sidal6parser10SidalRange9parseTypeMFNbPaZv
-	4000000	_D5sidal6parser10SidalRange11parseNumberMFNbiZv
-	1000000	_D5sidal6parser10SidalRange11parseStringMFNbPaZv
-	    4	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
+	1000000	_D5sidal6parser10SidalRange8popFrontMFNbZv
+_D5sidal6parser10SidalRange11parseStringMFNbPaZv	1000000	89005	89005
 ------------------
 	    1	_D4main11benchTokensFZv
-_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange	1	65	1
-	    1	_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ11range_emptyFPS4main20TestGenericCharArrayZb
+_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser11StringRangeAaZS5sidal6parser10SidalRange	1	10	1
 	    1	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
-	    1	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
+	    1	_D5sidal6parser10SidalRange8popFrontMFNbZv
 ------------------
 	    1	_D4main11benchTokensFZv
 _D5sidal6parser10SidalRange6__dtorMFZv	1	0	0
-	    1	_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ14range_finalizeFNaNbNiNfPS4main20TestGenericCharArrayZv
 ------------------
-	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange
-	  416	_D5sidal6parser10SidalRange11parseNumberMFNbiZv
-	    4	_D5sidal6parser10SidalRange10parseFloatMFNbiKmZv
-	    4	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
-	    1	_D5sidal6parser10SidalRange9parseTypeMFNbPaZv
-	  415	_D5sidal6parser10SidalRange11parseStringMFNbPaZv
-_D5sidal6parser10SidalRange7getDataMFNbkKAaZb	841	29165	452
-	  841	_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ11range_emptyFPS4main20TestGenericCharArrayZb
-	  841	_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ10range_fillFKS5sidal6parser12GenericRangePS4main20TestGenericCharArrayKAaZC6object9Throwable
+	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser11StringRangeAaZS5sidal6parser10SidalRange
+	    1	_D5sidal6parser10SidalRange8popFrontMFNbZv
+_D5sidal6parser10SidalRange7getDataMFNbkKAaZb	2	5	4
+	    2	_D5sidal6parser11StringRange4fillMFNbKAaZC6object9Throwable
 ------------------
-	5000003	_D5sidal6parser10SidalRange15parseSuperValueMFNbZv
-_D5sidal6parser10SidalRange9parseTypeMFNbPaZv	5000003	558490	558454
+	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser11StringRangeAaZS5sidal6parser10SidalRange
+	12000005	_D4main11benchTokensFZv
+_D5sidal6parser10SidalRange8popFrontMFNbZv	12000006	3934823	2150780
+	5000003	_D5sidal6parser10SidalRange9parseTypeMFNbPaZv
+	4000000	_D5sidal6parser10SidalRange11parseNumberMFNbiZv
+	1000000	_D5sidal6parser10SidalRange11parseStringMFNbPaZv
 	    1	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
 ------------------
-	    1	_D4main11benchTokensFZv
-_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNaNbNcNiS4main20TestGenericCharArrayZS5sidal6parser12GenericRange	1	0	0
+	5000003	_D5sidal6parser10SidalRange8popFrontMFNbZv
+_D5sidal6parser10SidalRange9parseTypeMFNbPaZv	5000003	468860	468860
 ------------------
-	  841	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
-_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ10range_fillFKS5sidal6parser12GenericRangePS4main20TestGenericCharArrayKAaZC6object9Throwable	841	28660	28660
+	    2	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
+_D5sidal6parser11StringRange4fillMFNbKAaZC6object9Throwable	2	1	1
 ------------------
-	    1	_D5sidal6parser10SidalRange6__ctorMFNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange
-	  841	_D5sidal6parser10SidalRange7getDataMFNbkKAaZb
-_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ11range_emptyFPS4main20TestGenericCharArrayZb	842	53	53
-------------------
-	    1	_D5sidal6parser10SidalRange6__dtorMFZv
-_D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ14range_finalizeFNaNbNiNfPS4main20TestGenericCharArrayZv	1	0	0
-------------------
-_Dmain	0	24716288	2192373
+_Dmain	0	33173280	896578
 	3000000	_D3std6random175__T7uniformVAyaa2_5b29TdTdTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNfddKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZd
 	1000000	_D3std6format19__T6formatTaTdTdTdZ6formatFNfxAadddZAya
 	    1	_D3std4file15__T6existsTAyaZ6existsFNbNiNfAyaZb
@@ -294,73 +277,72 @@ _Dmain	0	24716288	2192373
 	    1	_D3std5stdio28__T7writelnTAyaTkTAyaTkTAyaZ7writelnFNfAyakAyakAyaZv
 	    1	_D3std5stdio28__T7writelnTAyaTlTAyaTkTAyaZ7writelnFNfAyalAyakAyaZv
 	    1	_D3std5stdio17__T6writefTAyaTdZ6writefFNfAyadZv
+	    1	_D3std5stdio4File13__T6readlnTaZ6readlnMFKAawZk
 
 ======== Timer Is 2612272 Ticks/Sec, Times are in Microsecs ========
 
   Num          Tree        Func        Per
   Calls        Time        Time        Call
 
-3000000     1441532     1441532           0     nothrow @nogc @trusted int std.format.formatValue!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatValue(std.array.Appender!(immutable(char)[]).Appender, double, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
-1000000      868023      868023           0     pure nothrow ref @trusted std.array.Appender!(immutable(char)[]).Appender std.array.Appender!(immutable(char)[]).Appender.__ctor(immutable(char)[])
-12000005     1639960      840797           0     nothrow void sidal.parser.SidalRange.parseSuperValue()
-      1     9461605      839259      839259     _Dmain
-7000000      946148      826423           0     pure nothrow @trusted void std.array.Appender!(immutable(char)[]).Appender.ensureAddable(uint)
-3000000     3146510      532402           0     @safe void std.format.formatValue!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatValue(std.array.Appender!(immutable(char)[]).Appender, double, ref std.format.FormatSpec!(char).FormatSpec)
-1000000     5171826      474834           0     @safe uint std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double)
-      1     2001772      361792      361792     void main.benchTokens()
-4000000     1206693      351465           0     pure @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.array.Appender!(immutable(char)[]).Appender).writeUpToNextSpec(std.array.Appender!(immutable(char)[]).Appender)
-4000000      855227      342760           0     pure nothrow @safe void std.array.Appender!(immutable(char)[]).Appender.put!(const(char)[]).put(const(char)[])
-3000000      412325      341278           0     @safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
-2999585      322959      322908           0     nothrow void sidal.parser.SidalRange.parseFloat(int, ref ulong)
-4000000      512467      234832           0     _D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa
-5000003      213794      213780           0     nothrow void sidal.parser.SidalRange.parseType(char*)
-3000000     1068665      212472           0     pure nothrow @safe void std.array.Appender!(immutable(char)[]).Appender.put!(char[]).put(char[])
-4000000      540925      212435           0     nothrow void sidal.parser.SidalRange.parseNumber(int)
-3000000     3351658      205148           0     void std.format.formatGeneric!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatGeneric(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
-3000000      856192      187679           0     _D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa
-3000000      119724      119724           0     pure nothrow @nogc @safe uint std.array.appenderNewCapacity!(1u).appenderNewCapacity(uint, uint)
-3000001      103911      103911           0     pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
-1000000     6132813       92963           0     @safe immutable(char)[] std.format.format!(char, double, double, double).format(const(char[]), double, double, double)
-      1       74850       74850       74850     void main.benchWalktrhough()
-3000004       71048       71048           0     pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
-1000000       44405       38892           0     nothrow void sidal.parser.SidalRange.parseString(char*)
-1000000       23928       23928           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda7()
-1000000       23680       23680           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda8!(double).__lambda8(ref double)
-1000000       23397       23397           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda10!(double).__lambda10(ref double)
-1000000       23327       23327           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda9()
-1000000       22986       22986           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda12!(double).__lambda12(ref double)
-1000000       21319       21319           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda11()
-    841       10971       10971          13     _D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ10range_fillFKS5sidal6parser12GenericRangePS4main20TestGenericCharArrayKAaZC6object9Throwable
-      3         366         366         122     nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
-    841       11164         173           0     nothrow bool sidal.parser.SidalRange.getData(uint, ref char[])
-      1         126         116         116     nothrow @nogc @safe bool std.file.exists!(immutable(char)[]).exists(immutable(char)[])
-      8          36          36           4     @safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
-    842          20          20           0     _D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ11range_emptyFPS4main20TestGenericCharArrayZb
-      1          99          17          17     @safe void std.stdio.File.write!(immutable(char)[], long, immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], long, immutable(char)[], uint, immutable(char)[], char)
-      1           9           9           9     nothrow @nogc @safe std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[]).Res std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[])
-      1          15           7           7     @safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, double).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), double)
-      1         188           7           7     @safe void std.stdio.File.write!(immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], uint, immutable(char)[], char)
-      4           6           5           1     @safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
-      1           3           3           3     nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, double, char).formatValue(std.stdio.File.LockingTextWriter, double, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
-      1         150           2           2     @safe void std.stdio.File.write!(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[], char)
-      2           2           1           0     @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
-      1           4           1           1     @safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, double, char).formatValue(std.stdio.File.LockingTextWriter, double, ref std.format.FormatSpec!(char).FormatSpec)
-      6           1           1           0     @safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
-      1           0           0           0     @safe void std.conv.toTextRange!(long, std.stdio.File.LockingTextWriter).toTextRange(long, std.stdio.File.LockingTextWriter)
-      1          99           0           0     @safe void std.stdio.writeln!(immutable(char)[], long, immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], long, immutable(char)[], uint, immutable(char)[])
-      1         189           0           0     @safe void std.stdio.writeln!(immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], uint, immutable(char)[])
-      1          16           0           0     @safe void std.stdio.writef!(immutable(char)[], double).writef(immutable(char)[], double)
-      1         151           0           0     @safe void std.stdio.writeln!(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[])
-      2           0           0           0     @safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+      1     5311992     5311992     5311992     uint std.stdio.File.readln!(char).readln(ref char[], dchar)
+3000000     1270710     1270710           0     nothrow @nogc @trusted int std.format.formatValue!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatValue(std.array.Appender!(immutable(char)[]).Appender, double, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
+12000006     1506283      823336           0     nothrow void sidal.parser.SidalRange.popFront()
+7000000      861562      757822           0     pure nothrow @trusted void std.array.Appender!(immutable(char)[]).Appender.ensureAddable(uint)
+3000000     2677454      468002           0     @safe void std.format.formatValue!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatValue(std.array.Appender!(immutable(char)[]).Appender, double, ref std.format.FormatSpec!(char).FormatSpec)
+1000000     4548684      402257           0     @safe uint std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double)
+      1    12699014      343217      343217     _Dmain
+      1     1849077      342792      342792     void main.benchTokens()
+4000000     1161589      327773           0     pure @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.array.Appender!(immutable(char)[]).Appender).writeUpToNextSpec(std.array.Appender!(immutable(char)[]).Appender)
+3000000      358923      301115           0     @safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+4000000      833816      292961           0     pure nothrow @safe void std.array.Appender!(immutable(char)[]).Appender.put!(const(char)[]).put(const(char)[])
+3000000      259530      259530           0     nothrow void sidal.parser.SidalRange.parseFloat(int, ref ulong)
+4000000      469390      209859           0     nothrow void sidal.parser.SidalRange.parseNumber(int)
+3000000      841205      190758           0     pure nothrow @safe void std.array.Appender!(immutable(char)[]).Appender.put!(char[]).put(char[])
+4000000      540855      187423           0     _D3std5array17__T8AppenderTAyaZ8Appender12__T3putTAxaZ3putMFAxaZ10bigDataFunMFNaNbNekZAa
+3000000     2859910      182456           0     void std.format.formatGeneric!(std.array.Appender!(immutable(char)[]).Appender, double, char).formatGeneric(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+5000003      179483      179483           0     nothrow void sidal.parser.SidalRange.parseType(char*)
+3000000      650447      142316           0     _D3std5array17__T8AppenderTAyaZ8Appender11__T3putTAaZ3putMFAaZ10bigDataFunMFNaNbNekZAa
+1000000      122621      122621           0     pure nothrow ref @trusted std.array.Appender!(immutable(char)[]).Appender std.array.Appender!(immutable(char)[]).Appender.__ctor(immutable(char)[])
+3000000      103740      103740           0     pure nothrow @nogc @safe uint std.array.appenderNewCapacity!(1u).appenderNewCapacity(uint, uint)
+3000001       97535       97535           0     pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+1000000     4756321       85015           0     @safe immutable(char)[] std.format.format!(char, double, double, double).format(const(char[]), double, double, double)
+      1       78892       78892       78892     void main.benchWalktrhough()
+3000005       57808       57808           0     pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+1000000       34071       34071           0     nothrow void sidal.parser.SidalRange.parseString(char*)
+1000000       26639       26639           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda11()
+1000000       20598       20598           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda12!(double).__lambda12(ref double)
+1000000       20021       20021           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda9()
+1000000       19617       19617           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda8!(double).__lambda8(ref double)
+1000000       19079       19079           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda10!(double).__lambda10(ref double)
+1000000       18969       18969           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.array.Appender!(immutable(char)[]).Appender, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.array.Appender!(immutable(char)[]).Appender, char, double, double, double).formattedWrite(std.array.Appender!(immutable(char)[]).Appender, const(char[]), double, double, double).__lambda7()
+      3         387         387         129     nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+      1         124         119         119     nothrow @nogc @safe bool std.file.exists!(immutable(char)[]).exists(immutable(char)[])
+      8          37          37           4     @safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+      1          25          13          13     @safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, double).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), double)
+      2           5           5           2     @safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+      4           4           3           0     @safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
+      1         155           3           3     @safe void std.stdio.File.write!(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[], char)
+      1           4           3           3     nothrow @nogc @safe std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[]).Res std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[])
+      1           2           2           2     nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, double, char).formatValue(std.stdio.File.LockingTextWriter, double, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
+      1         195           2           2     @safe void std.stdio.File.write!(immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], uint, immutable(char)[], char)
+      8           1           1           0     pure nothrow @nogc @safe uint std.utf.encode!(1).encode(ref wchar[2], dchar)
+      2           1           1           0     nothrow bool sidal.parser.SidalRange.getData(uint, ref char[])
+      1           1           1           1     @safe void std.conv.toTextRange!(long, std.stdio.File.LockingTextWriter).toTextRange(long, std.stdio.File.LockingTextWriter)
+      2           6           1           0     @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+      1         195           0           0     @safe void std.stdio.writeln!(immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], uint, immutable(char)[])
+      6           0           0           0     @safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
+      1          85           0           0     @safe void std.stdio.File.write!(immutable(char)[], long, immutable(char)[], uint, immutable(char)[], char).write(immutable(char)[], long, immutable(char)[], uint, immutable(char)[], char)
+      1           4           0           0     void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, double, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+      1          26           0           0     @safe void std.stdio.writef!(immutable(char)[], double).writef(immutable(char)[], double)
+      1           3           0           0     @safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, double, char).formatValue(std.stdio.File.LockingTextWriter, double, ref std.format.FormatSpec!(char).FormatSpec)
       1           0           0           0     nothrow @nogc @trusted void std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[]).Res.__dtor()
-      1          24           0           0     ref sidal.parser.SidalRange sidal.parser.SidalRange.__ctor(sidal.parser.GenericRange, char[])
-      8           0           0           0     pure nothrow @nogc @safe uint std.utf.encode!(1).encode(ref wchar[2], dchar)
-      1           5           0           0     void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, double, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
-      1           0           0           0     pure nothrow @nogc @safe std.utf.byUTF!(wchar).byUTF!(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).byUTF(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).Result std.utf.byUTF!(wchar).byUTF!(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).byUTF(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl)
-      1           0           0           0     pure nothrow @nogc @safe std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[])
-      1           0           0           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, double).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), double).__lambda5()
-      1           0           0           0     pure nothrow ref @nogc sidal.parser.GenericRange sidal.parser.GenericRange.__ctor!(main.TestGenericCharArray).__ctor(main.TestGenericCharArray)
-      1           0           0           0     void sidal.parser.SidalRange.__dtor()
+      1           3           0           0     ref sidal.parser.SidalRange sidal.parser.SidalRange.__ctor(sidal.parser.StringRange, char[])
+      2           0           0           0     nothrow object.Throwable sidal.parser.StringRange.fill(ref char[])
       1           0           0           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, double).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), double).__lambda6!(double).__lambda6(ref double)
+      1         156           0           0     @safe void std.stdio.writeln!(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], uint, immutable(char)[], uint, immutable(char)[])
+      1           0           0           0     void sidal.parser.SidalRange.__dtor()
+      1           0           0           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, double).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), double).__lambda5()
+      1          85           0           0     @safe void std.stdio.writeln!(immutable(char)[], long, immutable(char)[], uint, immutable(char)[]).writeln(immutable(char)[], long, immutable(char)[], uint, immutable(char)[])
+      1           0           0           0     pure nothrow @nogc @safe std.utf.byUTF!(wchar).byUTF!(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).byUTF(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).Result std.utf.byUTF!(wchar).byUTF!(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl).byUTF(std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl)
       1           0           0           0     nothrow @nogc @trusted std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[]).Res std.internal.cstring.tempCString!(wchar, immutable(char)[]).tempCString(immutable(char)[]).Res.trustedVoidInit()
-      1           0           0           0     _D5sidal6parser12GenericRange40__T6__ctorTS4main20TestGenericCharArrayZ6__ctorMFNcS4main20TestGenericCharArrayZ14range_finalizeFNaNbNiNfPS4main20TestGenericCharArrayZv
+      1           0           0           0     pure nothrow @nogc @safe std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[]).ByCodeUnitImpl std.utf.byCodeUnit!(const(char)[]).byCodeUnit(const(char)[])

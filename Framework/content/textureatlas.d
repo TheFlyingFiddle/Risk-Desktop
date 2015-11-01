@@ -24,8 +24,6 @@ struct TextureAtlasLoader
 		atlas._texture = texture;
 		atlas.rects = cast(SourceRect[])(data[TextureAtlas.sizeof  .. $]);
 
-
-
 		return atlas;
 	}
 

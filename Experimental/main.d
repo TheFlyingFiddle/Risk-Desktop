@@ -6,8 +6,6 @@ import std.array;
 import std.datetime;
 
 
-
-
 alias SR = SidalRange;
 enum startData = "float3[] coordinates = float3[](";
 enum endData   = ")\n\0"; 
@@ -60,10 +58,11 @@ void benchTokens()
 	//    assert(p.gold == 32);
 	//}
 
-	char[1024 * 64] buffer = void;
+	char[1024 * 16] buffer = void;
 	//SR r = SR(ByChunkRange(File("data.txt", "rb")), buffer);
-	//foreach(ref token; SR(ByChunkRange(File("data.txt", "rb")), buffer)) 
-	foreach(ref token; SR(GenericRange(TestGenericCharArray(testString)), buffer)) 
+	foreach(ref token; SR(FileSource(File("data.txt", "rb")), buffer)) 
+	//foreach(ref token; SR(GenericRange(TestGenericCharArray(testString)), buffer)) 
+	//foreach(ref token; SR(StringSource(testString), buffer))
 	{
 		//if(token.tag == TokenTag.type || 
 		//   token.tag == TokenTag.name || 
@@ -115,7 +114,7 @@ int main(string[] argv)
 	size_t size = testString.length / (1024 * 1024);
 	writeln("Data Size: ", size, "mb");
 
-	//while(true)
+	while(true)
 	{
 		StopWatch sw;
 
@@ -135,6 +134,7 @@ int main(string[] argv)
 		writef("Sidal was %s times slower then walkthrough\n", cast(double)sidal_msecs / cast(double)sw.peek.msecs);
 	}
 
-	//readln;
+	readln;
 	return 0;
 }
+

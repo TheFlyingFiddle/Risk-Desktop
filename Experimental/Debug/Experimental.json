@@ -63,7 +63,7 @@
     ]
    },
    {
-    "name" : "GenericRange",
+    "name" : "GenericSource",
     "kind" : "struct",
     "line" : 14,
     "char" : 1,
@@ -80,7 +80,7 @@
       "kind" : "alias",
       "line" : 17,
       "char" : 2,
-      "deco" : "PFNbNiKS5sidal6parser12GenericRangePvKAaZC6object9Throwable"
+      "deco" : "PFNbNiKS5sidal6parser13GenericSourcePvKAaZC6object9Throwable"
      },
      {
       "name" : "Finalize",
@@ -132,7 +132,7 @@
       "kind" : "variable",
       "line" : 25,
       "char" : 7,
-      "deco" : "PFNbNiKS5sidal6parser12GenericRangePvKAaZC6object9Throwable",
+      "deco" : "PFNbNiKS5sidal6parser13GenericSourcePvKAaZC6object9Throwable",
       "originalType" : "Fill",
       "offset" : 40
      },
@@ -252,7 +252,7 @@
     ]
    },
    {
-    "name" : "ByChunkRange",
+    "name" : "FileSource",
     "kind" : "struct",
     "line" : 132,
     "char" : 1,
@@ -280,7 +280,7 @@
       "kind" : "constructor",
       "line" : 138,
       "char" : 2,
-      "deco" : "FNcS3std5stdio4FileZS5sidal6parser12ByChunkRange",
+      "deco" : "FNcS3std5stdio4FileZS5sidal6parser10FileSource",
       "originalType" : "ref (File f)",
       "parameters" : [
        {
@@ -338,18 +338,18 @@
       "kind" : "function",
       "line" : 132,
       "char" : 1,
-      "deco" : "FNcNjNeS5sidal6parser12ByChunkRangeZS5sidal6parser12ByChunkRange",
+      "deco" : "FNcNjNeS5sidal6parser10FileSourceZS5sidal6parser10FileSource",
       "parameters" : [
        {
         "name" : "p",
-        "deco" : "S5sidal6parser12ByChunkRange"
+        "deco" : "S5sidal6parser10FileSource"
        }
       ]
      }
     ]
    },
    {
-    "name" : "StringRange",
+    "name" : "StringSource",
     "kind" : "struct",
     "line" : 181,
     "char" : 1,
@@ -377,7 +377,7 @@
       "kind" : "constructor",
       "line" : 186,
       "char" : 2,
-      "deco" : "FNcAaZS5sidal6parser11StringRange",
+      "deco" : "FNcAaZS5sidal6parser12StringSource",
       "originalType" : "ref (char[] str)",
       "parameters" : [
        {
@@ -393,7 +393,7 @@
       "kind" : "constructor",
       "line" : 194,
       "char" : 2,
-      "deco" : "FNcAxaZS5sidal6parser11StringRange",
+      "deco" : "FNcAxaZS5sidal6parser12StringSource",
       "originalType" : "ref (const(char)[] str)",
       "parameters" : [
        {
@@ -434,95 +434,9 @@
     ]
    },
    {
-    "name" : "ValueKind",
-    "kind" : "enum",
-    "line" : 222,
-    "char" : 1,
-    "baseDeco" : "i",
-    "members" : [
-     {
-      "name" : "none",
-      "kind" : "enum member",
-      "value" : "0",
-      "line" : 224,
-      "char" : 2
-     },
-     {
-      "name" : "undecided",
-      "kind" : "enum member",
-      "value" : "1",
-      "line" : 225,
-      "char" : 3
-     },
-     {
-      "name" : "type",
-      "kind" : "enum member",
-      "value" : "2",
-      "line" : 226,
-      "char" : 3
-     },
-     {
-      "name" : "divider",
-      "kind" : "enum member",
-      "value" : "3",
-      "line" : 227,
-      "char" : 3
-     },
-     {
-      "name" : "objectStart",
-      "kind" : "enum member",
-      "value" : "4",
-      "line" : 228,
-      "char" : 3
-     },
-     {
-      "name" : "objectEnd",
-      "kind" : "enum member",
-      "value" : "5",
-      "line" : 229,
-      "char" : 3
-     },
-     {
-      "name" : "number",
-      "kind" : "enum member",
-      "value" : "6",
-      "line" : 230,
-      "char" : 3
-     },
-     {
-      "name" : "string",
-      "kind" : "enum member",
-      "value" : "7",
-      "line" : 231,
-      "char" : 3
-     },
-     {
-      "name" : "ident",
-      "kind" : "enum member",
-      "value" : "8",
-      "line" : 232,
-      "char" : 3
-     },
-     {
-      "name" : "name",
-      "kind" : "enum member",
-      "value" : "9",
-      "line" : 233,
-      "char" : 3
-     },
-     {
-      "name" : "error",
-      "kind" : "enum member",
-      "value" : "10",
-      "line" : 234,
-      "char" : 3
-     }
-    ]
-   },
-   {
     "name" : "TokenTag",
     "kind" : "enum",
-    "line" : 237,
+    "line" : 222,
     "char" : 1,
     "baseDeco" : "h",
     "members" : [
@@ -530,70 +444,77 @@
       "name" : "type",
       "kind" : "enum member",
       "value" : "cast(ubyte)0u",
-      "line" : 239,
+      "line" : 224,
       "char" : 2
      },
      {
       "name" : "name",
       "kind" : "enum member",
       "value" : "1",
-      "line" : 240,
+      "line" : 225,
       "char" : 2
      },
      {
       "name" : "ident",
       "kind" : "enum member",
       "value" : "2",
-      "line" : 241,
+      "line" : 226,
+      "char" : 2
+     },
+     {
+      "name" : "divider",
+      "kind" : "enum member",
+      "value" : "3",
+      "line" : 227,
       "char" : 2
      },
      {
       "name" : "string",
       "kind" : "enum member",
-      "value" : "3",
-      "line" : 242,
+      "value" : "4",
+      "line" : 228,
       "char" : 2
      },
      {
       "name" : "floating",
       "kind" : "enum member",
-      "value" : "4",
-      "line" : 243,
+      "value" : "5",
+      "line" : 229,
       "char" : 2
      },
      {
       "name" : "integer",
       "kind" : "enum member",
-      "value" : "5",
-      "line" : 244,
+      "value" : "6",
+      "line" : 230,
       "char" : 2
      },
      {
       "name" : "objectStart",
       "kind" : "enum member",
-      "value" : "6",
-      "line" : 245,
+      "value" : "7",
+      "line" : 231,
       "char" : 2
      },
      {
       "name" : "objectEnd",
       "kind" : "enum member",
-      "value" : "7",
-      "line" : 246,
+      "value" : "8",
+      "line" : 232,
       "char" : 2
      },
      {
       "name" : "itemDivider",
       "kind" : "enum member",
-      "value" : "8",
-      "line" : 247,
+      "value" : "9",
+      "line" : 233,
       "char" : 2
      },
      {
       "name" : "error",
       "kind" : "enum member",
-      "value" : "9",
-      "line" : 248,
+      "value" : "10",
+      "line" : 234,
       "char" : 2
      }
     ]
@@ -601,13 +522,13 @@
    {
     "name" : "SidalToken",
     "kind" : "struct",
-    "line" : 251,
+    "line" : 237,
     "char" : 1,
     "members" : [
      {
       "name" : "tag",
       "kind" : "variable",
-      "line" : 253,
+      "line" : 239,
       "char" : 11,
       "deco" : "E5sidal6parser8TokenTag",
       "offset" : 0
@@ -615,7 +536,7 @@
      {
       "name" : "value",
       "kind" : "variable",
-      "line" : 256,
+      "line" : 242,
       "char" : 13,
       "deco" : "Aa",
       "offset" : 8
@@ -623,7 +544,7 @@
      {
       "name" : "floating",
       "kind" : "variable",
-      "line" : 257,
+      "line" : 243,
       "char" : 13,
       "deco" : "d",
       "offset" : 8
@@ -631,7 +552,7 @@
      {
       "name" : "integer",
       "kind" : "variable",
-      "line" : 258,
+      "line" : 244,
       "char" : 12,
       "deco" : "m",
       "offset" : 8
@@ -639,7 +560,7 @@
      {
       "name" : "level",
       "kind" : "variable",
-      "line" : 259,
+      "line" : 245,
       "char" : 13,
       "deco" : "k",
       "originalType" : "size_t",
@@ -648,7 +569,7 @@
      {
       "name" : "error",
       "kind" : "variable",
-      "line" : 260,
+      "line" : 246,
       "char" : 14,
       "deco" : "C6object9Throwable",
       "originalType" : "Throwable",
@@ -659,13 +580,13 @@
    {
     "name" : "SidalRange",
     "kind" : "struct",
-    "line" : 264,
+    "line" : 250,
     "char" : 1,
     "members" : [
      {
       "name" : "terminator",
       "kind" : "variable",
-      "line" : 266,
+      "line" : 252,
       "char" : 7,
       "storageClass" : [
        "enum"
@@ -676,7 +597,7 @@
      {
       "name" : "type",
       "kind" : "variable",
-      "line" : 267,
+      "line" : 253,
       "char" : 12,
       "deco" : "E5sidal6parser9RangeType",
       "offset" : 0
@@ -684,97 +605,97 @@
      {
       "name" : "range_data",
       "kind" : "variable",
-      "line" : 275,
+      "line" : 261,
       "char" : 74,
       "deco" : "G48v",
-      "originalType" : "void[max(ByChunkRange.sizeof, StringRange.sizeof, GenericRange.sizeof)]",
+      "originalType" : "void[max(FileSource.sizeof, StringSource.sizeof, GenericSource.sizeof)]",
       "offset" : 4
      },
      {
       "name" : "chunk",
       "kind" : "function",
-      "line" : 276,
+      "line" : 262,
       "char" : 7,
-      "deco" : "FKS5sidal6parser12ByChunkRangeZv",
+      "deco" : "FKS5sidal6parser10FileSourceZv",
       "parameters" : [
        {
         "name" : "range",
-        "deco" : "S5sidal6parser12ByChunkRange",
+        "deco" : "S5sidal6parser10FileSource",
         "storageClass" : [
          "ref"
         ]
        }
       ],
-      "endline" : 276,
-      "endchar" : 81
-     },
-     {
-      "name" : "string",
-      "kind" : "function",
-      "line" : 277,
-      "char" : 7,
-      "deco" : "FKS5sidal6parser11StringRangeZv",
-      "parameters" : [
-       {
-        "name" : "range",
-        "deco" : "S5sidal6parser11StringRange",
-        "storageClass" : [
-         "ref"
-        ]
-       }
-      ],
-      "endline" : 277,
-      "endchar" : 80
-     },
-     {
-      "name" : "generic",
-      "kind" : "function",
-      "line" : 278,
-      "char" : 7,
-      "deco" : "FKS5sidal6parser12GenericRangeZv",
-      "parameters" : [
-       {
-        "name" : "range",
-        "deco" : "S5sidal6parser12GenericRange",
-        "storageClass" : [
-         "ref"
-        ]
-       }
-      ],
-      "endline" : 278,
-      "endchar" : 81
-     },
-     {
-      "name" : "chunk",
-      "kind" : "function",
-      "line" : 280,
-      "char" : 24,
-      "deco" : "FNbZPS5sidal6parser12ByChunkRange",
-      "endline" : 280,
+      "endline" : 262,
       "endchar" : 77
      },
      {
       "name" : "string",
       "kind" : "function",
-      "line" : 281,
-      "char" : 24,
-      "deco" : "FNbZPS5sidal6parser11StringRange",
-      "endline" : 281,
-      "endchar" : 76
+      "line" : 263,
+      "char" : 7,
+      "deco" : "FKS5sidal6parser12StringSourceZv",
+      "parameters" : [
+       {
+        "name" : "range",
+        "deco" : "S5sidal6parser12StringSource",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 263,
+      "endchar" : 82
      },
      {
       "name" : "generic",
       "kind" : "function",
-      "line" : 282,
-      "char" : 24,
-      "deco" : "FNbZPS5sidal6parser12GenericRange",
-      "endline" : 282,
+      "line" : 264,
+      "char" : 7,
+      "deco" : "FKS5sidal6parser13GenericSourceZv",
+      "parameters" : [
+       {
+        "name" : "range",
+        "deco" : "S5sidal6parser13GenericSource",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 264,
+      "endchar" : 83
+     },
+     {
+      "name" : "chunk",
+      "kind" : "function",
+      "line" : 266,
+      "char" : 22,
+      "deco" : "FNbZPS5sidal6parser10FileSource",
+      "endline" : 266,
+      "endchar" : 73
+     },
+     {
+      "name" : "string",
+      "kind" : "function",
+      "line" : 267,
+      "char" : 25,
+      "deco" : "FNbZPS5sidal6parser12StringSource",
+      "endline" : 267,
       "endchar" : 78
+     },
+     {
+      "name" : "generic",
+      "kind" : "function",
+      "line" : 268,
+      "char" : 25,
+      "deco" : "FNbZPS5sidal6parser13GenericSource",
+      "endline" : 268,
+      "endchar" : 80
      },
      {
       "name" : "buffer",
       "kind" : "variable",
-      "line" : 284,
+      "line" : 270,
       "char" : 9,
       "deco" : "Aa",
       "offset" : 52
@@ -782,7 +703,7 @@
      {
       "name" : "bptr",
       "kind" : "variable",
-      "line" : 285,
+      "line" : 271,
       "char" : 9,
       "deco" : "Pa",
       "offset" : 60
@@ -790,7 +711,7 @@
      {
       "name" : "length",
       "kind" : "variable",
-      "line" : 286,
+      "line" : 272,
       "char" : 9,
       "deco" : "k",
       "originalType" : "size_t",
@@ -799,7 +720,7 @@
      {
       "name" : "inplace",
       "kind" : "variable",
-      "line" : 287,
+      "line" : 273,
       "char" : 7,
       "deco" : "b",
       "offset" : 68
@@ -807,7 +728,7 @@
      {
       "name" : "level",
       "kind" : "variable",
-      "line" : 289,
+      "line" : 275,
       "char" : 9,
       "deco" : "k",
       "originalType" : "size_t",
@@ -816,7 +737,7 @@
      {
       "name" : "lines",
       "kind" : "variable",
-      "line" : 289,
+      "line" : 275,
       "char" : 16,
       "deco" : "k",
       "originalType" : "size_t",
@@ -825,7 +746,7 @@
      {
       "name" : "column",
       "kind" : "variable",
-      "line" : 289,
+      "line" : 275,
       "char" : 23,
       "deco" : "k",
       "originalType" : "size_t",
@@ -834,7 +755,7 @@
      {
       "name" : "front",
       "kind" : "variable",
-      "line" : 290,
+      "line" : 276,
       "char" : 13,
       "deco" : "S5sidal6parser10SidalToken",
       "offset" : 88
@@ -842,7 +763,7 @@
      {
       "name" : "empty",
       "kind" : "variable",
-      "line" : 291,
+      "line" : 277,
       "char" : 7,
       "deco" : "b",
       "offset" : 104
@@ -850,103 +771,85 @@
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 293,
+      "line" : 279,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser12ByChunkRangeAaZS5sidal6parser10SidalRange",
-      "originalType" : "ref (ByChunkRange range, char[] buffer)",
+      "deco" : "FNcS5sidal6parser10FileSourceAaZS5sidal6parser10SidalRange",
+      "originalType" : "ref (FileSource range, char[] buffer)",
       "parameters" : [
        {
         "name" : "range",
-        "deco" : "S5sidal6parser12ByChunkRange"
+        "deco" : "S5sidal6parser10FileSource"
        },
        {
         "name" : "buffer",
         "deco" : "Aa"
        }
       ],
-      "endline" : 308,
+      "endline" : 294,
       "endchar" : 2
      },
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 310,
+      "line" : 296,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser11StringRangeAaZS5sidal6parser10SidalRange",
-      "originalType" : "ref (StringRange range, char[] buffer)",
+      "deco" : "FNcS5sidal6parser12StringSourceAaZS5sidal6parser10SidalRange",
+      "originalType" : "ref (StringSource range, char[] buffer)",
       "parameters" : [
        {
         "name" : "range",
-        "deco" : "S5sidal6parser11StringRange"
+        "deco" : "S5sidal6parser12StringSource"
        },
        {
         "name" : "buffer",
         "deco" : "Aa"
        }
       ],
-      "endline" : 324,
+      "endline" : 310,
       "endchar" : 2
      },
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 326,
+      "line" : 312,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser12GenericRangeAaZS5sidal6parser10SidalRange",
-      "originalType" : "ref (GenericRange range, char[] buffer)",
+      "deco" : "FNcS5sidal6parser13GenericSourceAaZS5sidal6parser10SidalRange",
+      "originalType" : "ref (GenericSource range, char[] buffer)",
       "parameters" : [
        {
         "name" : "range",
-        "deco" : "S5sidal6parser12GenericRange"
+        "deco" : "S5sidal6parser13GenericSource"
        },
        {
         "name" : "buffer",
         "deco" : "Aa"
        }
       ],
-      "endline" : 340,
+      "endline" : 326,
       "endchar" : 2
      },
      {
       "name" : "~this",
       "kind" : "destructor",
-      "line" : 342,
+      "line" : 328,
       "char" : 2,
       "deco" : "FZv",
-      "endline" : 354,
+      "endline" : 340,
       "endchar" : 2
-     },
-     {
-      "name" : "advance",
-      "kind" : "function",
-      "line" : 357,
-      "char" : 7,
-      "deco" : "FNbZv",
-      "endline" : 360,
-      "endchar" : 2
-     },
-     {
-      "name" : "bfront",
-      "kind" : "function",
-      "line" : 362,
-      "char" : 7,
-      "deco" : "FNbZa",
-      "endline" : 362,
-      "endchar" : 32
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 363,
+      "line" : 343,
       "char" : 7,
       "deco" : "FNbZv",
-      "endline" : 366,
+      "endline" : 399,
       "endchar" : 2
      },
      {
       "name" : "getData",
       "kind" : "function",
-      "line" : 368,
+      "line" : 401,
       "char" : 7,
       "deco" : "FNbkKAaZb",
       "originalType" : "nothrow bool(size_t size, ref char[] data)",
@@ -963,22 +866,22 @@
         ]
        }
       ],
-      "endline" : 390,
+      "endline" : 423,
       "endchar" : 2
      },
      {
       "name" : "nextBuffer",
       "kind" : "function",
-      "line" : 392,
+      "line" : 425,
       "char" : 7,
       "deco" : "FNbZb",
-      "endline" : 396,
+      "endline" : 429,
       "endchar" : 2
      },
      {
       "name" : "moveBuffer",
       "kind" : "function",
-      "line" : 398,
+      "line" : 431,
       "char" : 7,
       "deco" : "FNbKPaZb",
       "parameters" : [
@@ -990,22 +893,13 @@
         ]
        }
       ],
-      "endline" : 408,
-      "endchar" : 2
-     },
-     {
-      "name" : "parseSuperValue",
-      "kind" : "function",
-      "line" : 410,
-      "char" : 7,
-      "deco" : "FNbZv",
-      "endline" : 464,
+      "endline" : 448,
       "endchar" : 2
      },
      {
       "name" : "parseString",
       "kind" : "function",
-      "line" : 466,
+      "line" : 450,
       "char" : 7,
       "deco" : "FNbPaZv",
       "parameters" : [
@@ -1014,41 +908,13 @@
         "deco" : "Pa"
        }
       ],
-      "endline" : 491,
+      "endline" : 475,
       "endchar" : 2
      },
      {
       "name" : "parseHex",
       "kind" : "function",
-      "line" : 493,
-      "char" : 7,
-      "deco" : "FNbiZv",
-      "parameters" : [
-       {
-        "name" : "sign",
-        "deco" : "i"
-       }
-      ],
-      "endline" : 518,
-      "endchar" : 2
-     },
-     {
-      "name" : "powE",
-      "kind" : "variable",
-      "line" : 520,
-      "char" : 29,
-      "storageClass" : [
-       "static",
-       "nothrow",
-       "__gshared"
-      ],
-      "deco" : "G20d",
-      "init" : "[1.00000, 0.1, 0.01, 0.001, 0.0001, 1e-05, 1e-06, 1e-07, 1e-08, 1e-09, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19]"
-     },
-     {
-      "name" : "parseFloat",
-      "kind" : "function",
-      "line" : 524,
+      "line" : 477,
       "char" : 7,
       "deco" : "FNbiKmZv",
       "parameters" : [
@@ -1064,20 +930,55 @@
         ]
        }
       ],
-      "endline" : 552,
+      "endline" : 501,
+      "endchar" : 2
+     },
+     {
+      "name" : "powE",
+      "kind" : "variable",
+      "line" : 503,
+      "char" : 29,
+      "storageClass" : [
+       "static",
+       "nothrow",
+       "__gshared"
+      ],
+      "deco" : "G20d",
+      "init" : "[1.00000, 0.1, 0.01, 0.001, 0.0001, 1e-05, 1e-06, 1e-07, 1e-08, 1e-09, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19]"
+     },
+     {
+      "name" : "parseFloat",
+      "kind" : "function",
+      "line" : 507,
+      "char" : 7,
+      "deco" : "FNbiKmZv",
+      "parameters" : [
+       {
+        "name" : "sign",
+        "deco" : "i"
+       },
+       {
+        "name" : "value",
+        "deco" : "m",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 528,
       "endchar" : 2
      },
      {
       "name" : "std.c.stdio",
       "kind" : "import",
-      "line" : 554,
+      "line" : 530,
       "char" : 9,
       "protection" : "private"
      },
      {
       "name" : "parseNumber",
       "kind" : "function",
-      "line" : 555,
+      "line" : 531,
       "char" : 7,
       "deco" : "FNbiZv",
       "parameters" : [
@@ -1086,13 +987,13 @@
         "deco" : "i"
        }
       ],
-      "endline" : 591,
+      "endline" : 568,
       "endchar" : 2
      },
      {
       "name" : "parseType",
       "kind" : "function",
-      "line" : 603,
+      "line" : 580,
       "char" : 7,
       "deco" : "FNbPaZv",
       "parameters" : [
@@ -1101,16 +1002,16 @@
         "deco" : "Pa"
        }
       ],
-      "endline" : 687,
+      "endline" : 657,
       "endchar" : 2
      },
      {
       "name" : "makeError",
       "kind" : "function",
-      "line" : 689,
+      "line" : 659,
       "char" : 7,
       "deco" : "FNbZv",
-      "endline" : 694,
+      "endline" : 664,
       "endchar" : 2
      },
      {
@@ -1124,7 +1025,7 @@
      {
       "name" : "opAssign",
       "kind" : "function",
-      "line" : 264,
+      "line" : 250,
       "char" : 1,
       "deco" : "FNcNjS5sidal6parser10SidalRangeZS5sidal6parser10SidalRange",
       "originalType" : "ref return SidalRange(SidalRange p)",
@@ -1140,6 +1041,7 @@
   ]
  },
  {
+  "name" : "sidal.serializer",
   "kind" : "module",
   "file" : "sidal\\serializer.d",
   "members" : []
@@ -1186,14 +1088,14 @@
    {
     "name" : "SR",
     "kind" : "alias",
-    "line" : 11,
+    "line" : 9,
     "char" : 1,
     "deco" : "S5sidal6parser10SidalRange"
    },
    {
     "name" : "startData",
     "kind" : "variable",
-    "line" : 12,
+    "line" : 10,
     "char" : 6,
     "storageClass" : [
      "enum"
@@ -1204,7 +1106,7 @@
    {
     "name" : "endData",
     "kind" : "variable",
-    "line" : 13,
+    "line" : 11,
     "char" : 6,
     "storageClass" : [
      "enum"
@@ -1215,27 +1117,27 @@
    {
     "name" : "testString",
     "kind" : "variable",
-    "line" : 15,
+    "line" : 13,
     "char" : 8,
     "deco" : "Aa"
    },
    {
     "name" : "terminatedString",
     "kind" : "variable",
-    "line" : 16,
+    "line" : 14,
     "char" : 8,
     "deco" : "Aya"
    },
    {
     "name" : "Player",
     "kind" : "struct",
-    "line" : 17,
+    "line" : 15,
     "char" : 1,
     "members" : [
      {
       "name" : "hp",
       "kind" : "variable",
-      "line" : 20,
+      "line" : 18,
       "char" : 9,
       "deco" : "k",
       "offset" : 0
@@ -1243,7 +1145,7 @@
      {
       "name" : "mana",
       "kind" : "variable",
-      "line" : 20,
+      "line" : 18,
       "char" : 13,
       "deco" : "k",
       "offset" : 4
@@ -1251,7 +1153,7 @@
      {
       "name" : "gold",
       "kind" : "variable",
-      "line" : 21,
+      "line" : 19,
       "char" : 9,
       "deco" : "k",
       "offset" : 8
@@ -1261,13 +1163,13 @@
    {
     "name" : "TestGenericChar",
     "kind" : "struct",
-    "line" : 24,
+    "line" : 22,
     "char" : 1,
     "members" : [
      {
       "name" : "s",
       "kind" : "variable",
-      "line" : 26,
+      "line" : 24,
       "char" : 9,
       "deco" : "Aa",
       "offset" : 0
@@ -1275,7 +1177,7 @@
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 27,
+      "line" : 25,
       "char" : 2,
       "deco" : "FNcAaZS4main15TestGenericChar",
       "originalType" : "ref (char[] s)",
@@ -1285,34 +1187,34 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 30,
+      "endline" : 28,
       "endchar" : 2
      },
      {
       "name" : "front",
       "kind" : "function",
-      "line" : 32,
+      "line" : 30,
       "char" : 7,
       "deco" : "FZa",
-      "endline" : 32,
+      "endline" : 30,
       "endchar" : 30
      },
      {
       "name" : "empty",
       "kind" : "function",
-      "line" : 33,
+      "line" : 31,
       "char" : 7,
       "deco" : "FZb",
-      "endline" : 33,
+      "endline" : 31,
       "endchar" : 39
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 34,
+      "line" : 32,
       "char" : 7,
       "deco" : "FZv",
-      "endline" : 34,
+      "endline" : 32,
       "endchar" : 35
      }
     ]
@@ -1320,20 +1222,20 @@
    {
     "name" : "std.algorithm",
     "kind" : "import",
-    "line" : 36,
+    "line" : 34,
     "char" : 8,
     "protection" : "private"
    },
    {
     "name" : "TestGenericCharArray",
     "kind" : "struct",
-    "line" : 37,
+    "line" : 35,
     "char" : 1,
     "members" : [
      {
       "name" : "s",
       "kind" : "variable",
-      "line" : 39,
+      "line" : 37,
       "char" : 9,
       "deco" : "Aa",
       "offset" : 0
@@ -1341,7 +1243,7 @@
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 40,
+      "line" : 38,
       "char" : 2,
       "deco" : "FNcAaZS4main20TestGenericCharArray",
       "originalType" : "ref (char[] s)",
@@ -1351,34 +1253,34 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 43,
+      "endline" : 41,
       "endchar" : 2
      },
      {
       "name" : "front",
       "kind" : "function",
-      "line" : 45,
+      "line" : 43,
       "char" : 9,
       "deco" : "FZAa",
-      "endline" : 45,
+      "endline" : 43,
       "endchar" : 48
      },
      {
       "name" : "empty",
       "kind" : "function",
-      "line" : 46,
+      "line" : 44,
       "char" : 7,
       "deco" : "FZb",
-      "endline" : 46,
+      "endline" : 44,
       "endchar" : 39
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 47,
+      "line" : 45,
       "char" : 7,
       "deco" : "FZv",
-      "endline" : 47,
+      "endline" : 45,
       "endchar" : 46
      }
     ]
@@ -1386,25 +1288,25 @@
    {
     "name" : "benchTokens",
     "kind" : "function",
-    "line" : 50,
+    "line" : 48,
     "char" : 6,
     "deco" : "FZv",
-    "endline" : 76,
+    "endline" : 75,
     "endchar" : 1
    },
    {
     "name" : "benchWalktrhough",
     "kind" : "function",
-    "line" : 78,
+    "line" : 77,
     "char" : 6,
     "deco" : "FZv",
-    "endline" : 86,
+    "endline" : 85,
     "endchar" : 1
    },
    {
     "name" : "main",
     "kind" : "function",
-    "line" : 88,
+    "line" : 87,
     "char" : 5,
     "deco" : "FAAyaZi",
     "parameters" : [
@@ -1413,9 +1315,24 @@
       "deco" : "AAya"
      }
     ],
-    "endline" : 140,
+    "endline" : 139,
     "endchar" : 1
    }
   ]
+ },
+ {
+  "kind" : "module",
+  "file" : "pattern_matching.d",
+  "members" : []
+ },
+ {
+  "kind" : "module",
+  "file" : "socket.d",
+  "members" : []
+ },
+ {
+  "kind" : "module",
+  "file" : "ssqueue.d",
+  "members" : []
  }
 ]

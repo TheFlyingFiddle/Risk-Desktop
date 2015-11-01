@@ -1099,7 +1099,7 @@
       "line" : 16,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS3app9factories16DesktopAppConfigZS3app9factories16DesktopAppConfig",
-      "originalType" : "ref DesktopAppConfig(DesktopAppConfig p)return ",
+      "originalType" : "ref return DesktopAppConfig(DesktopAppConfig p)",
       "parameters" : [
        {
         "name" : "p",
@@ -2469,12 +2469,12 @@
         "deco" : "S4util4hash6HashID"
        }
       ],
-      "endline" : 326,
+      "endline" : 324,
       "endchar" : 2
      },
      {
       "kind" : "template",
-      "line" : 328,
+      "line" : 326,
       "char" : 7,
       "name" : "asyncLoad",
       "parameters" : [
@@ -2487,7 +2487,7 @@
        {
         "name" : "asyncLoad",
         "kind" : "function",
-        "line" : 328,
+        "line" : 326,
         "char" : 7,
         "type" : "void(string path)",
         "parameters" : [
@@ -2496,7 +2496,7 @@
           "type" : "string"
          }
         ],
-        "endline" : 346,
+        "endline" : 342,
         "endchar" : 2
        }
       ]
@@ -2504,7 +2504,7 @@
      {
       "name" : "asyncLoad",
       "kind" : "function",
-      "line" : 348,
+      "line" : 344,
       "char" : 7,
       "deco" : "FAyaZv",
       "parameters" : [
@@ -2513,14 +2513,14 @@
         "deco" : "Aya"
        }
       ],
-      "endline" : 363,
+      "endline" : 358,
       "endchar" : 2
      },
      {
       "name" : "addAsyncItem",
       "kind" : "function",
       "protection" : "private",
-      "line" : 365,
+      "line" : 360,
       "char" : 15,
       "deco" : "FS4util4hash6HashIDS4util4hash8TypeHashPvZv",
       "parameters" : [
@@ -2537,14 +2537,14 @@
         "deco" : "Pv"
        }
       ],
-      "endline" : 369,
+      "endline" : 364,
       "endchar" : 2
      },
      {
       "name" : "addReloadedAsyncFile",
       "kind" : "function",
       "protection" : "private",
-      "line" : 372,
+      "line" : 366,
       "char" : 15,
       "deco" : "FS4util4hash6HashIDS4util4hash8TypeHashPvZv",
       "parameters" : [
@@ -2561,13 +2561,13 @@
         "deco" : "Pv"
        }
       ],
-      "endline" : 376,
+      "endline" : 370,
       "endchar" : 2
      },
      {
       "name" : "isLoaded",
       "kind" : "function",
-      "line" : 378,
+      "line" : 372,
       "char" : 7,
       "deco" : "FAyaZb",
       "parameters" : [
@@ -2576,22 +2576,22 @@
         "deco" : "Aya"
        }
       ],
-      "endline" : 381,
+      "endline" : 375,
       "endchar" : 2
      },
      {
       "name" : "areAllLoaded",
       "kind" : "function",
-      "line" : 383,
+      "line" : 377,
       "char" : 7,
       "deco" : "FZb",
-      "endline" : 386,
+      "endline" : 380,
       "endchar" : 2
      },
      {
       "name" : "getItem",
       "kind" : "function",
-      "line" : 388,
+      "line" : 382,
       "char" : 10,
       "deco" : "FNbAyaZPS7content7content6Handle",
       "parameters" : [
@@ -2600,12 +2600,12 @@
         "deco" : "Aya"
        }
       ],
-      "endline" : 391,
+      "endline" : 385,
       "endchar" : 2
      },
      {
       "kind" : "template",
-      "line" : 393,
+      "line" : 387,
       "char" : 18,
       "name" : "item",
       "parameters" : [
@@ -2618,7 +2618,7 @@
        {
         "name" : "item",
         "kind" : "function",
-        "line" : 393,
+        "line" : 387,
         "char" : 18,
         "type" : "nothrow ContentHandle!T(string path)",
         "parameters" : [
@@ -2627,7 +2627,7 @@
           "type" : "string"
          }
         ],
-        "endline" : 396,
+        "endline" : 390,
         "endchar" : 2
        }
       ]
@@ -2654,7 +2654,7 @@
    {
     "name" : "asyncLoadFile",
     "kind" : "function",
-    "line" : 399,
+    "line" : 393,
     "char" : 6,
     "deco" : "FAyaS4util4hash6HashIDS7content7content10FileLoaderDFS4util4hash6HashIDS4util4hash8TypeHashPvZvZv",
     "parameters" : [
@@ -2675,7 +2675,7 @@
       "deco" : "DFS4util4hash6HashIDS4util4hash8TypeHashPvZv"
      }
     ],
-    "endline" : 409,
+    "endline" : 403,
     "endchar" : 1
    }
   ]
@@ -9570,7 +9570,7 @@
       "line" : 9,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS8graphics4font8CharInfoZS8graphics4font8CharInfo",
-      "originalType" : "ref CharInfo(CharInfo p)return ",
+      "originalType" : "ref return CharInfo(CharInfo p)",
       "parameters" : [
        {
         "name" : "p",
@@ -9839,7 +9839,7 @@
       "line" : 127,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS8graphics4font7MeasureZS8graphics4font7Measure",
-      "originalType" : "ref Measure(Measure p)return ",
+      "originalType" : "ref return Measure(Measure p)",
       "parameters" : [
        {
         "name" : "p",
@@ -9994,7 +9994,7 @@
       "line" : 6,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS8graphics5frame5FrameZS8graphics5frame5Frame",
-      "originalType" : "ref Frame(Frame p)return ",
+      "originalType" : "ref return Frame(Frame p)",
       "parameters" : [
        {
         "name" : "p",
@@ -12984,7 +12984,7 @@
       "line" : 6,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS8graphics12textureatlas10SourceRectZS8graphics12textureatlas10SourceRect",
-      "originalType" : "ref SourceRect(SourceRect p)return ",
+      "originalType" : "ref return SourceRect(SourceRect p)",
       "parameters" : [
        {
         "name" : "p",
@@ -13799,7 +13799,7 @@
       "line" : 7,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS9rendering8combined10Renderer2DZS9rendering8combined10Renderer2D",
-      "originalType" : "ref Renderer2D(Renderer2D p)return ",
+      "originalType" : "ref return Renderer2D(Renderer2D p)",
       "parameters" : [
        {
         "name" : "p",
@@ -13963,7 +13963,7 @@
       "line" : 13,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS9rendering8renderer6VertexZS9rendering8renderer6Vertex",
-      "originalType" : "ref Vertex(Vertex p)return ",
+      "originalType" : "ref return Vertex(Vertex p)",
       "parameters" : [
        {
         "name" : "p",
@@ -14020,7 +14020,7 @@
       "line" : 21,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS9rendering8renderer10DistVertexZS9rendering8renderer10DistVertex",
-      "originalType" : "ref DistVertex(DistVertex p)return ",
+      "originalType" : "ref return DistVertex(DistVertex p)",
       "parameters" : [
        {
         "name" : "p",
@@ -16213,7 +16213,7 @@
       "line" : 49,
       "char" : 1,
       "deco" : "FNcNjS5sound6player11SoundPlayerZS5sound6player11SoundPlayer",
-      "originalType" : "ref SoundPlayer(SoundPlayer p)return ",
+      "originalType" : "ref return SoundPlayer(SoundPlayer p)",
       "parameters" : [
        {
         "name" : "p",
@@ -18691,7 +18691,7 @@
       "line" : 8,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS6window5mouse16MouseButtonStateZS6window5mouse16MouseButtonState",
-      "originalType" : "ref MouseButtonState(MouseButtonState p)return ",
+      "originalType" : "ref return MouseButtonState(MouseButtonState p)",
       "parameters" : [
        {
         "name" : "p",
@@ -19047,7 +19047,7 @@
       "line" : 26,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS6window5mouse5MouseZS6window5mouse5Mouse",
-      "originalType" : "ref Mouse(Mouse p)return ",
+      "originalType" : "ref return Mouse(Mouse p)",
       "parameters" : [
        {
         "name" : "p",
@@ -19684,7 +19684,7 @@
       "line" : 237,
       "char" : 1,
       "deco" : "FNaNbNcNiNjS6window6window12WindowConfigZS6window6window12WindowConfig",
-      "originalType" : "ref WindowConfig(WindowConfig p)return ",
+      "originalType" : "ref return WindowConfig(WindowConfig p)",
       "parameters" : [
        {
         "name" : "p",

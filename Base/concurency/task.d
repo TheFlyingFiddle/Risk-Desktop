@@ -68,7 +68,7 @@ void initialize(A)(ref A allocator, ConcurencyConfig config)
 
 	threads = allocator.allocate!(TaskThread*[])(config.numThreads); 
 	foreach(ref thread; threads) 
-		thread = allocator.allocate!TaskThread(allocator, 1024);
+		thread = allocator.allocate!TaskThread(allocator, config.numThreads);
 
 	registerThread("main");
 }
@@ -79,7 +79,6 @@ ReturnType!fun doTaskOnMain(alias fun, Args...)(Args args)
 	return doBlockingTaskOn!("main", fun, Args)(args);
 }
 
-
 void doTaskOnMain(T)(T task)
 {
 	foreach(ref thread; threads) if(thread.id == "main")
@@ -88,7 +87,6 @@ void doTaskOnMain(T)(T task)
 	}
 	assert(0, "Thread not found!");
 }
-
 
 ReturnType!fun doBlockingTaskOn(string threadID, alias fun, Args...)(Args args)
 {
