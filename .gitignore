@@ -30,6 +30,15 @@ $RECYCLE.BIN/
 /win64
 /Debug
 
+*.obj
+*.tlog
+*.map
+*.cmd
+*.lnkarg
+*.html
+*.dep
+*.json
+
 # =========================
 # Operating System Files
 # =========================
