@@ -1,0 +1,5 @@
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+echo Compiling main.d...
+dmd -g -O -inline -release -noboundscheck -X -Xf"Debug\main.json" -c  -ofDebug\main.obj -deps=Debug\main.obj.dep main.d
+:reportError
+if errorlevel 1 echo Building Debug\main.obj failed!

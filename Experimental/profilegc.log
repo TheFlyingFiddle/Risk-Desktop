@@ -1,5 +1,7 @@
 bytes allocated, allocations, type, function, file:line
-       55000000	        1000000	char[] D main main.d:101
+       30000000	        1000000	char[] D main main.d:135
        16000000	        1000000	std.array.Appender!string.Appender.Data std.array.Appender!string.Appender.this C:\D\dmd2\windows\bin\..\..\src\phobos\std\array.d:2653
-             32	              1	char[] D main main.d:94
-              3	              1	char[] D main main.d:105
+       12000008	              2	ubyte[] D main encoding\binary.d:246
+       12000000	        1000000	main.Coord[] D main main.d:136
+             30	              1	char[] D main main.d:127
+              3	              1	char[] D main main.d:140

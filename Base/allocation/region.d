@@ -47,9 +47,13 @@ struct RegionAllocator
 	void[] allocate_impl(size_t size, size_t alignment)
 	{
 		auto alignedOffset = aligned(_offset, alignment);
-		_offset = cast(void*)(cast(size_t)alignedOffset + size);
+		auto offset = cast(void*)(cast(size_t)alignedOffset + size);
 		
-		assert(bytesAllocated <= _capacity, "Out of memory");
+		//assert(bytesAllocated <= _capacity, "Out of memory");
+		if(offset - _buffer >= _capacity)
+			return null;
+		
+		_offset = offset;
 		return alignedOffset[0 .. size];
 	}
 
@@ -64,6 +68,11 @@ struct RegionAllocator
 			   cast(size_t)rewindPos >= cast(size_t)_buffer);
 		
 		this._offset = rewindPos;
+	}
+	
+	void reset()
+	{
+		this._offset   = this._buffer;
 	}
 
 
@@ -85,6 +94,75 @@ unittest
 	assert(region.bytesAllocated() == 1024);
 	assert(region.bytesRemaining() == 0);
 }
+
+//Good for allocating many as in 1000000+ small objects fast. 
+//Can only deallocate all objects at once. As such it is usefull
+//for serialization. 
+struct RegionChain
+{
+	struct Node
+	{
+		RegionAllocator region;
+		Node* next;
+	}	
+
+	IAllocator backing;
+	size_t minSize;
+	Node* list;
+	this(IAllocator backing, size_t standardSize)
+	{	
+		this.minSize = standardSize;
+		this.backing = backing;
+		list = allocNode(minSize);
+	}
+
+	Node* allocNode(size_t size) nothrow
+	{
+		import std.c.stdio;
+
+		auto memsize = Node.sizeof + size; 
+		auto tmem  = backing.allocateRaw(memsize, 8);
+		auto rmem  = (tmem.ptr + Node.sizeof)[0 .. size];
+		ubyte[] nodemem = cast(ubyte[])tmem[0 .. Node.sizeof];
+		nodemem[] = 0;
+		Node* node = cast(Node*)(nodemem.ptr);
+		node.region = RegionAllocator(rmem);
+		node.next   = null;
+		return node;
+	}
+
+	void[] allocate_impl(size_t size, size_t alignment) nothrow
+	{
+		import std.algorithm : max;
+		auto mem = list.region.allocate_impl(size, alignment);
+		if(mem.length) return mem;
+
+		Node* node = allocNode(max(minSize, size));
+		node.next  = list;
+		list = node;
+		return allocate_impl(size, alignment);
+	}
+
+	void deallocate_impl(void[] dealloc) nothrow
+	{
+		//assert(0, "Should never call this");
+	}
+
+	void deallocateAll()
+	{
+		Node* node = list;
+		Node* next = list.next;
+		while(node !is null)
+		{
+			void* nptr = cast(void*)node;
+			backing.deallocate(nptr[0 .. Node.sizeof + node.region._capacity]);
+			node = next;
+			if(node !is null)
+				next = node.next;
+		}
+	}
+}	
+
 
 struct RegionAppender(T)
 {

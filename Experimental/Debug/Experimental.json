@@ -1,5 +1,1181 @@
 [
  {
+  "name" : "encoding.binary",
+  "kind" : "module",
+  "file" : "encoding\\binary.d",
+  "members" : [
+   {
+    "name" : "util.traits",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "IAllocator",
+     "Mallocator"
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 6,
+    "char" : 6,
+    "name" : "encode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!T",
+    "members" : [
+     {
+      "name" : "encode",
+      "kind" : "function",
+      "line" : 6,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 10,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 13,
+    "char" : 6,
+    "name" : "encode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T && is(T == struct)",
+    "members" : [
+     {
+      "name" : "encode",
+      "kind" : "function",
+      "line" : 13,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 18,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 20,
+    "char" : 6,
+    "name" : "encode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "encode",
+      "kind" : "function",
+      "line" : 20,
+      "char" : 6,
+      "type" : "void(ref S s, T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T"
+       }
+      ],
+      "endline" : 27,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 29,
+    "char" : 6,
+    "name" : "encode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U*"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "encode",
+      "kind" : "function",
+      "line" : 29,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t, size_t length = 1)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "length",
+        "type" : "size_t",
+        "default" : "1"
+       }
+      ],
+      "endline" : 34,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 36,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U*"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!U",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 36,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t, size_t length = 1)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "length",
+        "type" : "size_t",
+        "default" : "1"
+       }
+      ],
+      "endline" : 40,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 42,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U*"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!U",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 42,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t, size_t length = 1)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "length",
+        "type" : "size_t",
+        "default" : "1"
+       }
+      ],
+      "endline" : 48,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 50,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == IAllocator)",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 50,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 53,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 55,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T && is(T == struct)",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 55,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 94,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 96,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!U",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 96,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 100,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 102,
+    "char" : 6,
+    "name" : "encodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "S",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!U",
+    "members" : [
+     {
+      "name" : "encodeInner",
+      "kind" : "function",
+      "line" : 102,
+      "char" : 6,
+      "type" : "void(ref S s, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "S",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 107,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 109,
+    "char" : 6,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!T && is(T == struct)",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 109,
+      "char" : 6,
+      "type" : "void(void* data, auto ref T t)",
+      "parameters" : [
+       {
+        "name" : "data",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 112,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 114,
+    "char" : 6,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T && is(T == struct)",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 114,
+      "char" : 6,
+      "type" : "void(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 119,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 121,
+    "char" : 6,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 121,
+      "char" : 6,
+      "type" : "void(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 127,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 129,
+    "char" : 6,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 129,
+      "char" : 6,
+      "type" : "void(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 134,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 136,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == IAllocator)",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 136,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 140,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 142,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U*"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 142,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t, size_t length = 1)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "length",
+        "type" : "size_t",
+        "default" : "1"
+       }
+      ],
+      "endline" : 146,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 148,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U*"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 148,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t, size_t length = 1)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "length",
+        "type" : "size_t",
+        "default" : "1"
+       }
+      ],
+      "endline" : 155,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 157,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T && is(T == struct)",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 157,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 199,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 201,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 201,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 205,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 207,
+    "char" : 8,
+    "name" : "decodeInner",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!U",
+    "members" : [
+     {
+      "name" : "decodeInner",
+      "kind" : "function",
+      "line" : 207,
+      "char" : 8,
+      "type" : "size_t(void* start, ref T t)",
+      "parameters" : [
+       {
+        "name" : "start",
+        "type" : "void*"
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 216,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "name" : "Test",
+    "kind" : "struct",
+    "line" : 218,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "variable",
+      "line" : 220,
+      "char" : 6,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "i",
+      "init" : "1",
+      "offset" : 0
+     },
+     {
+      "name" : "b",
+      "kind" : "variable",
+      "line" : 221,
+      "char" : 6,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "i",
+      "init" : "2",
+      "offset" : 4
+     },
+     {
+      "name" : "c",
+      "kind" : "variable",
+      "line" : 222,
+      "char" : 9,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "Aya",
+      "init" : "\"hello\"",
+      "offset" : 8
+     },
+     {
+      "name" : "d",
+      "kind" : "variable",
+      "line" : 223,
+      "char" : 13,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "AAAya",
+      "init" : "[[\"apa\", \"bapa\", \"capa\", \"maka\"], [\"mowgli\", \"powgli\", \"trololololo\"]]",
+      "offset" : 16
+     }
+    ]
+   },
+   {
+    "name" : "Test2",
+    "kind" : "struct",
+    "line" : 226,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "variable",
+      "line" : 228,
+      "char" : 6,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "i",
+      "init" : "1",
+      "offset" : 0
+     },
+     {
+      "name" : "b",
+      "kind" : "variable",
+      "line" : 228,
+      "char" : 13,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "i",
+      "init" : "3",
+      "offset" : 4
+     },
+     {
+      "name" : "k",
+      "kind" : "variable",
+      "line" : 229,
+      "char" : 8,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "f",
+      "init" : "23.32F",
+      "offset" : 8
+     },
+     {
+      "name" : "name",
+      "kind" : "variable",
+      "line" : 230,
+      "char" : 9,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "Aya",
+      "init" : "\"okokok\"",
+      "offset" : 12
+     },
+     {
+      "name" : "t",
+      "kind" : "variable",
+      "line" : 231,
+      "char" : 9,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "AS8encoding6binary4Test",
+      "init" : "[Test(1, 2, \"hello\", [[\"apa\", \"bapa\", \"capa\", \"maka\"], [\"mowgli\", \"powgli\", \"trololololo\"]]), Test(1, 2, \"hello\", [[\"apa\", \"bapa\", \"capa\", \"maka\"], [\"mowgli\", \"powgli\", \"trololololo\"]]), Test(1, 2, \"hello\", [[\"apa\", \"bapa\", \"capa\", \"maka\"], [\"mowgli\", \"powgli\", \"trololololo\"]]), Test(1, 2, \"hello\", [[\"apa\", \"bapa\", \"capa\", \"maka\"], [\"mowgli\", \"powgli\", \"trololololo\"]])]",
+      "offset" : 20
+     }
+    ]
+   },
+   {
+    "name" : "Test3",
+    "kind" : "struct",
+    "line" : 234,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "variable",
+      "line" : 236,
+      "char" : 6,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "i",
+      "offset" : 0
+     },
+     {
+      "name" : "test",
+      "kind" : "variable",
+      "line" : 237,
+      "char" : 8,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "PS8encoding6binary4Test",
+      "offset" : 4
+     }
+    ]
+   },
+   {
+    "name" : "TestStore",
+    "kind" : "struct",
+    "line" : 240,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "data",
+      "kind" : "variable",
+      "line" : 242,
+      "char" : 10,
+      "storageClass" : [
+       "@trusted"
+      ],
+      "deco" : "Ah",
+      "offset" : 0
+     },
+     {
+      "name" : "put",
+      "kind" : "function",
+      "line" : 243,
+      "char" : 7,
+      "deco" : "FNaNbNfAvZv",
+      "parameters" : [
+       {
+        "name" : "d",
+        "deco" : "Av"
+       }
+      ],
+      "endline" : 248,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "name" : "__unittestL251_1",
+    "kind" : "function",
+    "line" : 251,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 261,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL261_2",
+    "kind" : "function",
+    "line" : 261,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 270,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL270_3",
+    "kind" : "function",
+    "line" : 270,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 279,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL279_4",
+    "kind" : "function",
+    "line" : 279,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 291,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL291_5",
+    "kind" : "function",
+    "line" : 291,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 302,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL302_6",
+    "kind" : "function",
+    "line" : 302,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 315,
+    "endchar" : 1
+   },
+   {
+    "name" : "__unittestL315_7",
+    "kind" : "function",
+    "line" : 315,
+    "char" : 1,
+    "deco" : "FNeZv",
+    "endline" : 341,
+    "endchar" : 1
+   }
+  ]
+ },
+ {
   "name" : "sidal.parser",
   "kind" : "module",
   "file" : "sidal\\parser.d",
@@ -33,7 +1209,7 @@
     ]
    },
    {
-    "name" : "RangeType",
+    "name" : "SourceType",
     "kind" : "enum",
     "line" : 7,
     "char" : 1,
@@ -578,7 +1754,7 @@
     ]
    },
    {
-    "name" : "SidalRange",
+    "name" : "SidalParser",
     "kind" : "struct",
     "line" : 250,
     "char" : 1,
@@ -598,8 +1774,8 @@
       "name" : "type",
       "kind" : "variable",
       "line" : 253,
-      "char" : 12,
-      "deco" : "E5sidal6parser9RangeType",
+      "char" : 13,
+      "deco" : "E5sidal6parser10SourceType",
       "offset" : 0
      },
      {
@@ -753,7 +1929,7 @@
       "offset" : 80
      },
      {
-      "name" : "front",
+      "name" : "token",
       "kind" : "variable",
       "line" : 276,
       "char" : 13,
@@ -773,7 +1949,81 @@
       "kind" : "constructor",
       "line" : 279,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser10FileSourceAaZS5sidal6parser10SidalRange",
+      "deco" : "FNcS3std5stdio4FileAaZS5sidal6parser11SidalParser",
+      "originalType" : "ref (File file, char[] buffer)",
+      "parameters" : [
+       {
+        "name" : "file",
+        "deco" : "S3std5stdio4File"
+       },
+       {
+        "name" : "buffer",
+        "deco" : "Aa"
+       }
+      ],
+      "endline" : 282,
+      "endchar" : 2
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 284,
+      "char" : 2,
+      "deco" : "FNcAxaAaZS5sidal6parser11SidalParser",
+      "originalType" : "ref (const(char)[] s, char[] buffer)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "deco" : "Axa"
+       },
+       {
+        "name" : "buffer",
+        "deco" : "Aa"
+       }
+      ],
+      "endline" : 287,
+      "endchar" : 2
+     },
+     {
+      "kind" : "template",
+      "line" : 289,
+      "char" : 2,
+      "name" : "this",
+      "parameters" : [
+       {
+        "name" : "Range",
+        "kind" : "type"
+       }
+      ],
+      "constraint" : "isInputRange!Range",
+      "members" : [
+       {
+        "name" : "this",
+        "kind" : "constructor",
+        "line" : 289,
+        "char" : 2,
+        "type" : "(Range range, char[] buffer)",
+        "parameters" : [
+         {
+          "name" : "range",
+          "type" : "Range"
+         },
+         {
+          "name" : "buffer",
+          "type" : "char[]"
+         }
+        ],
+        "endline" : 292,
+        "endchar" : 2
+       }
+      ]
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 294,
+      "char" : 2,
+      "deco" : "FNcS5sidal6parser10FileSourceAaZS5sidal6parser11SidalParser",
       "originalType" : "ref (FileSource range, char[] buffer)",
       "parameters" : [
        {
@@ -785,15 +2035,15 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 294,
+      "endline" : 309,
       "endchar" : 2
      },
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 296,
+      "line" : 311,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser12StringSourceAaZS5sidal6parser10SidalRange",
+      "deco" : "FNcS5sidal6parser12StringSourceAaZS5sidal6parser11SidalParser",
       "originalType" : "ref (StringSource range, char[] buffer)",
       "parameters" : [
        {
@@ -805,15 +2055,15 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 310,
+      "endline" : 325,
       "endchar" : 2
      },
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 312,
+      "line" : 327,
       "char" : 2,
-      "deco" : "FNcS5sidal6parser13GenericSourceAaZS5sidal6parser10SidalRange",
+      "deco" : "FNcS5sidal6parser13GenericSourceAaZS5sidal6parser11SidalParser",
       "originalType" : "ref (GenericSource range, char[] buffer)",
       "parameters" : [
        {
@@ -825,31 +2075,31 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 326,
+      "endline" : 341,
       "endchar" : 2
      },
      {
       "name" : "~this",
       "kind" : "destructor",
-      "line" : 328,
+      "line" : 343,
       "char" : 2,
       "deco" : "FZv",
-      "endline" : 340,
+      "endline" : 355,
       "endchar" : 2
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 343,
+      "line" : 358,
       "char" : 7,
       "deco" : "FNbZv",
-      "endline" : 399,
+      "endline" : 414,
       "endchar" : 2
      },
      {
       "name" : "getData",
       "kind" : "function",
-      "line" : 401,
+      "line" : 416,
       "char" : 7,
       "deco" : "FNbkKAaZb",
       "originalType" : "nothrow bool(size_t size, ref char[] data)",
@@ -866,22 +2116,22 @@
         ]
        }
       ],
-      "endline" : 423,
+      "endline" : 438,
       "endchar" : 2
      },
      {
       "name" : "nextBuffer",
       "kind" : "function",
-      "line" : 425,
+      "line" : 440,
       "char" : 7,
       "deco" : "FNbZb",
-      "endline" : 429,
+      "endline" : 444,
       "endchar" : 2
      },
      {
       "name" : "moveBuffer",
       "kind" : "function",
-      "line" : 431,
+      "line" : 446,
       "char" : 7,
       "deco" : "FNbKPaZb",
       "parameters" : [
@@ -893,13 +2143,13 @@
         ]
        }
       ],
-      "endline" : 448,
+      "endline" : 463,
       "endchar" : 2
      },
      {
       "name" : "parseString",
       "kind" : "function",
-      "line" : 450,
+      "line" : 465,
       "char" : 7,
       "deco" : "FNbPaZv",
       "parameters" : [
@@ -908,13 +2158,13 @@
         "deco" : "Pa"
        }
       ],
-      "endline" : 475,
+      "endline" : 490,
       "endchar" : 2
      },
      {
       "name" : "parseHex",
       "kind" : "function",
-      "line" : 477,
+      "line" : 492,
       "char" : 7,
       "deco" : "FNbiKmZv",
       "parameters" : [
@@ -930,13 +2180,13 @@
         ]
        }
       ],
-      "endline" : 501,
+      "endline" : 517,
       "endchar" : 2
      },
      {
       "name" : "powE",
       "kind" : "variable",
-      "line" : 503,
+      "line" : 519,
       "char" : 29,
       "storageClass" : [
        "static",
@@ -949,7 +2199,7 @@
      {
       "name" : "parseFloat",
       "kind" : "function",
-      "line" : 507,
+      "line" : 523,
       "char" : 7,
       "deco" : "FNbiKmZv",
       "parameters" : [
@@ -965,20 +2215,20 @@
         ]
        }
       ],
-      "endline" : 528,
+      "endline" : 547,
       "endchar" : 2
      },
      {
       "name" : "std.c.stdio",
       "kind" : "import",
-      "line" : 530,
+      "line" : 549,
       "char" : 9,
       "protection" : "private"
      },
      {
       "name" : "parseNumber",
       "kind" : "function",
-      "line" : 531,
+      "line" : 550,
       "char" : 7,
       "deco" : "FNbiZv",
       "parameters" : [
@@ -987,13 +2237,13 @@
         "deco" : "i"
        }
       ],
-      "endline" : 568,
+      "endline" : 589,
       "endchar" : 2
      },
      {
       "name" : "parseType",
       "kind" : "function",
-      "line" : 580,
+      "line" : 601,
       "char" : 7,
       "deco" : "FNbPaZv",
       "parameters" : [
@@ -1002,16 +2252,16 @@
         "deco" : "Pa"
        }
       ],
-      "endline" : 657,
+      "endline" : 685,
       "endchar" : 2
      },
      {
       "name" : "makeError",
       "kind" : "function",
-      "line" : 659,
+      "line" : 687,
       "char" : 7,
       "deco" : "FNbZv",
-      "endline" : 664,
+      "endline" : 692,
       "endchar" : 2
      },
      {
@@ -1027,12 +2277,12 @@
       "kind" : "function",
       "line" : 250,
       "char" : 1,
-      "deco" : "FNcNjS5sidal6parser10SidalRangeZS5sidal6parser10SidalRange",
-      "originalType" : "ref return SidalRange(SidalRange p)",
+      "deco" : "FNcNjS5sidal6parser11SidalParserZS5sidal6parser11SidalParser",
+      "originalType" : "ref return SidalParser(SidalParser p)",
       "parameters" : [
        {
         "name" : "p",
-        "deco" : "S5sidal6parser10SidalRange"
+        "deco" : "S5sidal6parser11SidalParser"
        }
       ]
      }
@@ -1044,7 +2294,852 @@
   "name" : "sidal.serializer",
   "kind" : "module",
   "file" : "sidal\\serializer.d",
-  "members" : []
+  "members" : [
+   {
+    "name" : "sidal.parser",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.traits",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation.tracking",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "collections.list",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "EncodeMode",
+    "kind" : "enum",
+    "line" : 8,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 8,
+      "char" : 19
+     }
+    ]
+   },
+   {
+    "name" : "DecodeMode",
+    "kind" : "enum",
+    "line" : 9,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "a",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 9,
+      "char" : 19
+     }
+    ]
+   },
+   {
+    "name" : "ErrorCode",
+    "kind" : "enum",
+    "line" : 11,
+    "char" : 1,
+    "baseDeco" : "h",
+    "members" : [
+     {
+      "name" : "none",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)0u",
+      "line" : 13,
+      "char" : 2
+     },
+     {
+      "name" : "integerOverflow",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)1u",
+      "line" : 14,
+      "char" : 2
+     },
+     {
+      "name" : "wrongType",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)2u",
+      "line" : 15,
+      "char" : 2
+     },
+     {
+      "name" : "bufferOverflow",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)3u",
+      "line" : 16,
+      "char" : 2
+     },
+     {
+      "name" : "unnamed",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)4u",
+      "line" : 17,
+      "char" : 2
+     },
+     {
+      "name" : "toManyFields",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)5u",
+      "line" : 18,
+      "char" : 2
+     },
+     {
+      "name" : "unbalancedParens",
+      "kind" : "enum member",
+      "value" : "cast(ubyte)6u",
+      "line" : 19,
+      "char" : 2
+     }
+    ]
+   },
+   {
+    "name" : "SidalAllocator",
+    "kind" : "struct",
+    "line" : 22,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "track",
+      "kind" : "variable",
+      "line" : 24,
+      "char" : 17,
+      "deco" : "C10allocation8tracking14TrackAllocator",
+      "originalType" : "TrackAllocator",
+      "offset" : 0
+     },
+     {
+      "name" : "string",
+      "kind" : "variable",
+      "line" : 25,
+      "char" : 17,
+      "deco" : "S10allocation6region11RegionChain",
+      "offset" : 4
+     },
+     {
+      "name" : "this",
+      "kind" : "constructor",
+      "line" : 26,
+      "char" : 2,
+      "deco" : "FNcC10allocation6common10IAllocatorZS5sidal10serializer14SidalAllocator",
+      "originalType" : "ref (IAllocator allocator)",
+      "parameters" : [
+       {
+        "name" : "allocator",
+        "deco" : "C10allocation6common10IAllocator"
+       }
+      ],
+      "endline" : 31,
+      "endchar" : 2
+     },
+     {
+      "name" : "allocate",
+      "kind" : "function",
+      "line" : 33,
+      "char" : 9,
+      "deco" : "FNbkZAa",
+      "originalType" : "nothrow char[](size_t size)",
+      "parameters" : [
+       {
+        "name" : "size",
+        "deco" : "k"
+       }
+      ],
+      "endline" : 36,
+      "endchar" : 2
+     },
+     {
+      "name" : "deallocateAll",
+      "kind" : "function",
+      "line" : 38,
+      "char" : 7,
+      "deco" : "FZv",
+      "endline" : 42,
+      "endchar" : 2
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 45,
+    "char" : 1,
+    "name" : "SidalItem",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T",
+    "members" : [
+     {
+      "name" : "SidalItem",
+      "kind" : "struct",
+      "line" : 45,
+      "char" : 1,
+      "members" : [
+       {
+        "name" : "allocator",
+        "kind" : "variable",
+        "line" : 47,
+        "char" : 17,
+        "type" : "SidalAllocator"
+       },
+       {
+        "name" : "value",
+        "kind" : "variable",
+        "line" : 48,
+        "char" : 4,
+        "type" : "T"
+       },
+       {
+        "name" : "deallocate",
+        "kind" : "function",
+        "line" : 51,
+        "char" : 7,
+        "type" : "void()",
+        "endline" : 55,
+        "endchar" : 2
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 58,
+    "char" : 3,
+    "name" : "decodeSIDAL",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Source",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!hasIndirections!T",
+    "members" : [
+     {
+      "name" : "decodeSIDAL",
+      "kind" : "function",
+      "line" : 58,
+      "char" : 3,
+      "type" : "T(auto ref Source s)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Source",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 74,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 76,
+    "char" : 13,
+    "name" : "decodeSIDAL",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     },
+     {
+      "name" : "Source",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "hasIndirections!T",
+    "members" : [
+     {
+      "name" : "decodeSIDAL",
+      "kind" : "function",
+      "line" : 76,
+      "char" : 13,
+      "type" : "SidalItem!T(auto ref Source s, IAllocator alloc)",
+      "parameters" : [
+       {
+        "name" : "s",
+        "type" : "Source",
+        "storageClass" : [
+         "auto",
+         "ref"
+        ]
+       },
+       {
+        "name" : "alloc",
+        "type" : "IAllocator"
+       }
+      ],
+      "endline" : 93,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "name" : "SidalDecoder",
+    "kind" : "struct",
+    "line" : 96,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "allocator",
+      "kind" : "variable",
+      "line" : 98,
+      "char" : 17,
+      "deco" : "S5sidal10serializer14SidalAllocator",
+      "offset" : 0
+     },
+     {
+      "name" : "parser",
+      "kind" : "variable",
+      "line" : 99,
+      "char" : 14,
+      "deco" : "S5sidal6parser11SidalParser",
+      "offset" : 16
+     },
+     {
+      "name" : "token",
+      "kind" : "function",
+      "line" : 100,
+      "char" : 17,
+      "deco" : "FNbNcZS5sidal6parser10SidalToken",
+      "endline" : 100,
+      "endchar" : 56
+     },
+     {
+      "name" : "nextToken",
+      "kind" : "function",
+      "line" : 101,
+      "char" : 7,
+      "deco" : "FNbZv",
+      "endline" : 104,
+      "endchar" : 2
+     },
+     {
+      "kind" : "template",
+      "line" : 106,
+      "char" : 2,
+      "name" : "this",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "members" : [
+       {
+        "name" : "this",
+        "kind" : "constructor",
+        "line" : 106,
+        "char" : 2,
+        "type" : "(auto ref T t, char[] buffer, SidalAllocator alloc)",
+        "parameters" : [
+         {
+          "name" : "t",
+          "type" : "T",
+          "storageClass" : [
+           "auto",
+           "ref"
+          ]
+         },
+         {
+          "name" : "buffer",
+          "type" : "char[]"
+         },
+         {
+          "name" : "alloc",
+          "type" : "SidalAllocator"
+         }
+        ],
+        "endline" : 110,
+        "endchar" : 2
+       }
+      ]
+     },
+     {
+      "kind" : "template",
+      "line" : 112,
+      "char" : 12,
+      "name" : "decode",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "members" : [
+       {
+        "name" : "decode",
+        "kind" : "function",
+        "line" : 112,
+        "char" : 12,
+        "type" : "ErrorCode(ref T t)",
+        "parameters" : [
+         {
+          "name" : "t",
+          "type" : "T",
+          "storageClass" : [
+           "ref"
+          ]
+         }
+        ],
+        "endline" : 122,
+        "endchar" : 2
+       }
+      ]
+     },
+     {
+      "name" : "~this",
+      "kind" : "destructor",
+      "line" : 96,
+      "char" : 1,
+      "deco" : "FZv",
+      "originalType" : "void()"
+     },
+     {
+      "name" : "__xdtor",
+      "kind" : "alias"
+     },
+     {
+      "name" : "__xpostblit",
+      "kind" : "alias"
+     },
+     {
+      "name" : "opAssign",
+      "kind" : "function",
+      "line" : 96,
+      "char" : 1,
+      "deco" : "FNcNjS5sidal10serializer12SidalDecoderZS5sidal10serializer12SidalDecoder",
+      "originalType" : "ref return SidalDecoder(SidalDecoder p)",
+      "parameters" : [
+       {
+        "name" : "p",
+        "deco" : "S5sidal10serializer12SidalDecoder"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "Decoder",
+    "kind" : "alias",
+    "protection" : "private",
+    "line" : 127,
+    "char" : 9,
+    "deco" : "S5sidal10serializer12SidalDecoder"
+   },
+   {
+    "kind" : "template",
+    "line" : 130,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isIntegral!T",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 130,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 150,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 152,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isFloatingPoint!T",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 152,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 163,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 165,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == bool)",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 165,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 172,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 174,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "isSomeString!T",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 174,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 184,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 186,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "!isSomeString!T",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 186,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 209,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 211,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type",
+      "type" : "U[N]"
+     },
+     {
+      "name" : "U",
+      "kind" : "type"
+     },
+     {
+      "name" : "N",
+      "kind" : "value",
+      "deco" : "k"
+     }
+    ],
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 211,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 233,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 235,
+    "char" : 11,
+    "name" : "decodeNamed",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "decodeNamed",
+      "kind" : "function",
+      "line" : 235,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 288,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 290,
+    "char" : 11,
+    "name" : "decodeUnnamed",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "decodeUnnamed",
+      "kind" : "function",
+      "line" : 290,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 312,
+      "endchar" : 1
+     }
+    ]
+   },
+   {
+    "kind" : "template",
+    "line" : 314,
+    "char" : 11,
+    "name" : "decode",
+    "parameters" : [
+     {
+      "name" : "T",
+      "kind" : "type"
+     }
+    ],
+    "constraint" : "is(T == struct)",
+    "members" : [
+     {
+      "name" : "decode",
+      "kind" : "function",
+      "line" : 314,
+      "char" : 11,
+      "type" : "ErrorCode(ref Decoder d, ref T t)",
+      "parameters" : [
+       {
+        "name" : "d",
+        "type" : "Decoder",
+        "storageClass" : [
+         "ref"
+        ]
+       },
+       {
+        "name" : "t",
+        "type" : "T",
+        "storageClass" : [
+         "ref"
+        ]
+       }
+      ],
+      "endline" : 323,
+      "endchar" : 1
+     }
+    ]
+   }
+  ]
  },
  {
   "kind" : "module",
@@ -1065,48 +3160,69 @@
     "protection" : "private"
    },
    {
-    "name" : "std.range",
+    "name" : "sidal.serializer",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "encoding.binary",
     "kind" : "import",
     "line" : 4,
     "char" : 8,
     "protection" : "private"
    },
    {
-    "name" : "std.array",
+    "name" : "std.range",
     "kind" : "import",
     "line" : 5,
     "char" : 8,
     "protection" : "private"
    },
    {
-    "name" : "std.datetime",
+    "name" : "std.array",
     "kind" : "import",
     "line" : 6,
     "char" : 8,
     "protection" : "private"
    },
    {
+    "name" : "std.datetime",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "allocation",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
     "name" : "SR",
     "kind" : "alias",
-    "line" : 9,
+    "line" : 10,
     "char" : 1,
-    "deco" : "S5sidal6parser10SidalRange"
+    "deco" : "S5sidal6parser11SidalParser"
    },
    {
     "name" : "startData",
     "kind" : "variable",
-    "line" : 10,
+    "line" : 11,
     "char" : 6,
     "storageClass" : [
      "enum"
     ],
     "deco" : "Aya",
-    "init" : "\"float3[] coordinates = float3[](\""
+    "init" : "\"Coord[] coordinates = Coord[](\""
    },
    {
     "name" : "endData",
     "kind" : "variable",
-    "line" : 11,
+    "line" : 12,
     "char" : 6,
     "storageClass" : [
      "enum"
@@ -1117,27 +3233,27 @@
    {
     "name" : "testString",
     "kind" : "variable",
-    "line" : 13,
+    "line" : 14,
     "char" : 8,
     "deco" : "Aa"
    },
    {
     "name" : "terminatedString",
     "kind" : "variable",
-    "line" : 14,
+    "line" : 15,
     "char" : 8,
     "deco" : "Aya"
    },
    {
     "name" : "Player",
     "kind" : "struct",
-    "line" : 15,
+    "line" : 16,
     "char" : 1,
     "members" : [
      {
       "name" : "hp",
       "kind" : "variable",
-      "line" : 18,
+      "line" : 19,
       "char" : 9,
       "deco" : "k",
       "offset" : 0
@@ -1145,7 +3261,7 @@
      {
       "name" : "mana",
       "kind" : "variable",
-      "line" : 18,
+      "line" : 19,
       "char" : 13,
       "deco" : "k",
       "offset" : 4
@@ -1153,7 +3269,7 @@
      {
       "name" : "gold",
       "kind" : "variable",
-      "line" : 19,
+      "line" : 20,
       "char" : 9,
       "deco" : "k",
       "offset" : 8
@@ -1163,13 +3279,13 @@
    {
     "name" : "TestGenericChar",
     "kind" : "struct",
-    "line" : 22,
+    "line" : 23,
     "char" : 1,
     "members" : [
      {
       "name" : "s",
       "kind" : "variable",
-      "line" : 24,
+      "line" : 25,
       "char" : 9,
       "deco" : "Aa",
       "offset" : 0
@@ -1177,7 +3293,7 @@
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 25,
+      "line" : 26,
       "char" : 2,
       "deco" : "FNcAaZS4main15TestGenericChar",
       "originalType" : "ref (char[] s)",
@@ -1187,34 +3303,34 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 28,
+      "endline" : 29,
       "endchar" : 2
      },
      {
       "name" : "front",
       "kind" : "function",
-      "line" : 30,
+      "line" : 31,
       "char" : 7,
       "deco" : "FZa",
-      "endline" : 30,
+      "endline" : 31,
       "endchar" : 30
      },
      {
       "name" : "empty",
       "kind" : "function",
-      "line" : 31,
+      "line" : 32,
       "char" : 7,
       "deco" : "FZb",
-      "endline" : 31,
+      "endline" : 32,
       "endchar" : 39
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 32,
+      "line" : 33,
       "char" : 7,
       "deco" : "FZv",
-      "endline" : 32,
+      "endline" : 33,
       "endchar" : 35
      }
     ]
@@ -1222,20 +3338,20 @@
    {
     "name" : "std.algorithm",
     "kind" : "import",
-    "line" : 34,
+    "line" : 35,
     "char" : 8,
     "protection" : "private"
    },
    {
     "name" : "TestGenericCharArray",
     "kind" : "struct",
-    "line" : 35,
+    "line" : 36,
     "char" : 1,
     "members" : [
      {
       "name" : "s",
       "kind" : "variable",
-      "line" : 37,
+      "line" : 38,
       "char" : 9,
       "deco" : "Aa",
       "offset" : 0
@@ -1243,7 +3359,7 @@
      {
       "name" : "this",
       "kind" : "constructor",
-      "line" : 38,
+      "line" : 39,
       "char" : 2,
       "deco" : "FNcAaZS4main20TestGenericCharArray",
       "originalType" : "ref (char[] s)",
@@ -1253,60 +3369,104 @@
         "deco" : "Aa"
        }
       ],
-      "endline" : 41,
+      "endline" : 42,
       "endchar" : 2
      },
      {
       "name" : "front",
       "kind" : "function",
-      "line" : 43,
+      "line" : 44,
       "char" : 9,
       "deco" : "FZAa",
-      "endline" : 43,
+      "endline" : 44,
       "endchar" : 48
      },
      {
       "name" : "empty",
       "kind" : "function",
-      "line" : 44,
+      "line" : 45,
       "char" : 7,
       "deco" : "FZb",
-      "endline" : 44,
+      "endline" : 45,
       "endchar" : 39
      },
      {
       "name" : "popFront",
       "kind" : "function",
-      "line" : 45,
+      "line" : 46,
       "char" : 7,
       "deco" : "FZv",
-      "endline" : 45,
+      "endline" : 46,
       "endchar" : 46
+     }
+    ]
+   },
+   {
+    "name" : "Coord",
+    "kind" : "struct",
+    "line" : 49,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "x",
+      "kind" : "variable",
+      "line" : 51,
+      "char" : 8,
+      "deco" : "f",
+      "init" : "nanF",
+      "offset" : 0
+     },
+     {
+      "name" : "y",
+      "kind" : "variable",
+      "line" : 51,
+      "char" : 23,
+      "deco" : "f",
+      "init" : "nanF",
+      "offset" : 4
+     },
+     {
+      "name" : "z",
+      "kind" : "variable",
+      "line" : 51,
+      "char" : 38,
+      "deco" : "f",
+      "init" : "nanF",
+      "offset" : 8
      }
     ]
    },
    {
     "name" : "benchTokens",
     "kind" : "function",
-    "line" : 48,
+    "line" : 58,
     "char" : 6,
     "deco" : "FZv",
-    "endline" : 75,
+    "endline" : 95,
+    "endchar" : 1
+   },
+   {
+    "name" : "benchBinary",
+    "kind" : "function",
+    "line" : 97,
+    "char" : 6,
+    "deco" : "FZv",
+    "endline" : 109,
     "endchar" : 1
    },
    {
     "name" : "benchWalktrhough",
     "kind" : "function",
-    "line" : 77,
+    "line" : 111,
     "char" : 6,
     "deco" : "FZv",
-    "endline" : 85,
+    "endline" : 119,
     "endchar" : 1
    },
    {
     "name" : "main",
     "kind" : "function",
-    "line" : 87,
+    "line" : 121,
     "char" : 5,
     "deco" : "FAAyaZi",
     "parameters" : [
@@ -1315,24 +3475,9 @@
       "deco" : "AAya"
      }
     ],
-    "endline" : 139,
+    "endline" : 194,
     "endchar" : 1
    }
   ]
- },
- {
-  "kind" : "module",
-  "file" : "pattern_matching.d",
-  "members" : []
- },
- {
-  "kind" : "module",
-  "file" : "socket.d",
-  "members" : []
- },
- {
-  "kind" : "module",
-  "file" : "ssqueue.d",
-  "members" : []
  }
 ]

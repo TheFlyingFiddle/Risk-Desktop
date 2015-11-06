@@ -4,13 +4,13 @@ import allocation;
 import std.algorithm;
 import std.conv;
 
-size_t defaultHash(K)(ref K k) @nogc nothrow
+size_t defaultHash(K)(ref K k) @nogc nothrow pure
 {
 	import core.internal.hash;
 	import std.traits;
 
 	auto ptr = &bytesHash;
-	auto r   = cast(size_t function(const void*,size_t,size_t) @nogc nothrow)ptr;
+	auto r   = cast(size_t function(const void*,size_t,size_t) @nogc nothrow pure)ptr;
 
 	static if(isArray!K)
 		return r(k.ptr, k.length, 0);
@@ -33,11 +33,12 @@ private auto allocate(K, V, alias hf = defaultHash!T)(IAllocator allocator, size
 
 	M* m;
 	size_t allocSize = M.sizeof + (uint.sizeof * 2 + M.Element.sizeof) * sz;
-	auto base	  = allocator.allocateRaw(allocSize, M.Element.alignof).ptr;
+	auto base	  = cast(ubyte[])allocator.allocateRaw(allocSize, M.Element.alignof);
+	base[] = 0;
 	
-	m				  = cast(M*)base;
-    m.indices		  = cast(uint*)(base + M.sizeof);
-	m.elements		  = cast(M.Element*)(base + M.sizeof + uint.sizeof * 2 * sz);
+	m				  = cast(M*)base.ptr;
+    m.indices		  = cast(uint*)(base.ptr + M.sizeof);
+	m.elements		  = cast(M.Element*)(base.ptr + M.sizeof + uint.sizeof * 2 * sz);
 	m.length		  = 0;
 	m.capacity        = sz;
 	m.indices[0 .. sz * 2] = uint.max;
@@ -78,11 +79,12 @@ struct MHash(K, V, alias hf = defaultHash!T)
 		V		value;
 		uint	next;
 	}
+	nothrow pure:
 
 	uint length;
 	uint capacity;
-	uint* indices;
-	Element* elements;
+	@(x => x.capacity * 2) uint* indices;
+	@(x => x.capacity)     Element* elements;
 
 	//Will remove all incase of multimap!
 	bool removeFirst(K k) nothrow
@@ -249,6 +251,7 @@ struct MHash(K, V, alias hf = defaultHash!T)
 			return FindResult(idx, uint.max, uint.max);
 
 		FindResult result = FindResult(idx, indices[idx], uint.max);
+		int idid = result.index;
 
 		auto elem = elements[result.index];
 		while(elem.key != key)
@@ -285,7 +288,7 @@ struct Map(K, V, alias hf = defaultHash!K)
 		rep = allocate!(K, V, hf)(allocator, initialSize);	
 	}
 
-	V* opBinaryRight(string op : "in")(K key) nothrow
+	V* opBinaryRight(string op : "in")(K key) nothrow pure
 	{
 		auto res = rep.find(key);
 		return res.index == uint.max ? null : &elements[res.index].value;
@@ -299,6 +302,17 @@ struct Map(K, V, alias hf = defaultHash!K)
 	ref V opIndex(K key) 
 	{
 		return get(key);
+	}
+
+	bool opEquals(ref Map!(K, V, hf) other) nothrow pure @nogc
+	{
+		if(other.length < this.length) return false;
+		foreach(ref e; rep.elements[0 .. rep.length])
+		{
+			auto p = e.key in other;
+			if(!p || *p != e.value) return false;
+		}
+		return true;
 	}
 
 	V* add(K k, V v) 
@@ -379,6 +393,17 @@ struct MultiMap(K, V, alias hf  = defaultHash!K)
 	{
 		if(initialSize < 4) initialSize = 4;
 		rep = allocate!(K, V, hf)(allocator, initialSize);	
+	}
+
+	bool opEquals(ref MultiMap!(K, V, hf) other) nothrow pure @nogc 
+	{
+		if(other.length < this.length) return false;
+		foreach(ref k, ref v; this)
+		{
+			auto p = k in other;
+			if(!p || *p != v) return false;
+		}
+		return true;
 	}
 
 	auto opIndex(K key) 

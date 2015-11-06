@@ -1,0 +1,49 @@
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+
+echo allocation\common.d >Release\Base.build.rsp
+echo allocation\freelist.d >>Release\Base.build.rsp
+echo allocation\gc.d >>Release\Base.build.rsp
+echo allocation\native.d >>Release\Base.build.rsp
+echo allocation\package.d >>Release\Base.build.rsp
+echo allocation\region.d >>Release\Base.build.rsp
+echo allocation\stack.d >>Release\Base.build.rsp
+echo allocation\tracking.d >>Release\Base.build.rsp
+echo collections\blob.d >>Release\Base.build.rsp
+echo collections\deque.d >>Release\Base.build.rsp
+echo collections\list.d >>Release\Base.build.rsp
+echo collections\map.d >>Release\Base.build.rsp
+echo collections\package.d >>Release\Base.build.rsp
+echo collections\table.d >>Release\Base.build.rsp
+echo concurency\messagepassing.d >>Release\Base.build.rsp
+echo concurency\task.d >>Release\Base.build.rsp
+echo concurency\threadpool.d >>Release\Base.build.rsp
+echo log\package.d >>Release\Base.build.rsp
+echo math\matrix.d >>Release\Base.build.rsp
+echo math\package.d >>Release\Base.build.rsp
+echo math\polar.d >>Release\Base.build.rsp
+echo math\rect.d >>Release\Base.build.rsp
+echo math\vector.d >>Release\Base.build.rsp
+echo reflection\data.d >>Release\Base.build.rsp
+echo reflection\generation.d >>Release\Base.build.rsp
+echo reflection\serialization.d >>Release\Base.build.rsp
+echo serialization\base.d >>Release\Base.build.rsp
+echo util\bench.d >>Release\Base.build.rsp
+echo util\bitmanip.d >>Release\Base.build.rsp
+echo util\exception.d >>Release\Base.build.rsp
+echo util\hash.d >>Release\Base.build.rsp
+echo util\servicelocator.d >>Release\Base.build.rsp
+echo util\strings.d >>Release\Base.build.rsp
+echo util\traits.d >>Release\Base.build.rsp
+echo util\variant.d >>Release\Base.build.rsp
+echo sdl.d >>Release\Base.build.rsp
+
+"C:\Program Files (x86)\VisualD\pipedmd.exe" dmd -O -inline -release -lib -noboundscheck -X -Xf"Release\Base.json" -deps="Release\Base.dep" -of"Release\Base.lib" -map "Release\Base.map" -L/NOMAP @Release\Base.build.rsp
+if errorlevel 1 goto reportError
+if not exist "Release\Base.lib" (echo "Release\Base.lib" not created! && goto reportError)
+
+goto noError
+
+:reportError
+echo Building Release\Base.lib failed!
+
+:noError

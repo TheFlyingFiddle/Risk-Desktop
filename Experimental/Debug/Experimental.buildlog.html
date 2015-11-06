@@ -10,15 +10,18 @@ Building Debug\Experimental.exe
 Command Line
 </font></table>
 set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
-dmd -g -O -inline -debug -noboundscheck -X -Xf&quot;Debug\Experimental.json&quot; -deps=&quot;Debug\Experimental.dep&quot; -c -of&quot;Debug\Experimental.obj&quot; sidal\parser.d sidal\serializer.d main.d pattern_matching.d socket.d ssqueue.d
+set DMD_LIB=;..\Base\Debug
+dmd -g -debug -unittest -X -Xf&quot;Debug\Experimental.json&quot; -I..\Base -deps=&quot;Debug\Experimental.dep&quot; -c -of&quot;Debug\Experimental.obj&quot; encoding\binary.d sidal\parser.d sidal\serializer.d main.d
 if errorlevel 1 goto reportError
 
 set LIB=&quot;C:\D\dmd2\windows\bin\..\lib&quot;
-echo. &gt; C:\Risk\Risk-Desktop\Experimental\Debug\Experimental.build.lnkarg
-echo &quot;Debug\Experimental.obj&quot;,&quot;Debug\Experimental.exe&quot;,&quot;Debug\Experimental.map&quot;,user32.lib+ &gt;&gt; C:\Risk\Risk-Desktop\Experimental\Debug\Experimental.build.lnkarg
-echo kernel32.lib/NOMAP/CO/NOI/DELEXE &gt;&gt; C:\Risk\Risk-Desktop\Experimental\Debug\Experimental.build.lnkarg
+echo. &gt; C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
+echo &quot;Debug\Experimental.obj&quot;,&quot;Debug\Experimental.exe&quot;,&quot;Debug\Experimental.map&quot;,Base.lib+ &gt;&gt; C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
+echo user32.lib+ &gt;&gt; C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
+echo kernel32.lib+ &gt;&gt; C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
+echo ..\Base\Debug\/NOMAP/CO/NOI/DELEXE &gt;&gt; C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
 
-&quot;C:\Program Files (x86)\VisualD\pipedmd.exe&quot; -deps Debug\Experimental.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\Risk\Risk-Desktop\Experimental\Debug\Experimental.build.lnkarg
+&quot;C:\Program Files (x86)\VisualD\pipedmd.exe&quot; -deps Debug\Experimental.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\GitHub\Risk\Experimental\Debug\Experimental.build.lnkarg
 if errorlevel 1 goto reportError
 if not exist &quot;Debug\Experimental.exe&quot; (echo &quot;Debug\Experimental.exe&quot; not created! &amp;&amp; goto reportError)
 
@@ -31,5 +34,5 @@ echo Building Debug\Experimental.exe failed!
 <table width=100% bgcolor=#EFEFE5><tr><td><font face=arial size=+1>
 Output
 </font></table>
-
+12u
 </body></html>

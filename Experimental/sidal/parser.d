@@ -4,7 +4,7 @@ import std.algorithm;
 import std.range : ElementType, isInputRange;
 import std.stdio : File;
 
-enum RangeType
+enum SourceType
 {
 	file,
 	string,
@@ -35,7 +35,7 @@ struct GenericSource
 			{
 				foreach(i, ref c; toFill)
 				{
-					c = range.front;
+					c = range.token;
 					range.popFront();
 					if(range.empty)
 					{
@@ -80,11 +80,11 @@ struct GenericSource
 				size_t filled = 0, size = 0;
 				do
 				{
-					size = min(range.front.length - this_.used, toFill.length - filled);
-					toFill[filled .. filled + size] = range.front[this_.used .. this_.used + size];
+					size = min(range.token.length - this_.used, toFill.length - filled);
+					toFill[filled .. filled + size] = range.token[this_.used .. this_.used + size];
 					this_.used   += size;
 					filled += size;
-					if(this_.used >= range.front.length)
+					if(this_.used >= range.token.length)
 					{
 						this_.used = 0;
 						range.popFront();
@@ -247,10 +247,10 @@ struct SidalToken
 	}
 }
 
-struct SidalRange
+struct SidalParser
 {
 	enum terminator = '\0';
-	RangeType type;
+	SourceType type;
 	//Workaround for union. Destructor in file prevents us from using it properly :S
 	//union
 	//{
@@ -273,7 +273,7 @@ struct SidalRange
 	bool inplace;
 
 	size_t level, lines, column;
-	SidalToken front;
+	SidalToken token;
 	bool empty;
 
 	this(File file, char[] buffer)
@@ -286,15 +286,14 @@ struct SidalRange
 		this(StringSource(s), buffer);
 	}
 
-	this(Range)(Range range, char[] buffer)
+	this(Range)(Range range, char[] buffer) if(isInputRange!Range)
 	{
 		this(GenericSource!Range(range), buffer);
 	}
 
-
 	this(FileSource range, char[] buffer)
 	{
-		this.type   = RangeType.file;
+		this.type   = SourceType.file;
 		this.chunk  = range;
 		this.buffer = buffer;
 		this.level = this.length = this.column = 0;
@@ -302,8 +301,8 @@ struct SidalRange
 		if(!empty)
 		{
 			nextBuffer();
-			if(front.tag == TokenTag.error)
-				throw front.error;
+			if(token.tag == TokenTag.error)
+				throw token.error;
 
 			popFront();
 		}
@@ -311,7 +310,7 @@ struct SidalRange
 
 	this(StringSource range, char[] buffer)
 	{
-		this.type	= RangeType.string;
+		this.type	= SourceType.string;
 		this.string = range;
 		this.buffer = buffer;
 		this.level = this.length = this.column = 0;
@@ -319,15 +318,15 @@ struct SidalRange
 		if(!empty)
 		{
 			nextBuffer();
-			if(front.tag == TokenTag.error)
-				throw front.error;
+			if(token.tag == TokenTag.error)
+				throw token.error;
 			popFront();
 		}
 	}
 
 	this(GenericSource range, char[] buffer)
 	{
-		this.type = RangeType.generic;
+		this.type = SourceType.generic;
 		this.generic = range;
 		this.buffer  = buffer;
 		this.level = this.length = this.column = 0;
@@ -335,8 +334,8 @@ struct SidalRange
 		if(!empty)
 		{
 			nextBuffer();
-			if(front.tag == TokenTag.error)
-				throw front.error;
+			if(token.tag == TokenTag.error)
+				throw token.error;
 			popFront();
 		}
 	}
@@ -345,10 +344,10 @@ struct SidalRange
 	{
 		switch(type)
 		{
-			case RangeType.file: 
+			case SourceType.file: 
 				chunk.finalize();
 				break;
-			case RangeType.generic:
+			case SourceType.generic:
 				generic.finalize();
 				break;
 			default: break;
@@ -367,24 +366,24 @@ struct SidalRange
 				lines++; column = 0; 
 				break;
 			case ' ': case '\t': case '\r': break;
-			case ',': break;
-				front.tag = TokenTag.divider;
-				front.level = level;
+			case ',': 
+				token.tag = TokenTag.divider;
+				token.level = level;
 				bptr++;
 				break outer;
 			case '(':
-				front.tag = TokenTag.objectStart;
-				front.level = level++;
+				token.tag = TokenTag.objectStart;
+				token.level = level++;
 				bptr++;
 				break outer;
 			case ')':
-				front.tag = TokenTag.objectEnd;
-				front.level = --level;
+				token.tag = TokenTag.objectEnd;
+				token.level = --level;
 				bptr++;
 				break outer;
 			case ':':
-				front.tag = TokenTag.itemDivider;
-				front.level = level;
+				token.tag = TokenTag.itemDivider;
+				token.level = level;
 				bptr++;
 				break outer;
 			case '"':
@@ -419,9 +418,9 @@ struct SidalRange
 		Throwable t;
 		final switch(type)
 		{
-			case RangeType.file:	 empty = chunk.empty; t = chunk.fill(data);     break;
-			case RangeType.string:	 empty = string.empty; t = string.fill(data);   break;
-			case RangeType.generic:  empty = generic.empty; t = generic.fill(data); break;
+			case SourceType.file:	 empty = chunk.empty; t = chunk.fill(data);     break;
+			case SourceType.string:	 empty = string.empty; t = string.fill(data);   break;
+			case SourceType.generic:  empty = generic.empty; t = generic.fill(data); break;
 		}
 
 		data.ptr[data.length] = '\0';
@@ -430,8 +429,8 @@ struct SidalRange
 		column += length;
 		if(t)
 		{
-			front.tag   = TokenTag.error;
-			front.error = t; 
+			token.tag   = TokenTag.error;
+			token.error = t; 
 			return empty;
 		}
 
@@ -472,14 +471,14 @@ struct SidalRange
 			switch(*bptr)
 			{
 				case '"': 
-					front.tag   = TokenTag.string;
-					front.value = b[0 .. bptr - b];
+					token.tag   = TokenTag.string;
+					token.value = b[0 .. bptr - b];
 					bptr++;
 					return;
 				case terminator:
 					if(!moveBuffer(b))
 					{
-						if(front.tag == TokenTag.error)
+						if(token.tag == TokenTag.error)
 							return;
 						break stringOuter;
 					}
@@ -494,6 +493,7 @@ struct SidalRange
 	{
 		for(;; bptr++) 
 		{
+hexRetry:
 			if(*bptr >= '0' && *bptr <= '9')
 				value *= 0x10 + *bptr - '0';
 			else if((*bptr | 0x20)  >= 'a' && (*bptr | 0x20) <= 'f')
@@ -502,18 +502,18 @@ struct SidalRange
 			{
 				if(!nextBuffer)
 				{
-					if(front.tag == TokenTag.error)
+					if(token.tag == TokenTag.error)
 						return;
-
 					break;
 				}
+				goto hexRetry;
 			}	
 			else 
 				break;
 		}
 
-		front.tag	  = TokenTag.integer;
-		front.integer = value;
+		token.tag	  = TokenTag.integer;
+		token.integer = value;
 	}
 
 __gshared static double[20] powE = 
@@ -524,23 +524,26 @@ __gshared static double[20] powE =
 	{
 		char* b		 = bptr;
 		double begin = value;
+		value = 0;
 		for(;;bptr++)
 		{
+floatRetry:
 			if(*bptr >= '0' && *bptr <= '9')
 				value = value * 10 + *bptr - '0';
 			else if(*bptr == terminator)
 			{
 				if(!moveBuffer(b))
 				{
-					if(front.tag == TokenTag.error)
+					if(token.tag == TokenTag.error)
 						return;
 					break;
 				}
+				goto floatRetry;
 			}
 			else break;
 		}
-		front.tag = TokenTag.floating;
-		front.floating = (begin + (cast(double)value) * powE[bptr - b]) * sign;
+		token.tag = TokenTag.floating;
+		token.floating = (begin + (cast(double)value) * powE[bptr - b]) * sign;
 	}	
 
 	import std.c.stdio;
@@ -549,16 +552,18 @@ __gshared static double[20] powE =
 		ulong value = 0;
 		for(;;bptr++)
 		{
+numberRetry:
 			if(*bptr >= '0' && *bptr <= '9')
 				value = value * 10 + *bptr - '0';
 			else if(*bptr == terminator)
 			{
 				if(!nextBuffer)
 				{
-					if(front.tag == TokenTag.error)
+					if(token.tag == TokenTag.error)
 						return;
 					break;
 				}
+				goto numberRetry;
 			}
 			else
 				break;
@@ -578,8 +583,8 @@ __gshared static double[20] powE =
 				return;
 		}
 		
-		front.tag     = TokenTag.integer;
-		front.integer = value * sign;
+		token.tag     = TokenTag.integer;
+		token.integer = value * sign;
 		return;
 	}
 
@@ -595,11 +600,8 @@ __gshared static double[20] powE =
 	//  float2 [ string ] [ ]
 	void parseType(char* b)
 	{
-		if(b < buffer.ptr)
-		{
-			int i;
-			return;
-		}
+		uint lbracks = 0, rbracks = 0;
+
 
 typeOuter:
 		for(;;bptr++) 
@@ -610,7 +612,7 @@ typeRetry:
 				case terminator:
 					if(!moveBuffer(b))
 					{
-						if(front.tag == TokenTag.error)
+						if(token.tag == TokenTag.error)
 							return;
 					
 						break typeOuter;
@@ -619,8 +621,15 @@ typeRetry:
 						goto typeRetry;
 				default:  
 					break typeOuter;
-				case '\n': lines++; column = 0; break typeOuter;
-				case ']':    case '[':
+				case '\n': lines++; column = 0; goto case;
+				case '\t': case '\r': case ' ': break typeOuter;
+
+				case ']':  
+					if(lbracks == rbracks) 
+						goto typeFail;
+					rbracks++; 
+					break;
+				case '[':  lbracks++; break;
 				case '0': .. case '9':
 				case 'a': .. case 'z': 
 				case 'A': .. case 'Z':
@@ -629,8 +638,10 @@ typeRetry:
 			}
 		}
 
-		front.value = b[0 .. bptr - b];
+		if(lbracks != rbracks || (rbracks > 0 && bptr[-1]  != ']'))
+		   goto typeFail;
 
+		token.value = b[0 .. bptr - b];
 		for(;; bptr++)
 		{
 		typeRetry2:
@@ -642,7 +653,7 @@ typeRetry:
 						//Last thing in the stream. 
 						//It can only be an ident here.
 						//If it's not then the stream is wrong anyway!
-						front.tag = TokenTag.ident;
+						token.tag = TokenTag.ident;
 						return;
 					}
 					else 
@@ -652,20 +663,21 @@ typeRetry:
 				case '\n': lines++; column = 0; break;
 				case ' ': case '\t': case '\r': break;
 				case '=':
-					front.tag = TokenTag.name;
+					token.tag = TokenTag.name;
 					bptr++;
 					return;
 				case ',': case ')':
-					front.tag = TokenTag.ident;
+					token.tag = TokenTag.ident;
 					return;
 				case 'a': .. case 'z':
 				case 'A': .. case 'Z':
 				case '_': 
 				case '(': 
-					front.tag = TokenTag.type;
+					token.tag = TokenTag.type;
 					return;
 			}
 		}
+
 typeFail:
 		makeError();
 		return;
@@ -675,8 +687,8 @@ typeFail:
 	void makeError()
 	{
 		//assert(false);
-		//front = sidalToken(TokenTag.error, 0);
-		front.tag = TokenTag.error;
+		//token = sidalToken(TokenTag.error, 0);
+		token.tag = TokenTag.error;
 	}
 
 	@disable this(this);

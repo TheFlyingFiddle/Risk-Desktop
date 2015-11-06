@@ -27,7 +27,7 @@ struct FixedList(T)
 	
 	//This could potentially length + capacity at the begining of the buffer
 	//instead. This would lead to reference like behaviour.
-	T* buffer;
+	@("capacity") T* buffer;
 	uint length, capacity;
 
 	@property const(T)[] array()
@@ -394,7 +394,7 @@ struct List(T)
 
 	bool removeAt(SwapStrategy s = SwapStrategy.stable)(size_t index)
 	{
-		return base_.removeAt!(s, T)(index);
+		return base_.removeAt!(s)(index);
 	}
 
 	@property List!T save() { return this; }
@@ -406,7 +406,7 @@ struct List(T)
 	void popFront() { base_.popFront(); }
 	void popBack() { base_.popBack(); }
 	void put(T data) { this ~= data; }
-	void put(T[] data) { this ~= data; }
+	//void put(T[] data) { this ~= data; }
 }
 
 alias cstring(size_t N) = SList!(char, N);

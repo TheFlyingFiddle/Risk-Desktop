@@ -1,0 +1,19 @@
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+dmd -g -O -inline -release -noboundscheck -X -Xf"Debug\Dmd_experiments.json" -deps="Debug\Dmd_experiments.dep" -c -od"Debug" Debug\main.obj
+if errorlevel 1 goto reportError
+
+set LIB="C:\D\dmd2\windows\bin\..\lib"
+echo. > C:\GitHub\Risk\DMDEXP~1\Debug\DMD_EX~1.LNK
+echo Debug\main.obj,"Debug\Dmd_experiments.exe","Debug\Dmd_experiments.map",user32.lib+ >> C:\GitHub\Risk\DMDEXP~1\Debug\DMD_EX~1.LNK
+echo kernel32.lib/NOMAP/CO/NOI/DELEXE >> C:\GitHub\Risk\DMDEXP~1\Debug\DMD_EX~1.LNK
+
+"C:\Program Files (x86)\VisualD\pipedmd.exe" -deps Debug\Dmd_experiments.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\GitHub\Risk\DMDEXP~1\Debug\DMD_EX~1.LNK
+if errorlevel 1 goto reportError
+if not exist "Debug\Dmd_experiments.exe" (echo "Debug\Dmd_experiments.exe" not created! && goto reportError)
+
+goto noError
+
+:reportError
+echo Building Debug\Dmd_experiments.exe failed!
+
+:noError

@@ -1,0 +1,22 @@
+set PATH=C:\D\dmd2\windows\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\\Common7\IDE;C:\Program Files (x86)\Windows Kits\8.1\\bin;%PATH%
+set DMD_LIB=;..\Base\Release
+dmd -O -inline -release -noboundscheck -X -Xf"Release\Experimental.json" -I..\Base -deps="Release\Experimental.dep" -c -of"Release\Experimental.obj" encoding\binary.d sidal\parser.d sidal\serializer.d main.d -profile=gc
+if errorlevel 1 goto reportError
+
+set LIB="C:\D\dmd2\windows\bin\..\lib"
+echo. > C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+echo "Release\Experimental.obj","Release\Experimental.exe","Release\Experimental.map",Base.lib+ >> C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+echo user32.lib+ >> C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+echo kernel32.lib+ >> C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+echo ..\Base\Release\/NOMAP/NOI/DELEXE >> C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+
+"C:\Program Files (x86)\VisualD\pipedmd.exe" -deps Release\Experimental.lnkdep C:\D\dmd2\windows\bin\link.exe @C:\GitHub\Risk\Experimental\Release\Experimental.build.lnkarg
+if errorlevel 1 goto reportError
+if not exist "Release\Experimental.exe" (echo "Release\Experimental.exe" not created! && goto reportError)
+
+goto noError
+
+:reportError
+echo Building Release\Experimental.exe failed!
+
+:noError
